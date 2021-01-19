@@ -4,10 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-19 22:44:14
+ * @LastEditTime: 2021-01-19 23:24:28
  */
 import React from "react";
-import MyEditor from "./Editor";
+import Editor from "./Editor";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,10 +32,13 @@ class App extends React.Component {
           href="http://cdn.bootcss.com/highlight.js/8.0/styles/tomorrow.min.css"
           rel="stylesheet"
         />
-        <MyEditor
+        <Editor
           defaultHTML={""}
-          onEdit={(html) => {
-            console.log("OnEdit: ", html);
+          onConfirmPress={(html) => {
+            console.log(html);
+          }}
+          onCancelPress={(html) => {
+            console.log(html);
           }}
         />
       </div>

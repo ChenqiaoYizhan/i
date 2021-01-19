@@ -4,12 +4,13 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2020-12-28 21:46:54
+ * @LastEditTime: 2021-01-19 23:05:51
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
