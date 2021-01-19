@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-19 23:22:36
+ * @LastEditTime: 2021-01-19 23:52:41
  */
 import React from "react";
 import E from "wangeditor";
@@ -57,6 +57,7 @@ class Editor extends React.Component {
     };
     /**一定要创建 */
     this.editor.create();
+    this.editor.txt.html(this.props.defaultHTML);
   }
 
   componentWillUnmount() {
@@ -67,7 +68,7 @@ class Editor extends React.Component {
     return (
       <div style={{ padding: 32 }}>
         <div style={{ flexDirection: "column", display: "flex" }}>
-          <div id="editDiv">{this.props.defaultHTML}</div>
+          <div id="editDiv" />
           <div style={{ height: 4 }} />
           <div
             style={{

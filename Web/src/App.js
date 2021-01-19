@@ -4,11 +4,11 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-19 23:24:28
+ * @LastEditTime: 2021-01-20 00:16:38
  */
 import React from "react";
 import Editor from "./Editor";
-
+import Reader from './Reader';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Device:", this.device());
   }
 
   device() {
@@ -32,15 +31,7 @@ class App extends React.Component {
           href="http://cdn.bootcss.com/highlight.js/8.0/styles/tomorrow.min.css"
           rel="stylesheet"
         />
-        <Editor
-          defaultHTML={""}
-          onConfirmPress={(html) => {
-            console.log(html);
-          }}
-          onCancelPress={(html) => {
-            console.log(html);
-          }}
-        />
+        <Reader />
       </div>
     );
   }
