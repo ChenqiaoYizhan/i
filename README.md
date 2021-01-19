@@ -1,2 +1,2 @@
 # i
-个人博客 ( React+ Spring Boot )
+个人博客 ( React + Spring Boot )
