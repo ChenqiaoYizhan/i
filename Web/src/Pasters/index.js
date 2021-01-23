@@ -4,29 +4,14 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-22 00:08:39
+ * @LastEditTime: 2021-01-24 00:03:45
  */
 import React from "react";
 import Item from "./Item";
 import Wall from "../images/Paster_wall.gif";
+import * as x from "../x";
 
-const PASTER_WALL_SIZE = {
-  HEIGHT: 600,
-  WIDTH: 1200,
-};
-const COLORS = [
-  { title: "基佬紫", name: "purple", value: "#dc27b0" },
-  { title: "闷骚红", name: "red", value: "#ff5252" },
-  { title: "天空蓝", name: "blue", value: "#4481ff" },
-  { title: "荷花粉", name: "pink", value: "#ff4081" },
-  { title: "深邃蓝", name: "indigo", value: "#3f51b5" },
-  { title: "水墨绿", name: "teal", value: "#009688" },
-  { title: "香蕉黄", name: "amber", value: "#ffc107" },
-  { title: "苹果绿", name: "green", value: "#4caf50" },
-  { title: "活力橙", name: "orange", value: "#ff9800" },
-  { title: "咖啡棕", name: "brown", value: "#795548" },
-];
-const DATAS = [
+var DATAS = [
   {
     title: "陈桥驿站",
     time: "2020-01-20 13:30:10",
@@ -147,33 +132,27 @@ class Pasters extends React.Component {
   }
 
   componentDidMount() {
-    let index = 0;
     let array = [];
-    var that = this;
-    let timer = setInterval(function () {
-      if (index == DATAS.length - 1) {
-        index = 0;
-        array = [];
-        clearInterval(timer);
-      } else {
-        let item = DATAS[index];
-        array.push({
-          id: index + 1,
-          title: item.title,
-          time: item.time,
-          message: item.message,
-          zIndex: index,
-          index: parseInt(Math.random() * 8),
-          color: COLORS[parseInt(COLORS.length * Math.random())].value,
-          top: parseInt(Math.random() * (PASTER_WALL_SIZE.HEIGHT - 200)),
-          left: parseInt(Math.random() * (PASTER_WALL_SIZE.WIDTH - 250)),
-        });
-        index++;
-        that.setState({
-          datas: array,
-        });
-      }
-    }, 256);
+    DATAS = DATAS.slice(0, 10);
+    for (let i = 0; i < DATAS.length; i++) {
+      let item = DATAS[i];
+      array.push({
+        id: i,
+        title: item.title,
+        time: item.time,
+        message: item.message,
+        zIndex: i,
+        index: parseInt(Math.random() * 8),
+        color: x.UI.randomColor(),
+        top: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 320)),
+        left: parseInt(
+          Math.random() * (x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH - 235)
+        ),
+      });
+    }
+    this.setState({
+      datas: array,
+    });
   }
 
   loadPasters() {
@@ -195,8 +174,9 @@ class Pasters extends React.Component {
             onPress={() => {
               let datasCopy = this.state.datas;
               for (let j = 0; j < datasCopy.length; j++) {
-                datasCopy[j].zIndex = i == j ? 1024 : 0;
+                datasCopy[j].zIndex = j;
               }
+              datasCopy[i].zIndex = x.UI.ZINDEX.PASTER;
               this.setState({
                 datas: datasCopy,
               });
@@ -215,8 +195,9 @@ class Pasters extends React.Component {
           flex: 1,
           flexDirection: "column",
           backgroundImage: `url(${Wall})`,
-          height: PASTER_WALL_SIZE.HEIGHT,
-          width: '100%',
+          height: x.UI.PASTER_WALL_HEIGHT,
+          width: "100%",
+          position: "relative",
         }}
       >
         {this.loadPasters()}

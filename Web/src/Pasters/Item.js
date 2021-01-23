@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-20 18:26:55
+ * @LastEditTime: 2021-01-23 22:21:37
  */
 import React from "react";
 
@@ -19,7 +19,7 @@ class Item extends React.Component {
   }
 
   componentDidMount() {
-    console.log(images);
+    // console.log(images);
   }
 
   loadPasters() {}

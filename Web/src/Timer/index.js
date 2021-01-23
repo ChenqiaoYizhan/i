@@ -4,12 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-21 23:44:56
+ * @LastEditTime: 2021-01-23 22:34:02
  */
 
 import React from "react";
-
-import BackgroundImage from "../images/Slider_Background.jpg";
 import PropTypes from "prop-types";
 import { Timeline } from "antd";
 import Item from "./Item";
@@ -49,7 +47,6 @@ class Timer extends React.Component {
       array.push(
         <Timeline.Item
           key={i}
-          dot={<img src={url} style={{ height: 32, width: 32 }} />}
         >
           <Item item={item} />
         </Timeline.Item>
@@ -64,8 +61,7 @@ class Timer extends React.Component {
         style={{
           flex: 1,
           flexDirection: "column",
-          display: "flex",
-          padding: 32,
+          display: "flex"
         }}
       >
         <Timeline mode='left'>{this.loadTimeLines()}</Timeline>,

@@ -4,12 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-21 23:55:54
+ * @LastEditTime: 2021-01-23 22:31:13
  */
 
 import React from "react";
-
-import BackgroundImage from "../images/Slider_Background.jpg";
 import PropTypes from "prop-types";
 import { Timeline } from "antd";
 
@@ -32,18 +30,13 @@ class Item extends React.Component {
       <div
         style={{
           flexDirection: "row",
-          display: "flex",
-          margin: 8,
+          display: "flex"
         }}
       >
-        <img
-          src={require("../images/Chat_border.png")}
-          style={{ height: 16, width: 16, marginTop: 8, marginRight: -4 }}
-        />
         <div
           style={{
             flex: 1,
-            borderRadius: 8,
+            borderRadius: 16,
             border: "1px solid #25a2fd",
             borderWidth: 1,
             padding: 8,

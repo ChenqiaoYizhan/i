@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 16:50:57
+ * @LastEditTime: 2021-01-23 17:02:35
  */
 import React from "react";
 import Editor from "./Editor";
@@ -12,7 +12,7 @@ import Reader from "./Reader";
 import Slider from "./Slider";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
-import Menu from "./Menu";
+import Menu from "./Home";
 import * as x from "./x";
 import DanmuItem from "./DanmuItem";
 
@@ -78,6 +78,9 @@ class Danmus extends React.Component {
     this.state.datas = [];
     this.setState({
       datas: [],
+    });
+    document.removeEventListener("visibilitychange", function () {
+      console.log("Danmus page removed visibilitychange event");
     });
     clearInterval(this.timer);
   }

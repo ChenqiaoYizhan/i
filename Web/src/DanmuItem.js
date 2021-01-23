@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 16:49:43
+ * @LastEditTime: 2021-01-23 21:53:43
  */
 import React from "react";
 import Editor from "./Editor";
@@ -12,14 +12,20 @@ import Reader from "./Reader";
 import Slider from "./Slider";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
-import Menu from "./Menu";
+import Menu from "./Home";
 import * as x from "./x";
 
 class DanmuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      math: { x: 0, y: parseInt(Math.random() * document.body.scrollHeight) },
+      math: {
+        x: 0,
+        y: parseInt(
+          Math.random() * (document.body.scrollHeight - x.UI.MENU_HEIGHT) +
+            x.UI.MENU_HEIGHT
+        ),
+      },
     };
   }
 
