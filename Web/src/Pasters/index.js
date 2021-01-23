@@ -4,14 +4,14 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-20 18:33:00
+ * @LastEditTime: 2021-01-22 00:08:39
  */
 import React from "react";
 import Item from "./Item";
 import Wall from "../images/Paster_wall.gif";
 
 const PASTER_WALL_SIZE = {
-  HEIGHT: 800,
+  HEIGHT: 600,
   WIDTH: 1200,
 };
 const COLORS = [
@@ -216,7 +216,7 @@ class Pasters extends React.Component {
           flexDirection: "column",
           backgroundImage: `url(${Wall})`,
           height: PASTER_WALL_SIZE.HEIGHT,
-          width: PASTER_WALL_SIZE.WIDTH,
+          width: '100%',
         }}
       >
         {this.loadPasters()}

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-20 00:27:42
+ * @LastEditTime: 2021-01-21 22:48:40
  */
 import React from "react";
 import Editor from "./Editor";
@@ -63,12 +63,8 @@ class Reader extends React.Component {
   render() {
     return (
       <div style={{ flex: 1, flexDirection: "column" }}>
-        <link
-          href="http://cdn.bootcss.com/highlight.js/8.0/styles/tomorrow.min.css"
-          rel="stylesheet"
-        />
         <div
-          style={{ padding: 32 }}
+          style={{ padding: 32, flex: 1 }}
           dangerouslySetInnerHTML={{ __html: DEFAULT_ARTICLE }}
         />
         <Editor
