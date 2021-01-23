@@ -4,36 +4,68 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 22:21:37
+ * @LastEditTime: 2021-01-24 02:25:34
  */
 import React from "react";
+import * as x from "../x";
+import PropTypes from "prop-types";
 
 const requireContext = require.context("../images", true, /^\.\/.*\.gif$/);
 const images = requireContext.keys().map(requireContext);
 
 // 尺寸 235 × 68
 class Item extends React.Component {
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    onMoved: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.moveView = null;
+    this.state = {
+      translateY: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 320)),
+      translateX: parseInt(
+        Math.random() * (x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH - 235)
+      ),
+    };
   }
 
   componentDidMount() {
     // console.log(images);
   }
 
-  loadPasters() {}
-
   render() {
     let item = this.props.item;
     let index = item.index;
     let color = item.color;
+    var that = this;
     return (
       <div
-        style={{ flexDirection: "column" }}
-        draggable={true}
+        ref={(moveView) => (this.moveView = moveView)}
         onMouseDown={(e) => {
-          this.props.onPress();
+          that.props.onMoved(item);
+          var e = e || window.event;
+          // 拖拽前
+          that.moveView.startX = e.clientX - that.moveView.offsetLeft;
+          that.moveView.startY = e.clientY - that.moveView.offsetTop;
+          // 鼠标移动
+          document.onmousemove = function (e) {
+            var e = e || window.event;
+            that.moveView.style.left = e.clientX - that.moveView.startX + "px";
+            that.moveView.style.top = e.clientY - that.moveView.startY + "px";
+          };
+          // 鼠标抬起，停止移动
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        }}
+        style={{
+          position: "absolute",
+          left: `${this.state.translateX}px`,
+          top: `${this.state.translateY}px`,
+          zIndex: item.zIndex,
         }}
       >
         <div

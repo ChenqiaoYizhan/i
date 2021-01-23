@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 00:03:45
+ * @LastEditTime: 2021-01-24 02:31:36
  */
 import React from "react";
 import Item from "./Item";
@@ -130,7 +130,7 @@ class Pasters extends React.Component {
       datas: [],
     };
   }
-
+  
   componentDidMount() {
     let array = [];
     DATAS = DATAS.slice(0, 10);
@@ -142,12 +142,8 @@ class Pasters extends React.Component {
         time: item.time,
         message: item.message,
         zIndex: i,
-        index: parseInt(Math.random() * 8),
+        index: parseInt(Math.random() * 8), // 八种卡片选哪张
         color: x.UI.randomColor(),
-        top: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 320)),
-        left: parseInt(
-          Math.random() * (x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH - 235)
-        ),
       });
     }
     this.setState({
@@ -160,29 +156,22 @@ class Pasters extends React.Component {
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
       array.push(
-        <div
+        <Item
           key={i}
-          style={{
-            position: "absolute",
-            zIndex: item.zIndex,
-            left: item.left,
-            top: item.top,
+          item={item}
+          onMoved={(it) => {
+            let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
+            // console.log("Moved datasCopy before", datasCopy);
+            for (let j = 0; j < datasCopy.length; j++) {
+              datasCopy[j].zIndex = j;
+            }
+            datasCopy[i].zIndex = x.UI.ZINDEX.PASTER;
+            // console.log("Moved datasCopy after", datasCopy);
+            this.setState({
+              datas: datasCopy,
+            });
           }}
-        >
-          <Item
-            item={item}
-            onPress={() => {
-              let datasCopy = this.state.datas;
-              for (let j = 0; j < datasCopy.length; j++) {
-                datasCopy[j].zIndex = j;
-              }
-              datasCopy[i].zIndex = x.UI.ZINDEX.PASTER;
-              this.setState({
-                datas: datasCopy,
-              });
-            }}
-          />
-        </div>
+        />
       );
     }
     return array;
@@ -192,11 +181,9 @@ class Pasters extends React.Component {
     return (
       <div
         style={{
-          flex: 1,
-          flexDirection: "column",
           backgroundImage: `url(${Wall})`,
           height: x.UI.PASTER_WALL_HEIGHT,
-          width: "100%",
+          width: x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - 24,
           position: "relative",
         }}
       >

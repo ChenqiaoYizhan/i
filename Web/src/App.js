@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 23:48:33
+ * @LastEditTime: 2021-01-24 02:39:52
  */
 import React from "react";
 import Editor from "./Editor";
@@ -17,11 +17,13 @@ import * as x from "./x";
 import Danmus from "./Danmus";
 import Home from "./Home";
 import Webs from "./Webs";
+//  测试页面
+import MovePasterDemo from "./Demo/MovePasterDemo";
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: <Webs />,
+      page: <MovePasterDemo />,
     };
   }
 
@@ -116,9 +118,7 @@ class App extends React.Component {
             <Slider />
           </div>
         </div>
-        <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>
-          <Danmus />
-        </div>
+        <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>{/* <Danmus /> */}</div>
       </div>
     );
   }
