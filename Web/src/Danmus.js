@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 01:35:26
+ * @LastEditTime: 2021-01-23 16:50:57
  */
 import React from "react";
 import Editor from "./Editor";
@@ -36,6 +36,8 @@ let DATAS = [
 class Danmus extends React.Component {
   constructor(props) {
     super(props);
+    this.isDanmusShowOnAppPage = true;
+    this.timer = null;
     this.state = {
       datas: [],
     };
@@ -43,26 +45,68 @@ class Danmus extends React.Component {
 
   componentDidMount() {
     let that = this;
-    setInterval(function () {
-      let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
-      datasCopy.push({
-        latex: DATAS[parseInt(DATAS.length * Math.random())],
-        qq: parseInt(Math.random() * 119) + 1,
-      });
-      that.setState({
-        datas: datasCopy,
-      });
+    let index = 0;
+    console.log("Damus page state: onResume()");
+    this.timer = setInterval(function () {
+      if (that.isDanmusShowOnAppPage) {
+        console.log("Danmus page appeared, danmus array is changing");
+        let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
+        index++;
+        datasCopy.push({
+          id: index,
+          latex: DATAS[parseInt(DATAS.length * Math.random())],
+          qq: parseInt(Math.random() * 119) + 1,
+          show: true,
+        });
+        that.setState({
+          datas: datasCopy,
+        });
+      } else {
+        console.log("Danmus page dismissed, danmus array was not bean changed");
+      }
     }, parseInt(
       Math.random() * (x.DANMU.INTERVAL.max - x.DANMU.INTERVAL.min) +
         x.DANMU.INTERVAL.min
     ));
+    document.addEventListener("visibilitychange", function () {
+      that.isDanmusShowOnAppPage = !document.hidden;
+    });
+  }
+
+  componentWillUnmount() {
+    console.log("Danmus page state: onRecycle()");
+    this.state.datas = [];
+    this.setState({
+      datas: [],
+    });
+    clearInterval(this.timer);
   }
 
   loadDamus() {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
-      array.push(<DanmuItem item={item} />);
+      array.push(
+        item.show ? (
+          <DanmuItem
+            key={item.id}
+            item={item}
+            onDismiss={(id) => {
+              let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
+              let position = datasCopy.findIndex((it) => it.id == id);
+              datasCopy[position].show = false;
+              console.log(
+                "Danmus array",
+                datasCopy.filter((it) => it.show)
+              );
+              this.state.datas = datasCopy;
+              this.setState({
+                datas: datasCopy,
+              });
+            }}
+          />
+        ) : null
+      );
     }
     return array;
   }

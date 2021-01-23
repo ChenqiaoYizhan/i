@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 00:32:03
+ * @LastEditTime: 2021-01-23 16:52:00
  */
 
 import React from "react";
@@ -13,7 +13,6 @@ import Slider_i_background from "../images/Slider_i_background.jpg";
 import * as x from "../x";
 import Header from "./Header";
 import BookCloud from "./BookCloud";
-import Maths from "./Maths";
 
 const DATAS = [
   {
@@ -69,7 +68,6 @@ class Slider extends React.Component {
       >
         <Header />
         <div style={{ height: 8 }} />
-        <Maths />
       </div>
     );
   }

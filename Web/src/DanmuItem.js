@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 14:54:11
+ * @LastEditTime: 2021-01-23 16:49:43
  */
 import React from "react";
 import Editor from "./Editor";
@@ -19,7 +19,6 @@ class DanmuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isStop: false,
       math: { x: 0, y: parseInt(Math.random() * document.body.scrollHeight) },
     };
   }
@@ -35,18 +34,16 @@ class DanmuItem extends React.Component {
           },
         });
       } else {
-        that.setState({
-          isStop: true,
-        });
+        that.props.onDismiss(that.props.item.id);
         clearInterval(timer);
       }
-    },17);
+    }, 42);
   }
 
   render() {
     let latextHost = `http://sciencesoft.at/image/latexurl/image.png?dpi=${x.UI.SLIDER_WIDTH}&src=`;
     let qq = "http://www.cctv3.net/facebook/" + this.props.item.qq + "@QQ.gif";
-    return this.state.isStop ? null : (
+    return (
       <div
         style={{
           position: "absolute",
