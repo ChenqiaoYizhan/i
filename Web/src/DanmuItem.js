@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 21:53:43
+ * @LastEditTime: 2021-01-24 03:29:11
  */
 import React from "react";
 import Editor from "./Editor";
@@ -43,7 +43,7 @@ class DanmuItem extends React.Component {
         that.props.onDismiss(that.props.item.id);
         clearInterval(timer);
       }
-    }, 42);
+    }, 17);
   }
 
   render() {

@@ -4,13 +4,13 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 21:04:17
+ * @LastEditTime: 2021-01-24 19:13:06
  */
 import React from "react";
 import PropTypes from "prop-types";
 import * as x from "../x";
 import { Carousel } from "antd";
-
+import List from './List';
 class Home extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -44,21 +44,19 @@ class Home extends React.Component {
     return (
       <div
         style={{
-          alignItems: "center",
           display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          backgroundColor: "white",
+          flexDirection: "column"
         }}
       >
-        <div
+        {/* <div
           style={{
-            height: ((x.UI.MAIN_WIDTH - 24 - x.UI.SLIDER_WIDTH) ) / 3,
-            width: x.UI.MAIN_WIDTH - 24 - x.UI.SLIDER_WIDTH,
+            height: (((x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH) / 2) * 9) / 16,
+            width: (x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH) / 2,
           }}
         >
           <Carousel autoplay>{this.loadBanners()}</Carousel>
-        </div>
+        </div> */}
+        <List />
       </div>
     );
   }

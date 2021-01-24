@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 17:02:35
+ * @LastEditTime: 2021-01-24 13:27:30
  */
 import React from "react";
 import Editor from "./Editor";
@@ -46,10 +46,10 @@ class Danmus extends React.Component {
   componentDidMount() {
     let that = this;
     let index = 0;
-    console.log("Damus page state: onResume()");
+    // console.log("Damus page state: onResume()");
     this.timer = setInterval(function () {
-      if (that.isDanmusShowOnAppPage) {
-        console.log("Danmus page appeared, danmus array is changing");
+      if (that.isDanmusShowOnAppPage && that.state.datas.length < 10) {
+        // console.log("Danmus page appeared, danmus array is changing");
         let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
         index++;
         datasCopy.push({
@@ -62,7 +62,7 @@ class Danmus extends React.Component {
           datas: datasCopy,
         });
       } else {
-        console.log("Danmus page dismissed, danmus array was not bean changed");
+        // console.log("Danmus page dismissed, danmus array was not bean changed");
       }
     }, parseInt(
       Math.random() * (x.DANMU.INTERVAL.max - x.DANMU.INTERVAL.min) +
@@ -80,7 +80,7 @@ class Danmus extends React.Component {
       datas: [],
     });
     document.removeEventListener("visibilitychange", function () {
-      console.log("Danmus page removed visibilitychange event");
+      // console.log("Danmus page removed visibilitychange event");
     });
     clearInterval(this.timer);
   }
@@ -98,10 +98,10 @@ class Danmus extends React.Component {
               let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
               let position = datasCopy.findIndex((it) => it.id == id);
               datasCopy[position].show = false;
-              console.log(
-                "Danmus array",
-                datasCopy.filter((it) => it.show)
-              );
+              // console.log(
+              //   "Danmus array",
+              //   datasCopy.filter((it) => it.show)
+              // );
               this.state.datas = datasCopy;
               this.setState({
                 datas: datasCopy,

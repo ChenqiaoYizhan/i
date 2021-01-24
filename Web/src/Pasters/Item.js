@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 02:25:34
+ * @LastEditTime: 2021-01-24 19:09:36
  */
 import React from "react";
 import * as x from "../x";
@@ -12,8 +12,16 @@ import PropTypes from "prop-types";
 
 const requireContext = require.context("../images", true, /^\.\/.*\.gif$/);
 const images = requireContext.keys().map(requireContext);
-
-// 尺寸 235 × 68
+const ALL_PASTERS_COLORS = [
+  "#b42648",
+  "#63bf22",
+  "#96490b",
+  "#ea252d",
+  "#045384",
+  "#fac023",
+  "#471162",
+  "#666666",
+];
 class Item extends React.Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
@@ -24,9 +32,9 @@ class Item extends React.Component {
     super(props);
     this.moveView = null;
     this.state = {
-      translateY: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 320)),
+      translateY: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 235)),
       translateX: parseInt(
-        Math.random() * (x.UI.MAIN_WIDTH - 8 - x.UI.SLIDER_WIDTH - 235)
+        Math.random() * (x.UI.MAIN_WIDTH - x.UI.MAIN_INTERVAL - x.UI.SLIDER_WIDTH - 235)
       ),
     };
   }
@@ -38,7 +46,7 @@ class Item extends React.Component {
   render() {
     let item = this.props.item;
     let index = item.index;
-    let color = item.color;
+    let color = ALL_PASTERS_COLORS[index];
     var that = this;
     return (
       <div
@@ -102,7 +110,7 @@ class Item extends React.Component {
         </div>
         <div
           style={{
-            height: 68,
+            height: 72,
             width: 235,
             backgroundImage: `url(${images[3 * index + 2]})`,
             flexDirection: "row",
@@ -114,7 +122,7 @@ class Item extends React.Component {
             justifyContent: "flex-end",
           }}
         >
-          <div style={{ fontSize: 12, color: color }}>陈桥驿站</div>
+          <div style={{ fontSize: 12, color: color }}>{item.title}</div>
         </div>
       </div>
     );

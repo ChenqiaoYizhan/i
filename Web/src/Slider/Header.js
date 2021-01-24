@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 00:31:04
+ * @LastEditTime: 2021-01-24 15:25:14
  */
 
 import React from "react";
@@ -97,9 +97,11 @@ class Header extends React.Component {
             alignItems: "center",
           }}
         >
-          {this.loadCount("99", "文章数")}
+          {this.loadCount("99", "文章")}
           <div style={{ height: 16, width: 1, backgroundColor: "#f0f0f0" }} />
-          {this.loadCount("99", "评论数")}
+          {this.loadCount("99", "日记")}
+          <div style={{ height: 16, width: 1, backgroundColor: "#f0f0f0" }} />
+          {this.loadCount("99", "评论")}
         </div>
       </div>
     );

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 02:39:52
+ * @LastEditTime: 2021-01-24 19:11:31
  */
 import React from "react";
 import Editor from "./Editor";
@@ -17,13 +17,15 @@ import * as x from "./x";
 import Danmus from "./Danmus";
 import Home from "./Home";
 import Webs from "./Webs";
+import Header from "./Header";
 //  测试页面
 import MovePasterDemo from "./Demo/MovePasterDemo";
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: <MovePasterDemo />,
+      page: <Home />,
+      menu: { text: "首页" },
     };
   }
 
@@ -82,14 +84,17 @@ class App extends React.Component {
               }
               this.setState({
                 page: page,
+                menu: item,
               });
             }}
           />
         </div>
         <div style={{ height: x.UI.MENU_HEIGHT }} />
+        <div style={{ height: 8 }} />
+        <Header item={this.state.menu} />
+        <div style={{ height: 8 }} />
         <div
           style={{
-            margin: 16,
             width: x.UI.MAIN_WIDTH,
             flexDirection: "row",
             display: "flex",
@@ -101,24 +106,16 @@ class App extends React.Component {
               flexDirection: "column",
             }}
           >
-            <div
-              style={{
-                backgroundColor: "white",
-                borderRadius: 8,
-                padding: 8,
-                minHeight: document.body.clientHeight - x.UI.MENU_HEIGHT - 32,
-                boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
-              }}
-            >
-              {this.state.page}
-            </div>
+            <div>{this.state.page}</div>
           </div>
-          <div style={{ width: 8 }} />
+          <div style={{ width: x.UI.MAIN_INTERVAL }} />
           <div style={{ width: x.UI.SLIDER_WIDTH }}>
             <Slider />
           </div>
         </div>
-        <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>{/* <Danmus /> */}</div>
+        <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>
+          <Danmus />
+        </div>
       </div>
     );
   }

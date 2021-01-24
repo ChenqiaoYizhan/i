@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 23:46:46
+ * @LastEditTime: 2021-01-24 19:14:26
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -165,7 +165,9 @@ class Webs extends React.Component {
             padding: 2,
             margin: 2,
             borderRadius: 4,
-            width: (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - 36) / 3,
+            width:
+              (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL) / 3 -
+              8,
             backgroundColor: "#f0f0f0",
           }}
         >
@@ -198,6 +200,11 @@ class Webs extends React.Component {
           width: "100%",
           display: "flex",
           flexDirection: "column",
+          backgroundColor: "white",
+          borderRadius: 8,
+          padding: 8,
+          minHeight: document.body.clientHeight - x.UI.MENU_HEIGHT - 32,
+          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
         }}
       >
         {this.loadItems()}
