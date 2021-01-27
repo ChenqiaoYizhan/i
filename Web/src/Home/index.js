@@ -4,13 +4,15 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:13:06
+ * @LastEditTime: 2021-01-27 22:38:58
  */
 import React from "react";
 import PropTypes from "prop-types";
 import * as x from "../x";
 import { Carousel } from "antd";
-import List from './List';
+import List from "./List";
+import { withRouter } from "react-router-dom";
+
 class Home extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -18,6 +20,10 @@ class Home extends React.Component {
     this.state = {
       index: 0,
     };
+  }
+
+  componentDidMount() {
+    
   }
 
   loadBanners() {
@@ -45,7 +51,7 @@ class Home extends React.Component {
       <div
         style={{
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
         }}
       >
         {/* <div
@@ -62,4 +68,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

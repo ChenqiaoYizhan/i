@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:09:19
+ * @LastEditTime: 2021-01-24 20:11:05
  */
 import React from "react";
 import Item from "./Item";
@@ -96,7 +96,6 @@ class Pasters extends React.Component {
           position: "relative",
           backgroundColor: "white",
           borderRadius: 8,
-          padding: 8,
           minHeight: document.body.clientHeight - x.UI.MENU_HEIGHT - 32,
           boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
         }}

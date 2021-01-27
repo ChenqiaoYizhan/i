@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:10:10
+ * @LastEditTime: 2021-01-24 22:32:24
  */
 
 import React from "react";
@@ -40,11 +40,16 @@ class Timer extends React.Component {
           style={{
             flexDirection: "column",
             display: "flex",
-            width: (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL) / x.UI.TIMER_COLUMNS - 8,
+            width:
+              (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL + 8) /
+                x.UI.TIMER_COLUMNS -
+              8,
             backgroundColor: "white",
             borderRadius: 8,
             padding: 4,
-            margin: 4,
+            marginLeft: 4,
+            marginRight: 4,
+            marginBottom: 16,
             boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
           }}
         >
@@ -85,10 +90,14 @@ class Timer extends React.Component {
           flex: 1,
           flexDirection: "column",
           display: "flex",
+          marginLeft: -4,
+          marginRight: -4,
         }}
       >
         <Masonry
-          onImagesLoaded={this.handleImagesLoaded}
+          onImagesLoaded={() => {
+            
+          }}
           onLayoutComplete={(laidOutItems) => {}}
           onRemoveComplete={(removedItems) => {}}
         >

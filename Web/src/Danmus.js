@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 13:27:30
+ * @LastEditTime: 2021-01-27 15:01:24
  */
 import React from "react";
 import Editor from "./Editor";
@@ -48,7 +48,7 @@ class Danmus extends React.Component {
     let index = 0;
     // console.log("Damus page state: onResume()");
     this.timer = setInterval(function () {
-      if (that.isDanmusShowOnAppPage && that.state.datas.length < 10) {
+      if (that.isDanmusShowOnAppPage) {
         // console.log("Danmus page appeared, danmus array is changing");
         let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
         index++;

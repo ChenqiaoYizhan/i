@@ -4,12 +4,17 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-23 22:29:41
+ * @LastEditTime: 2021-01-27 21:00:23
  */
 import React from "react";
 import PropTypes from "prop-types";
 import { Input, Button } from "antd";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import * as x from "../x";
 
 const DATAS = [
@@ -17,33 +22,38 @@ const DATAS = [
     image: require("../images/Slider_home.png"),
     text: "首页",
     page: "",
-    id: "home",
+    id: "Home",
   },
   {
     image: require("../images/Slider_book.png"),
     text: "归档",
     page: "",
-    id: "book",
+    id: "Book",
   },
   {
     image: require("../images/Slider_paster.png"),
     text: "留言",
     page: "",
-    id: "paster",
+    id: "Pasters",
   },
   {
     image: require("../images/Slider_timer.png"),
     text: "时光",
     page: "",
-    id: "timer",
+    id: "Timer",
   },
   {
     image: require("../images/Slider_web.png"),
     text: "工具",
     page: "",
-    id: "web",
+    id: "Webs",
   },
-  { image: require("../images/Slider_i.png"), text: "关于", page: "", id: "i" },
+  {
+    image: require("../images/Slider_i.png"),
+    text: "关于",
+    page: "",
+    id: "About",
+  },
 ];
 class Menu extends React.Component {
   static propTypes = {

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:06:12
+ * @LastEditTime: 2021-01-27 22:24:12
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -87,7 +87,7 @@ class List extends React.Component {
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-end",
-                  display: "flex"
+                  display: "flex",
                 }}
               >
                 <div
@@ -102,18 +102,25 @@ class List extends React.Component {
                     require("../images/List_date.png"),
                     moment().format("YYYY-MM-DD HH:mm:ss")
                   )}
-                  <div style={{width: 16}} />
+                  <div style={{ width: 16 }} />
                   {this.loadIconText(
                     require("../images/List_see.png"),
                     parseInt(Math.random() * 100)
                   )}
-                  <div style={{width: 16}} />
+                  <div style={{ width: 16 }} />
                   {this.loadIconText(
                     require("../images/List_discuss.png"),
                     parseInt(Math.random() * 100)
                   )}
                 </div>
-                <Button type="primary">阅读全文</Button>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    window.open(`../Reader/${Math.random()}`, "_blank");
+                  }}
+                >
+                  阅读全文
+                </Button>
               </div>
             </div>
           </div>

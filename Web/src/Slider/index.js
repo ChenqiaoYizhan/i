@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 15:52:42
+ * @LastEditTime: 2021-01-24 20:53:15
  */
 
 import React from "react";
@@ -31,6 +31,7 @@ class Slider extends React.Component {
         style={{
           flexDirection: "column",
           display: "flex",
+          backgroundColor: '#f0f0f0'
         }}
       >
         <Header />
