@@ -4,12 +4,15 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 20:11:05
+ * @LastEditTime: 2021-01-28 23:09:35
  */
 import React from "react";
 import Item from "./Item";
 import Wall from "../images/Paster_wall.gif";
 import * as x from "../x";
+import Disscuss from "../Disscuss";
+import PropTypes from "prop-types";
+
 var selectPasters = require("../datas/selectPasters.json");
 
 class Pasters extends React.Component {
@@ -24,7 +27,7 @@ class Pasters extends React.Component {
     let array = [];
     // 保证八种贴纸都显示出来
     // 从第八张往后的贴纸随机显示
-    let DATAS = selectPasters.slice(0, 20);
+    let DATAS = selectPasters.slice(0, 16);
     let all8Pasters = Array.from({ length: 8 }, (_, i) => i)
       .sort((a, b) => Math.random() - 0.5)
       .concat(
@@ -90,17 +93,46 @@ class Pasters extends React.Component {
     return (
       <div
         style={{
-          backgroundImage: `url(${Wall})`,
-          height: x.UI.PASTER_WALL_HEIGHT,
-          width: x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL,
-          position: "relative",
+          flexDirection: "column",
+          display: "flex",
           backgroundColor: "white",
-          borderRadius: 8,
-          minHeight: document.body.clientHeight - x.UI.MENU_HEIGHT - 32,
           boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+          borderRadius: 8,
         }}
       >
-        {this.loadPasters()}
+        <div
+          style={{
+            flexDirection: "column",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: `url(${Wall})`,
+              height: ((x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH) * 9) / 16,
+              width: x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL,
+              position: "relative",
+              backgroundColor: "white",
+              borderRadius: 8,
+              boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+            }}
+          >
+            {this.loadPasters()}
+          </div>
+        </div>
+        <div style={{ height: 8 }} />
+        <div style={{ padding: 8 }}>
+          <Disscuss
+            height={(x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - 16) / 4}
+            width={
+              x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 16
+            }
+            onConfirmPress={(data) => {
+              console.log(data);
+            }}
+          />
+        </div>
       </div>
     );
   }

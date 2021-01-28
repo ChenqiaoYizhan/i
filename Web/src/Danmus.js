@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-27 15:01:24
+ * @LastEditTime: 2021-01-28 15:08:30
  */
 import React from "react";
 import Editor from "./Editor";
@@ -48,7 +48,7 @@ class Danmus extends React.Component {
     let index = 0;
     // console.log("Damus page state: onResume()");
     this.timer = setInterval(function () {
-      if (that.isDanmusShowOnAppPage) {
+      if (that.isDanmusShowOnAppPage && that.state.datas.length < 20) {
         // console.log("Danmus page appeared, danmus array is changing");
         let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
         index++;
@@ -62,7 +62,7 @@ class Danmus extends React.Component {
           datas: datasCopy,
         });
       } else {
-        // console.log("Danmus page dismissed, danmus array was not bean changed");
+        // console.log("Danmus page dismissed or sizeof datas > 20, danmus array was not bean changed");
       }
     }, parseInt(
       Math.random() * (x.DANMU.INTERVAL.max - x.DANMU.INTERVAL.min) +

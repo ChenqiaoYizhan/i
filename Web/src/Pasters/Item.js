@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:09:36
+ * @LastEditTime: 2021-01-28 22:45:25
  */
 import React from "react";
 import * as x from "../x";
@@ -32,9 +32,12 @@ class Item extends React.Component {
     super(props);
     this.moveView = null;
     this.state = {
-      translateY: parseInt(Math.random() * (x.UI.PASTER_WALL_HEIGHT - 235)),
+      translateY: parseInt(
+        Math.random() * (((x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH) * 9) / 16 - 235)
+      ),
       translateX: parseInt(
-        Math.random() * (x.UI.MAIN_WIDTH - x.UI.MAIN_INTERVAL - x.UI.SLIDER_WIDTH - 235)
+        Math.random() *
+          (x.UI.MAIN_WIDTH - x.UI.MAIN_INTERVAL - x.UI.SLIDER_WIDTH - 235)
       ),
     };
   }

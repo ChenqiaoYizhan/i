@@ -4,24 +4,28 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-27 22:18:46
+ * @LastEditTime: 2021-01-28 22:20:09
  */
 import React from "react";
 import Main from "./Main";
 import Editor from "./Editor";
+import MovePasterDemo from "./Demo/MovePasterDemo";
 import Home from "./Home";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
 import Webs from "./Webs";
 import Reader from "./Reader";
+import CanvasPadDemo from "./Demo/CanvasPadDemo";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import Test from "./Demo/Test";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      
+    };
   }
-
+  
   componentDidMount() {}
 
   render() {
@@ -29,20 +33,34 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route path="/Edit">
-              <Editor />
-            </Route>
             <Route
               path="/"
               component={() => (
                 <Main>
-                  <Route path="/Home" component={() => <Home />} />
+                  <Route path="/Home" exact component={() => <Home />} />
                   <Route path="/Book" component={() => <Home />} />
                   <Route path="/Pasters" component={() => <Pasters />} />
                   <Route path="/Timer" component={() => <Timer />} />
                   <Route path="/Webs" component={() => <Webs />} />
                   <Route path="/About" component={() => <Home />} />
                   <Route path="/Reader/:id" component={() => <Reader />} />
+                  <Route
+                    // 以后测试页面统一添加前缀 /Demo/PageName
+                    path="/Demo"
+                    component={() => (
+                      <div>
+                        <Route
+                          path="/Demo/MovePasterDemo"
+                          component={() => <MovePasterDemo />}
+                        />
+                        <Route
+                          path="/Demo/CanvasPadDemo"
+                          component={() => <CanvasPadDemo />}
+                        />
+                        <Route path="/Demo/Test" component={() => <Test />} />
+                      </div>
+                    )}
+                  />
                 </Main>
               )}
             ></Route>

@@ -4,28 +4,17 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-27 23:42:32
+ * @LastEditTime: 2021-01-28 22:38:41
  */
 import React from "react";
-import Editor from "./Editor";
-import Reader from "./Reader";
 import Slider from "./Slider";
-import Pasters from "./Pasters";
-import Timer from "./Timer";
 import Menu from "./Menu";
 import * as x from "./x";
 import Danmus from "./Danmus";
 import Home from "./Home";
-import Webs from "./Webs";
-import Header from "./App/Header";
 import Footer from "./App/Footer";
-import ChiJi from "./Demo/ChiJi";
-import md5 from "blueimp-md5";
 
 import { Link, withRouter } from "react-router-dom";
-
-//  测试页面
-import MovePasterDemo from "./Demo/MovePasterDemo";
 
 class Main extends React.Component {
   constructor(props) {
@@ -75,9 +64,7 @@ class Main extends React.Component {
           />
         </div>
         <div style={{ height: x.UI.MENU_HEIGHT }} />
-        <div style={{ height: 8 }} />
-        <Header item={this.state.menu} />
-        <div style={{ height: 8 }} />
+        <div style={{ height: 16 }} />
         <div
           style={{
             width: x.UI.MAIN_WIDTH,

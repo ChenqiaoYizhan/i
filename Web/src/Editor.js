@@ -4,16 +4,24 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-19 23:52:41
+ * @LastEditTime: 2021-01-28 21:08:35
  */
 import React from "react";
 import E from "wangeditor";
 import hljs from "highlight.js";
 import { Button } from "antd";
+import PropTypes from "prop-types";
 
 const FACE_URL = "http://www.cctv3.net/facebook";
 
 class Editor extends React.Component {
+  static propTypes = {
+    menus: PropTypes.array, // 不配置则默认显示所有
+    height: PropTypes.number.isRequired,
+    onConfirmPress: PropTypes.func.isRequired,
+    onCancelPress: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.editor = null;
@@ -24,7 +32,7 @@ class Editor extends React.Component {
   componentDidMount() {
     let that = this;
     this.editor = new E("#editDiv");
-    this.editor.config.height = 512;
+    this.editor.config.height = this.props.height;
     // 配置代码高亮
     this.editor.highlight = hljs;
     // 配置表情
@@ -52,6 +60,38 @@ class Editor extends React.Component {
       //   content: "😂 🙄".split(/\s/),
       // },
     ];
+    // 设置显示的菜单项
+    this.editor.config.menus =
+      this.props.menus === undefined
+        ? [
+            // 官网给出的配置
+            "head",
+            "bold",
+            "fontSize",
+            "fontName",
+            "italic",
+            "underline",
+            "strikeThrough",
+            "indent",
+            "lineHeight",
+            "foreColor",
+            "backColor",
+            "link",
+            "list",
+            "todo",
+            "justify",
+            "quote",
+            
+            
+            "image",
+            "video",
+            "table",
+            "code",
+            "splitLine",
+            "undo",
+            "redo",
+          ]
+        : this.props.menus;
     this.editor.config.onchange = function (newHTML) {
       that.html = newHTML;
     };
@@ -66,36 +106,34 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div style={{ padding: 32 }}>
-        <div style={{ flexDirection: "column", display: "flex" }}>
-          <div id="editDiv" />
-          <div style={{ height: 4 }} />
-          <div
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              display: "flex",
+      <div style={{ flexDirection: "column", display: "flex" }}>
+        <div id="editDiv" />
+        <div style={{ height: 4 }} />
+        <div
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            display: "flex",
+          }}
+        >
+          <Button
+            style={{ flex: 1 }}
+            type="primary"
+            onClick={() => {
+              this.props.onConfirmPress(this.html);
             }}
           >
-            <Button
-              style={{ flex: 1 }}
-              type="primary"
-              onClick={() => {
-                this.props.onConfirmPress(this.html);
-              }}
-            >
-              保存
-            </Button>
-            <div style={{ width: 4 }} />
-            <Button
-              type="default"
-              onClick={() => {
-                this.props.onCancelPress(this.html);
-              }}
-            >
-              取消
-            </Button>
-          </div>
+            保存
+          </Button>
+          <div style={{ width: 4 }} />
+          <Button
+            type="default"
+            onClick={() => {
+              this.props.onCancelPress(this.html);
+            }}
+          >
+            取消
+          </Button>
         </div>
       </div>
     );
