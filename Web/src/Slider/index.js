@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 20:53:15
+ * @LastEditTime: 2021-01-29 23:13:56
  */
 
 import React from "react";
@@ -12,9 +12,10 @@ import PropTypes from "prop-types";
 import Slider_i_background from "../images/Slider_i_background.jpg";
 import * as x from "../x";
 import Header from "./Header";
-import BookCloud from "./BookCloud";
+import BookCloud from "./Cloud2DItem";
 import Doge from "./Doge";
 import Connect from "./Connect";
+import Cloud2Ds from "./Cloud2Ds";
 class Slider extends React.Component {
   static propTypes = {};
 
@@ -31,14 +32,14 @@ class Slider extends React.Component {
         style={{
           flexDirection: "column",
           display: "flex",
-          backgroundColor: '#f0f0f0'
+          backgroundColor: "#f0f0f0",
         }}
       >
         <Header />
         <div style={{ height: 8 }} />
         <Connect />
         <div style={{ height: 8 }} />
-        <Doge />
+        <Cloud2Ds />
       </div>
     );
   }

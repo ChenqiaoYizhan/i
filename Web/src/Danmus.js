@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 15:08:30
+ * @LastEditTime: 2021-01-30 01:57:47
  */
 import React from "react";
 import Editor from "./Editor";
@@ -48,7 +48,7 @@ class Danmus extends React.Component {
     let index = 0;
     // console.log("Damus page state: onResume()");
     this.timer = setInterval(function () {
-      if (that.isDanmusShowOnAppPage && that.state.datas.length < 20) {
+      if (that.isDanmusShowOnAppPage) {
         // console.log("Danmus page appeared, danmus array is changing");
         let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
         index++;
@@ -68,20 +68,22 @@ class Danmus extends React.Component {
       Math.random() * (x.DANMU.INTERVAL.max - x.DANMU.INTERVAL.min) +
         x.DANMU.INTERVAL.min
     ));
-    document.addEventListener("visibilitychange", function () {
-      that.isDanmusShowOnAppPage = !document.hidden;
+    document.addEventListener("mouseleave", function () {
+      that.isDanmusShowOnAppPage = false;
+    });
+    document.addEventListener("mouseenter", function () {
+      that.isDanmusShowOnAppPage = true;
     });
   }
 
   componentWillUnmount() {
-    console.log("Danmus page state: onRecycle()");
+    // console.log("Danmus page state: onRecycle()");
     this.state.datas = [];
     this.setState({
       datas: [],
     });
-    document.removeEventListener("visibilitychange", function () {
-      // console.log("Danmus page removed visibilitychange event");
-    });
+    document.removeEventListener("mouseenter");
+    document.removeEventListener("mouseleave");
     clearInterval(this.timer);
   }
 

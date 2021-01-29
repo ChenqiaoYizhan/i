@@ -4,12 +4,13 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:26:13
+ * @LastEditTime: 2021-01-30 01:15:50
  */
 
 import React from "react";
 import PropTypes from "prop-types";
 import * as x from "../x";
+import Group from './Group';
 
 const DATAS = [
   { id: 1, name: "i@cctv.net", image: require("../images/Connect_email.png") },
@@ -44,7 +45,7 @@ class Connect extends React.Component {
           }}
         >
           <img src={item.image} style={{ height: 16, width: 16 }} />
-          <div style={{ fontSize: 12, color: "black" }}>{item.name}</div>
+          <div style={{ fontSize: 12, color: "grey" }}>{item.name}</div>
         </div>
       );
     }
@@ -65,6 +66,7 @@ class Connect extends React.Component {
           boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)", // 前两个参数偏移量 第三个参数抬起来的高度 第四个参数 阴影扩散的大小
         }}
       >
+        <Group text='联系方式' image={require('../images/Slider_connect.png')} />
         {this.loadItems()}
       </div>
     );

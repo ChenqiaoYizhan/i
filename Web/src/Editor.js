@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 21:08:35
+ * @LastEditTime: 2021-01-29 18:42:55
  */
 import React from "react";
 import E from "wangeditor";
@@ -80,9 +80,7 @@ class Editor extends React.Component {
             "list",
             "todo",
             "justify",
-            "quote",
-            
-            
+            "quote",   
             "image",
             "video",
             "table",

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-22 19:13:43
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 22:42:56
+ * @LastEditTime: 2021-01-29 23:51:59
  */
 import md5 from "blueimp-md5";
 
@@ -20,6 +20,31 @@ export const UI = {
     DANMU: 99,
   },
   TIMER_COLUMNS: 3,
+  randomColor: function () {
+    let s = "";
+    let array = [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+    ];
+    for (let i = 0; i < 6; i++) {
+      s += array[parseInt(Math.random() * array.length)] + "";
+    }
+    return "#" + s;
+  },
 };
 
 export const MD5 = {

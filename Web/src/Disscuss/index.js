@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-26 23:50:58
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 23:12:18
+ * @LastEditTime: 2021-01-30 00:13:26
  */
 import { color } from "echarts";
 import React from "react";
@@ -17,8 +17,16 @@ import { Button } from "antd";
 import PropTypes from "prop-types";
 
 const DATAS = [
-  { key: "text", name: "低调的文字模式" },
-  { key: "paint", name: "奢华的涂鸦模式" },
+  {
+    key: "text",
+    name: "低调的文字模式",
+    image: "http://www.cctv3.net/facebook/7@Huya.png",
+  },
+  {
+    key: "paint",
+    name: "奢华的涂鸦模式",
+    image: "http://www.cctv3.net/facebook/16@Huya.png",
+  },
 ];
 
 class Discuss extends React.Component {
@@ -58,6 +66,8 @@ class Discuss extends React.Component {
           style={{
             justifyContent: "center",
             display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
             paddingTop: 4,
             padding: 4,
             paddingLeft: 8,
@@ -67,6 +77,8 @@ class Discuss extends React.Component {
             backgroundColor: i == this.state.tab ? "#f24e4e" : "#e3e6ec",
           }}
         >
+          <img src={item.image} style={{ height: 24, width: 28 }} />
+          <div style={{ width: 2 }} />
           <div
             style={{
               color: i == this.state.tab ? "white" : "grey",

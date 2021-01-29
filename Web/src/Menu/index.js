@@ -4,52 +4,47 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-27 21:00:23
+ * @LastEditTime: 2021-01-30 00:35:42
  */
 import React from "react";
 import PropTypes from "prop-types";
 import { Input, Button } from "antd";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as x from "../x";
 
 const DATAS = [
   {
-    image: require("../images/Slider_home.png"),
+    image: require("../images/Menu_home.png"),
     text: "首页",
     page: "",
     id: "Home",
   },
   {
-    image: require("../images/Slider_book.png"),
+    image: require("../images/Menu_book.png"),
     text: "归档",
     page: "",
     id: "Book",
   },
   {
-    image: require("../images/Slider_paster.png"),
+    image: require("../images/Menu_paster.png"),
     text: "留言",
     page: "",
     id: "Pasters",
   },
   {
-    image: require("../images/Slider_timer.png"),
+    image: require("../images/Menu_timer.png"),
     text: "时光",
     page: "",
     id: "Timer",
   },
   {
-    image: require("../images/Slider_web.png"),
+    image: require("../images/Menu_web.png"),
     text: "工具",
     page: "",
     id: "Webs",
   },
   {
-    image: require("../images/Slider_i.png"),
+    image: require("../images/Menu_i.png"),
     text: "关于",
     page: "",
     id: "About",

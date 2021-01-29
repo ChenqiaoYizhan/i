@@ -1,10 +1,10 @@
 /*
- * @Descripttion:
+ * @Descripttion:React 16.13.1 2020/05/21
  * @version:
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 22:20:09
+ * @LastEditTime: 2021-01-30 01:58:05
  */
 import React from "react";
 import Main from "./Main";
@@ -13,6 +13,7 @@ import MovePasterDemo from "./Demo/MovePasterDemo";
 import Home from "./Home";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
+import Book from "./Book";
 import Webs from "./Webs";
 import Reader from "./Reader";
 import CanvasPadDemo from "./Demo/CanvasPadDemo";
@@ -21,11 +22,9 @@ import Test from "./Demo/Test";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
-  
+
   componentDidMount() {}
 
   render() {
@@ -38,7 +37,7 @@ class App extends React.Component {
               component={() => (
                 <Main>
                   <Route path="/Home" exact component={() => <Home />} />
-                  <Route path="/Book" component={() => <Home />} />
+                  <Route path="/Book" component={() => <Book />} />
                   <Route path="/Pasters" component={() => <Pasters />} />
                   <Route path="/Timer" component={() => <Timer />} />
                   <Route path="/Webs" component={() => <Webs />} />
@@ -63,7 +62,7 @@ class App extends React.Component {
                   />
                 </Main>
               )}
-            ></Route>
+            />
           </Switch>
         </BrowserRouter>
       </div>

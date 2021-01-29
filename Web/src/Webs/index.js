@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 19:14:26
+ * @LastEditTime: 2021-01-29 18:45:51
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -156,7 +156,10 @@ class Webs extends React.Component {
     for (let i = 0; i < children.length; i++) {
       let item = children[i];
       array.push(
-        <div
+        <a
+          onClick={() => {
+            
+          }}
           key={i}
           style={{
             flexDirection: "row",
@@ -167,7 +170,7 @@ class Webs extends React.Component {
             borderRadius: 4,
             width:
               (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL) / 3 -
-              8,
+              9,
             backgroundColor: "#f0f0f0",
           }}
         >
@@ -187,7 +190,7 @@ class Webs extends React.Component {
             <div style={{ fontSize: 14, color: "black" }}>{item.title}</div>
             <div style={{ fontSize: 12, color: "grey" }}>{item.message}</div>
           </div>
-        </div>
+        </a>
       );
     }
     return array;
