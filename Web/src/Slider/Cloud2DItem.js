@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:30:41
+ * @LastEditTime: 2021-01-30 02:52:01
  */
 
 import React from "react";
@@ -40,7 +40,7 @@ class Cloud2DItem extends React.Component {
     let timer = setInterval(function () {
       bottom += 1;
       if (bottom >= that.props.height - 32) {
-        that.props.onDismiss();
+        that.props.onDismiss(that.props.item);
         clearInterval(timer);
       } else {
         that.state.cloud.y = bottom;

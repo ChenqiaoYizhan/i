@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:57:47
+ * @LastEditTime: 2021-01-30 03:05:42
  */
 import React from "react";
 import Editor from "./Editor";
@@ -64,10 +64,7 @@ class Danmus extends React.Component {
       } else {
         // console.log("Danmus page dismissed or sizeof datas > 20, danmus array was not bean changed");
       }
-    }, parseInt(
-      Math.random() * (x.DANMU.INTERVAL.max - x.DANMU.INTERVAL.min) +
-        x.DANMU.INTERVAL.min
-    ));
+    }, parseInt(Math.random() * 4000) + 2000);
     document.addEventListener("mouseleave", function () {
       that.isDanmusShowOnAppPage = false;
     });
@@ -82,8 +79,8 @@ class Danmus extends React.Component {
     this.setState({
       datas: [],
     });
-    document.removeEventListener("mouseenter");
-    document.removeEventListener("mouseleave");
+    document.removeEventListener("mouseenter", function () {});
+    document.removeEventListener("mouseleave", function () {});
     clearInterval(this.timer);
   }
 
@@ -96,17 +93,11 @@ class Danmus extends React.Component {
           <DanmuItem
             key={item.id}
             item={item}
-            onDismiss={(id) => {
-              let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
-              let position = datasCopy.findIndex((it) => it.id == id);
-              datasCopy[position].show = false;
-              // console.log(
-              //   "Danmus array",
-              //   datasCopy.filter((it) => it.show)
-              // );
-              this.state.datas = datasCopy;
+            onDismiss={(item) => {
+              let index = this.state.datas.findIndex((it) => it.id == item.id);
+              this.state.datas[index].show = false;
               this.setState({
-                datas: datasCopy,
+                datas: this.state.datas,
               });
             }}
           />

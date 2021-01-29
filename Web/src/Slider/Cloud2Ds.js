@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:54:31
+ * @LastEditTime: 2021-01-30 03:02:31
  */
 
 import React from "react";
@@ -72,12 +72,12 @@ class Cloud2Ds extends React.Component {
       that.isCloud2dShowOnAppPage = true;
     });
   }
-  
-  componentWillUnmount() {
-    document.removeEventListener("mouseleave");
-    document.removeEventListener("mouseenter");
-  }
 
+  componentWillUnmount() {
+    document.removeEventListener("mouseleave", function () {});
+    document.removeEventListener("mouseenter", function () {});
+  }
+  
   loadCloud2Ds() {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-22 19:13:43
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-29 23:51:59
+ * @LastEditTime: 2021-01-30 02:09:36
  */
 import md5 from "blueimp-md5";
 
@@ -54,9 +54,4 @@ export const MD5 = {
     // Apache-Codec c39599ecc7f5a9cc0659ac2191101dd2
     return md5(`Sun Yupeng(${s})`);
   },
-};
-
-export const DANMU = {
-  SPEED: 1, // 弹幕速度 x轴的位移距离 这里就不控制间隔了，直接采用1s/24HZ = 41.66ms刷新一次 推荐: 2
-  INTERVAL: { min: 2021, max: 6666 }, // 弹幕间隔，毫秒 推荐: 2000-4000
 };

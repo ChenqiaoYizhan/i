@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 03:29:11
+ * @LastEditTime: 2021-01-30 02:27:41
  */
 import React from "react";
 import Editor from "./Editor";
@@ -35,15 +35,15 @@ class DanmuItem extends React.Component {
       if (that.state.math.x < document.body.clientWidth) {
         that.setState({
           math: {
-            x: that.state.math.x + x.DANMU.SPEED,
+            x: that.state.math.x + 3,
             y: that.state.math.y,
           },
         });
       } else {
-        that.props.onDismiss(that.props.item.id);
+        that.props.onDismiss(that.props.item);
         clearInterval(timer);
       }
-    }, 17);
+    }, 100);
   }
 
   render() {
