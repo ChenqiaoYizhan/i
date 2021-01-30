@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-26 23:50:58
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 00:13:26
+ * @LastEditTime: 2021-01-31 00:41:55
  */
 import { color } from "echarts";
 import React from "react";
@@ -15,6 +15,8 @@ import Editor from "../Editor";
 import CanvasPad from "./CanvasPad";
 import { Button } from "antd";
 import PropTypes from "prop-types";
+
+const HEIGHT_WIDTH_RATE = 4;
 
 const DATAS = [
   {
@@ -32,8 +34,7 @@ const DATAS = [
 class Discuss extends React.Component {
   static propTypes = {
     onConfirmPress: PropTypes.func.isRequired,
-    width: PropTypes.number,
-    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
   };
 
   constructor(props) {
@@ -107,6 +108,21 @@ class Discuss extends React.Component {
         <div
           style={{
             flexDirection: "row",
+            alignItems: "flex-end",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={require("../images/Discuss_tiaodou.gif")}
+            style={{ height: 128, width: 128 }}
+          />
+          <div style={{ width: 12 }} />
+          <div style={{ fontSize: 30, color: "black" }}>评论</div>
+        </div>
+        <div
+          style={{
+            flexDirection: "row",
             alignItems: "center",
             display: "flex",
           }}
@@ -144,7 +160,7 @@ class Discuss extends React.Component {
         {this.state.tab == 0 ? (
           <Editor
             menus={["emoticon", "foreColor"]} // 不配置则默认显示所有
-            height={this.props.height}
+            height={this.props.width / HEIGHT_WIDTH_RATE}
             onConfirmPress={(html) => {
               this.props.onConfirmPress({
                 name: this.nameText.input.value,
@@ -160,7 +176,7 @@ class Discuss extends React.Component {
           />
         ) : this.state.tab == 1 ? (
           <CanvasPad
-            height={this.props.height}
+            height={this.props.width / HEIGHT_WIDTH_RATE}
             width={this.props.width}
             onConfirmPress={(base64) => {
               this.props.onConfirmPress({

@@ -4,13 +4,13 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 12:34:08
+ * @LastEditTime: 2021-01-31 00:45:48
  */
 import React from "react";
 import * as x from "../x";
 import PropTypes from "prop-types";
 
-const requireContext = require.context("../images", true, /^\.\/.*\.gif$/);
+const requireContext = require.context("../images", true, /Paster.*\.gif$/);
 const images = requireContext.keys().map(requireContext);
 const ALL_PASTERS_COLORS = [
   "#b42648",

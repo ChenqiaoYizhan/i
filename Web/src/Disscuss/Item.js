@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-28 19:13:28
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 20:40:15
+ * @LastEditTime: 2021-01-31 00:28:04
  */
 /*
  * @Descripttion:
@@ -196,7 +196,7 @@ class List extends React.Component {
   }
 
   render() {
-    let n = parseInt(Math.random()*5)
+    let n = parseInt(Math.random() * 5);
     return (
       <div
         style={{
@@ -211,7 +211,8 @@ class List extends React.Component {
             display: "flex",
             padding: 12,
             borderRadius: 8,
-            margin: 8,
+            marginTop: 4,
+            marginBottom: 4,
             boxShadow: "0 0 2px 1px rgba(0, 0, 0, 0.24)",
           }}
         >
@@ -236,7 +237,6 @@ class List extends React.Component {
           width={x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH + 32}
         >
           <Discuss
-            height={188}
             width={x.UI.MAIN_WIDTH - 16 - x.UI.SLIDER_WIDTH}
             onConfirmPress={() => {
               this.setState({

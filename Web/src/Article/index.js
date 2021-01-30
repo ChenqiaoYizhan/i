@@ -4,13 +4,14 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 23:59:47
+ * @LastEditTime: 2021-01-31 00:41:16
  */
 import React from "react";
 import PropTypes from "prop-types";
 import * as x from "../x";
 import { withRouter } from "react-router-dom";
-
+import Discuss from "../Disscuss";
+import Discusses from "../Disscuss/Discusses";
 import article from "./article.css";
 
 class Article extends React.Component {
@@ -36,7 +37,16 @@ class Article extends React.Component {
           padding: 8,
         }}
       >
-        <div dangerouslySetInnerHTML={{ __html: this.state.text }} />
+        <div
+          style={{ padding: 8 }}
+          dangerouslySetInnerHTML={{ __html: this.state.text }}
+        />
+        <Discuss
+          width={x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 16}
+          onConfirmPress={() => {}}
+        />
+        <div style={{ height: 12 }} />
+        <Discusses />
       </div>
     );
   }

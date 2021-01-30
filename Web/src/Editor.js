@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 21:16:15
+ * @LastEditTime: 2021-01-31 00:25:00
  */
 import React from "react";
 import E from "wangeditor";
@@ -19,7 +19,6 @@ class Editor extends React.Component {
     // menus: PropTypes.array, // 不配置则默认显示所有
     // height: PropTypes.number.isRequired,
     // onConfirmPress: PropTypes.func.isRequired,
-    // onCancelPress: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -54,12 +53,6 @@ class Editor extends React.Component {
           src: `${FACE_URL}/${i + 1}@Huya.png`,
         })),
       },
-      // {
-      //   title: "emoji",
-      //   type: "emoji",
-      //   // emoji 表情，content 是一个数组即可
-      //   content: "😂 🙄".split(/\s/),
-      // },
     ];
     // 设置显示的菜单项
     if (this.props.menus !== undefined) {
@@ -83,33 +76,17 @@ class Editor extends React.Component {
       <div style={{ flexDirection: "column", display: "flex" }}>
         <div id="editDiv" />
         <div style={{ height: 4 }} />
-        <div
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            display: "flex",
+
+        <Button
+          style={{ flex: 1 }}
+          type="primary"
+          onClick={() => {
+            // this.props.onConfirmPress(this.html);
+            console.log(this.html);
           }}
         >
-          <Button
-            style={{ flex: 1 }}
-            type="primary"
-            onClick={() => {
-              // this.props.onConfirmPress(this.html);
-              console.log(this.html);
-            }}
-          >
-            保存
-          </Button>
-          <div style={{ width: 4 }} />
-          <Button
-            type="default"
-            onClick={() => {
-              // this.props.onCancelPress(this.html);
-            }}
-          >
-            取消
-          </Button>
-        </div>
+          保存
+        </Button>
       </div>
     );
   }
