@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 03:02:31
+ * @LastEditTime: 2021-01-30 12:05:31
  */
 
 import React from "react";
@@ -52,11 +52,18 @@ class Cloud2Ds extends React.Component {
       let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
       if (that.isCloud2dShowOnAppPage) {
         index++;
+        let key = keys[index % keys.length];
         datasCopy.push({
           id: index,
           text: keys[index % keys.length],
           color: x.UI.randomColor(),
           show: true,
+          x:
+            parseInt(
+              (x.UI.SLIDER_WIDTH - key.length * 12 - 16) * Math.random()
+            ) + 4,
+          y: x.UI.SLIDER_WIDTH - 32,
+          time: Math.random() * 1588 + 6666,
         });
         console.log(datasCopy);
         that.setState({
@@ -66,6 +73,10 @@ class Cloud2Ds extends React.Component {
       }
     }, 1000);
     document.addEventListener("mouseleave", function () {
+      that.state.datas = [];
+      that.setState({
+        datas: []
+      })
       that.isCloud2dShowOnAppPage = false;
     });
     document.addEventListener("mouseenter", function () {
@@ -77,28 +88,24 @@ class Cloud2Ds extends React.Component {
     document.removeEventListener("mouseleave", function () {});
     document.removeEventListener("mouseenter", function () {});
   }
-  
+
   loadCloud2Ds() {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
       array.push(
-        item.show ? (
-          <Cloud2DItem
-            key={i}
-            item={item}
-            width={x.UI.SLIDER_WIDTH}
-            height={x.UI.SLIDER_WIDTH}
-            onClick={() => {}}
-            onDismiss={() => {
-              let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
-              datasCopy[i].show = false;
-              this.setState({
-                datas: datasCopy,
-              });
-            }}
-          />
-        ) : null
+        <Cloud2DItem
+          key={i}
+          item={item}
+          onClick={() => {}}
+          onDismiss={() => {
+            let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
+            datasCopy[i].show = false;
+            this.setState({
+              datas: datasCopy,
+            });
+          }}
+        />
       );
     }
     return array;

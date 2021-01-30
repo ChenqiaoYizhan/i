@@ -12,6 +12,7 @@
     "highlight.js": "^10.5.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
+    "rc-tween-one": "^2.7.3",
     "react": "^16.13.1",
     "react-canvas-draw": "^1.1.1",
     "react-dom": "^16.13.1",

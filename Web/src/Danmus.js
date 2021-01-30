@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 03:05:42
+ * @LastEditTime: 2021-01-30 12:02:36
  */
 import React from "react";
 import Editor from "./Editor";
@@ -57,6 +57,11 @@ class Danmus extends React.Component {
           latex: DATAS[parseInt(DATAS.length * Math.random())],
           qq: parseInt(Math.random() * 119) + 1,
           show: true,
+          y: parseInt(
+            Math.random() * (document.body.clientHeight - x.UI.MENU_HEIGHT) +
+              x.UI.MENU_HEIGHT
+          ),
+          time: parseInt(Math.random() * 1688) + 8888,
         });
         that.setState({
           datas: datasCopy,
@@ -66,6 +71,10 @@ class Danmus extends React.Component {
       }
     }, parseInt(Math.random() * 4000) + 2000);
     document.addEventListener("mouseleave", function () {
+      that.state.datas = [];
+      that.setState({
+        datas: []
+      })
       that.isDanmusShowOnAppPage = false;
     });
     document.addEventListener("mouseenter", function () {
@@ -89,19 +98,18 @@ class Danmus extends React.Component {
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
       array.push(
-        item.show ? (
-          <DanmuItem
-            key={item.id}
-            item={item}
-            onDismiss={(item) => {
-              let index = this.state.datas.findIndex((it) => it.id == item.id);
-              this.state.datas[index].show = false;
-              this.setState({
-                datas: this.state.datas,
-              });
-            }}
-          />
-        ) : null
+        <DanmuItem
+          key={item.id}
+          item={item}
+          onDismiss={(item) => {
+            console.log("Danmu item dismissed", item);
+            let index = this.state.datas.findIndex((it) => it.id == item.id);
+            this.state.datas[index].show = false;
+            this.setState({
+              datas: this.state.datas,
+            });
+          }}
+        />
       );
     }
     return array;
