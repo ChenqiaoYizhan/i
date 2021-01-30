@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:58:26
+ * @LastEditTime: 2021-01-30 23:57:42
  */
 import React from "react";
 import Slider from "./Slider";
@@ -57,9 +57,18 @@ class Main extends React.Component {
         >
           <Menu
             onMenuPress={(item) => {
-              this.props.history.push({
-                pathname: `/${item.id}`,
-              });
+              switch (item.id) {
+                case "About":
+                  this.props.history.push({
+                    pathname: `/Article/i`,
+                  });
+                  break;
+
+                default:
+                  this.props.history.push({
+                    pathname: `/${item.id}`,
+                  });
+              }
             }}
           />
         </div>

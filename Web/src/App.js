@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:58:05
+ * @LastEditTime: 2021-01-30 23:34:04
  */
 import React from "react";
 import Main from "./Main";
@@ -15,7 +15,7 @@ import Pasters from "./Pasters";
 import Timer from "./Timer";
 import Book from "./Book";
 import Webs from "./Webs";
-import Reader from "./Reader";
+import Article from "./Article";
 import CanvasPadDemo from "./Demo/CanvasPadDemo";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Test from "./Demo/Test";
@@ -42,7 +42,7 @@ class App extends React.Component {
                   <Route path="/Timer" component={() => <Timer />} />
                   <Route path="/Webs" component={() => <Webs />} />
                   <Route path="/About" component={() => <Home />} />
-                  <Route path="/Reader/:id" component={() => <Reader />} />
+                  <Route path="/Article/:id" component={() => <Article />} />
                   <Route
                     // 以后测试页面统一添加前缀 /Demo/PageName
                     path="/Demo"
@@ -60,6 +60,7 @@ class App extends React.Component {
                       </div>
                     )}
                   />
+                  <Route path="/Editor" component={() => <Editor />} />
                 </Main>
               )}
             />

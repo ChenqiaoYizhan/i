@@ -4,11 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 11:29:24
+ * @LastEditTime: 2021-01-30 12:30:59
  */
 import React from "react";
 import Editor from "./Editor";
-import Reader from "./Reader";
 import Slider from "./Slider";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
@@ -32,7 +31,8 @@ class DanmuItem extends React.Component {
     return item.show ? (
       <TweenOne
         animation={{
-          x: document.body.clientWidth,
+          x: document.body.clientWidth * -1,
+          scale: 0.88,
           duration: item.time,
           onComplete: () => {
             this.props.onDismiss(item);
@@ -40,7 +40,7 @@ class DanmuItem extends React.Component {
         }}
         moment={0}
         paused={false}
-        style={{ left: 0, position: "absolute", top: item.y }}
+        style={{ right: 0, position: "absolute", top: item.y }}
       >
         <div
           style={{

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-26 23:50:58
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 11:13:38
+ * @LastEditTime: 2021-01-30 16:41:39
  */
 /*
  * @Descripttion:
@@ -20,14 +20,10 @@ import CanvasDraw from "react-canvas-draw";
 import * as x from "../x";
 import PropTypes from "prop-types";
 import TweenOne from "rc-tween-one";
+import Discusses from "../Disscuss/Discusses";
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.animation = [
-      {
-        
-      }
-    ];
     this.state = {};
   }
 
@@ -40,18 +36,10 @@ export default class extends React.Component {
           backgroundColor: "white",
           flexDirection: "column",
           display: "flex",
+          padding: 12,
         }}
       >
-        <TweenOne
-          animation={{x: 600, duration: 2000}}
-          moment={0}
-          paused={false}
-          style={{
-            height: 200,
-            width: 200,
-            backgroundColor: "blue",
-          }}
-        />
+        <Discusses />
       </div>
     );
   }

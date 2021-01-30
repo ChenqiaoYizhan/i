@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 11:56:02
+ * @LastEditTime: 2021-01-30 20:21:07
  */
 
 import React from "react";
@@ -14,8 +14,6 @@ import TweenOne from "rc-tween-one";
 import * as x from "../x";
 class Cloud2DItem extends React.Component {
   static propTypes = {
-    height: PropTypes.number,
-    width: PropTypes.number.isRequired,
     onDismiss: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
   };

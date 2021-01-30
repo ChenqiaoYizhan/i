@@ -4,11 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 12:02:36
+ * @LastEditTime: 2021-01-30 23:32:54
  */
 import React from "react";
 import Editor from "./Editor";
-import Reader from "./Reader";
 import Slider from "./Slider";
 import Pasters from "./Pasters";
 import Timer from "./Timer";
@@ -61,7 +60,7 @@ class Danmus extends React.Component {
             Math.random() * (document.body.clientHeight - x.UI.MENU_HEIGHT) +
               x.UI.MENU_HEIGHT
           ),
-          time: parseInt(Math.random() * 1688) + 8888,
+          time: parseInt(Math.random() * 1688) + 16888,
         });
         that.setState({
           datas: datasCopy,
@@ -69,7 +68,7 @@ class Danmus extends React.Component {
       } else {
         // console.log("Danmus page dismissed or sizeof datas > 20, danmus array was not bean changed");
       }
-    }, parseInt(Math.random() * 4000) + 2000);
+    }, 2888);
     document.addEventListener("mouseleave", function () {
       that.state.datas = [];
       that.setState({

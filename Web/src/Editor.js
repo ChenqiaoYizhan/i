@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-29 18:42:55
+ * @LastEditTime: 2021-01-30 21:16:15
  */
 import React from "react";
 import E from "wangeditor";
@@ -16,10 +16,10 @@ const FACE_URL = "http://www.cctv3.net/facebook";
 
 class Editor extends React.Component {
   static propTypes = {
-    menus: PropTypes.array, // 不配置则默认显示所有
-    height: PropTypes.number.isRequired,
-    onConfirmPress: PropTypes.func.isRequired,
-    onCancelPress: PropTypes.func.isRequired,
+    // menus: PropTypes.array, // 不配置则默认显示所有
+    // height: PropTypes.number.isRequired,
+    // onConfirmPress: PropTypes.func.isRequired,
+    // onCancelPress: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -32,7 +32,8 @@ class Editor extends React.Component {
   componentDidMount() {
     let that = this;
     this.editor = new E("#editDiv");
-    this.editor.config.height = this.props.height;
+    this.editor.config.height =
+      this.props.height == undefined ? 256 : this.props.height;
     // 配置代码高亮
     this.editor.highlight = hljs;
     // 配置表情
@@ -61,35 +62,10 @@ class Editor extends React.Component {
       // },
     ];
     // 设置显示的菜单项
-    this.editor.config.menus =
-      this.props.menus === undefined
-        ? [
-            // 官网给出的配置
-            "head",
-            "bold",
-            "fontSize",
-            "fontName",
-            "italic",
-            "underline",
-            "strikeThrough",
-            "indent",
-            "lineHeight",
-            "foreColor",
-            "backColor",
-            "link",
-            "list",
-            "todo",
-            "justify",
-            "quote",   
-            "image",
-            "video",
-            "table",
-            "code",
-            "splitLine",
-            "undo",
-            "redo",
-          ]
-        : this.props.menus;
+    if (this.props.menus !== undefined) {
+      this.editor.config.menus = this.props.menus;
+    } else {
+    }
     this.editor.config.onchange = function (newHTML) {
       that.html = newHTML;
     };
@@ -118,7 +94,8 @@ class Editor extends React.Component {
             style={{ flex: 1 }}
             type="primary"
             onClick={() => {
-              this.props.onConfirmPress(this.html);
+              // this.props.onConfirmPress(this.html);
+              console.log(this.html);
             }}
           >
             保存
@@ -127,7 +104,7 @@ class Editor extends React.Component {
           <Button
             type="default"
             onClick={() => {
-              this.props.onCancelPress(this.html);
+              // this.props.onCancelPress(this.html);
             }}
           >
             取消

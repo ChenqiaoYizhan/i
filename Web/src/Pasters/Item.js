@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 22:45:25
+ * @LastEditTime: 2021-01-30 12:34:08
  */
 import React from "react";
 import * as x from "../x";
@@ -52,7 +52,7 @@ class Item extends React.Component {
     let color = ALL_PASTERS_COLORS[index];
     var that = this;
     return (
-      <div
+      <a
         ref={(moveView) => (this.moveView = moveView)}
         onMouseDown={(e) => {
           that.props.onMoved(item);
@@ -127,7 +127,7 @@ class Item extends React.Component {
         >
           <div style={{ fontSize: 12, color: color }}>{item.title}</div>
         </div>
-      </div>
+      </a>
     );
   }
 }

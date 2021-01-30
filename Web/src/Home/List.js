@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-27 22:24:12
+ * @LastEditTime: 2021-01-30 23:33:16
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -116,7 +116,7 @@ class List extends React.Component {
                 <Button
                   type="primary"
                   onClick={() => {
-                    window.open(`../Reader/${Math.random()}`, "_blank");
+                    // window.open(`../Reader/${Math.random()}`, "_blank");
                   }}
                 >
                   阅读全文
