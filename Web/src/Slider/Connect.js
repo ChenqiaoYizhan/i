@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 01:15:50
+ * @LastEditTime: 2021-01-31 11:07:12
  */
 
 import React from "react";
@@ -63,7 +63,7 @@ class Connect extends React.Component {
           backgroundColor: "white",
           borderRadius: 8,
           padding: 8,
-          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)", // 前两个参数偏移量 第三个参数抬起来的高度 第四个参数 阴影扩散的大小
+          boxShadow: x.UI.BOX_SHADOW,// 前两个参数偏移量 第三个参数抬起来的高度 第四个参数 阴影扩散的大小
         }}
       >
         <Group text='联系方式' image={require('../images/Slider_connect.png')} />

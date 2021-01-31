@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 12:30:59
+ * @LastEditTime: 2021-01-31 11:06:20
  */
 import React from "react";
 import Editor from "./Editor";
@@ -50,7 +50,7 @@ class DanmuItem extends React.Component {
             backgroundColor: "white",
             borderRadius: x.UI.DANMU_HEIGHT / 2,
             padding: 2,
-            boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+            boxShadow: x.UI.BOX_SHADOW,
           }}
         >
           <img

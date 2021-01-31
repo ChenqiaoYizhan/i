@@ -207,7 +207,7 @@ class Webs extends React.Component {
           borderRadius: 8,
           padding: 8,
           minHeight: document.body.clientHeight - x.UI.MENU_HEIGHT - 32,
-          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+          boxShadow: x.UI.BOX_SHADOW,
         }}
       >
         {this.loadItems()}

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 23:09:35
+ * @LastEditTime: 2021-01-31 11:06:56
  */
 import React from "react";
 import Item from "./Item";
@@ -96,7 +96,7 @@ class Pasters extends React.Component {
           flexDirection: "column",
           display: "flex",
           backgroundColor: "white",
-          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+          boxShadow: x.UI.BOX_SHADOW,
           borderRadius: 8,
         }}
       >
@@ -115,7 +115,7 @@ class Pasters extends React.Component {
               position: "relative",
               backgroundColor: "white",
               borderRadius: 8,
-              boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+              boxShadow: x.UI.BOX_SHADOW,
             }}
           >
             {this.loadPasters()}

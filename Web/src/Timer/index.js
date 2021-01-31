@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-24 22:32:24
+ * @LastEditTime: 2021-01-31 11:07:49
  */
 
 import React from "react";
@@ -50,7 +50,7 @@ class Timer extends React.Component {
             marginLeft: 4,
             marginRight: 4,
             marginBottom: 16,
-            boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+            boxShadow: x.UI.BOX_SHADOW,
           }}
         >
           <div

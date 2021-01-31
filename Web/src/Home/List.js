@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 23:33:16
+ * @LastEditTime: 2021-01-31 11:46:00
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -25,7 +25,7 @@ class List extends React.Component {
 
   componentDidMount() {
     this.setState({
-      datas: selectPasters.slice(0, 20),
+      datas: selectPasters.slice(0, 10),
     });
   }
 
@@ -52,7 +52,7 @@ class List extends React.Component {
             flexDirection: "column",
             display: "flex",
             backgroundColor: "white",
-            boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+            boxShadow: x.UI.BOX_SHADOW,
             borderRadius: 8,
             marginBottom: i == this.state.datas.length - 1 ? 0 : 8,
             padding: 8,
@@ -61,7 +61,12 @@ class List extends React.Component {
           <div style={{ display: "flex" }}>
             <img
               src="http://www.cctv3.net/images/ChiJi0201.jpg"
-              style={{ height: 135, width: 240 }}
+              style={{
+                height: 135,
+                width: 240,
+                borderTopLeftRadius: 8,
+                borderBottomLeftRadius: 8,
+              }}
             />
             <div style={{ width: 8 }} />
             <div

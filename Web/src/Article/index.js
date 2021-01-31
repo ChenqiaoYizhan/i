@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 00:41:16
+ * @LastEditTime: 2021-01-31 00:57:10
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -31,7 +31,7 @@ class Article extends React.Component {
         style={{
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)",
+          boxShadow: x.UI.BOX_SHADOW,
           borderRadius: 8,
           backgroundColor: "white",
           padding: 8,

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-28 19:13:28
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 00:28:04
+ * @LastEditTime: 2021-01-31 11:06:47
  */
 /*
  * @Descripttion:
@@ -103,11 +103,11 @@ class List extends React.Component {
         <img
           src={require("../images/i.jpg")}
           style={{
-            height: 36,
-            width: 36,
-            marginLeft: isParent ? 0 : 48,
-            borderRadius: 18,
-            boxShadow: "0 0 2px 1px rgba(0, 0, 0, 0.24)",
+            height: 56,
+            width: 56,
+            marginLeft: isParent ? 0 : 68,
+            borderRadius: 28,
+            boxShadow: x.UI.BOX_SHADOW,
           }}
         />
         <div style={{ width: 12 }} />
@@ -213,7 +213,7 @@ class List extends React.Component {
             borderRadius: 8,
             marginTop: 4,
             marginBottom: 4,
-            boxShadow: "0 0 2px 1px rgba(0, 0, 0, 0.24)",
+            boxShadow: x.UI.BOX_SHADOW,
           }}
         >
           {this.loadItem(true)}

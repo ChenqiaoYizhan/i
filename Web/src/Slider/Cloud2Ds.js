@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 12:05:31
+ * @LastEditTime: 2021-01-31 19:49:27
  */
 
 import React from "react";
@@ -65,7 +65,7 @@ class Cloud2Ds extends React.Component {
           y: x.UI.SLIDER_WIDTH - 32,
           time: Math.random() * 1588 + 6666,
         });
-        console.log(datasCopy);
+        // console.log(datasCopy);
         that.setState({
           datas: datasCopy,
         });
@@ -119,7 +119,7 @@ class Cloud2Ds extends React.Component {
           display: "flex",
           backgroundColor: "white",
           borderRadius: 8,
-          boxShadow: "0 0 4px 2px rgba(0, 0, 0, 0.24)", // 前两个参数偏移量 第三个参数抬起来的高度 第四个参数 阴影扩散的大小
+          boxShadow: x.UI.BOX_SHADOW,
         }}
       >
         <Group text="文章分类" image={require("../images/Slider_cloud.png")} />
