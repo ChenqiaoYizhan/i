@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 23:32:54
+ * @LastEditTime: 2021-02-01 20:11:53
  */
 import React from "react";
 import Editor from "./Editor";
@@ -101,7 +101,7 @@ class Danmus extends React.Component {
           key={item.id}
           item={item}
           onDismiss={(item) => {
-            console.log("Danmu item dismissed", item);
+            // console.log("Danmu item dismissed", item);
             let index = this.state.datas.findIndex((it) => it.id == item.id);
             this.state.datas[index].show = false;
             this.setState({
