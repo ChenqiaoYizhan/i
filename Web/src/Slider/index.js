@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-29 23:13:56
+ * @LastEditTime: 2021-02-02 23:08:58
  */
 
 import React from "react";
@@ -16,6 +16,7 @@ import BookCloud from "./Cloud2DItem";
 import Doge from "./Doge";
 import Connect from "./Connect";
 import Cloud2Ds from "./Cloud2Ds";
+import IID from "./IID";
 class Slider extends React.Component {
   static propTypes = {};
 
@@ -40,6 +41,8 @@ class Slider extends React.Component {
         <Connect />
         <div style={{ height: 8 }} />
         <Cloud2Ds />
+        <div style={{ height: 8 }} />
+        <IID />
       </div>
     );
   }

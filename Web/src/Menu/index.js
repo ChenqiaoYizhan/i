@@ -4,13 +4,14 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 00:35:42
+ * @LastEditTime: 2021-02-02 21:58:24
  */
 import React from "react";
 import PropTypes from "prop-types";
 import { Input, Button } from "antd";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as x from "../x";
+import { withRouter } from "react-router";
 
 const DATAS = [
   {
@@ -149,10 +150,28 @@ class Menu extends React.Component {
           >
             搜索
           </Button>
+          <div style={{ width: 24 }} />
+          <a
+            onClick={() => {
+              this.props.history.push({
+                pathname: `/Admin`,
+              });
+            }}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <img
+              style={{ height: 24, width: 108 }}
+              src={require("../images/Menu_admin.png")}
+            />
+          </a>
         </div>
       </div>
     );
   }
 }
 
-export default Menu;
+export default withRouter(Menu);

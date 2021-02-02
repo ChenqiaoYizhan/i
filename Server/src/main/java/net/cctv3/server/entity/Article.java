@@ -8,6 +8,8 @@ public class Article {
     public Integer id;
     public String iid;
     public String name;
+    public String title;
+    public String message;
     public String image;
     public String html;
     public int look;

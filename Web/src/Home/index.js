@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-01 22:47:30
+ * @LastEditTime: 2021-02-03 00:00:27
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -13,9 +13,6 @@ import Banner from "./Banner";
 import List from "./List";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-
-var datas = require("../datas/selectBanners.json");
-
 class Home extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -26,29 +23,29 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    for (let i = 0; i < datas.length; i++) {
-      let item = datas[i];
-      item.id = null;
-      item.iid = x.MD5.dealWithSunyupeng(Math.random());
-      item.useful = 1;
-      item.time = moment().format("YYYY-MM-DD HH:mm:ss");
-      fetch("http://localhost:8080/insertBanner.action", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
-        body: JSON.stringify(item),
-      })
-        .then((response) => {
-          let json = response.json();
-          console.log(json);
-          return json;
-        })
-        .then((json) => {
-          console.log(json);
-        });
-    }
+    // for (let i = 0; i < datas.length; i++) {
+    //   let item = datas[i];
+    //   item.id = null;
+    //   item.iid = x.MD5.dealWithSunyupeng(Math.random());
+    //   item.useful = 1;
+    //   item.time = moment().format("YYYY-MM-DD HH:mm:ss");
+    //   fetch("http://localhost:8080/insertBanner.action", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     mode: "cors",
+    //     body: JSON.stringify(item),
+    //   })
+    //     .then((response) => {
+    //       let json = response.json();
+    //       console.log(json);
+    //       return json;
+    //     })
+    //     .then((json) => {
+    //       console.log(json);
+    //     });
+    // }
   }
 
   loadBanners() {

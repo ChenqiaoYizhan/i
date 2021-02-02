@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 21:08:30
+ * @LastEditTime: 2021-02-03 00:01:22
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -13,16 +13,15 @@ import { Button } from "antd";
 import moment from "moment";
 import TweenOne from "rc-tween-one";
 
-var selectBanners = require("../datas/selectBanners.json");
 const WIDTH =
   (x.UI.MAIN_WIDTH - x.UI.MAIN_INTERVAL - x.UI.SLIDER_WIDTH - 16) / 13;
-
 class Banner extends React.Component {
   static propTypes = {};
 
   constructor(props) {
     super(props);
     this.timer = null;
+    this.banners = [];
     this.isCouldPlayBanners = true;
     this.state = {
       datas: [],
@@ -30,15 +29,21 @@ class Banner extends React.Component {
   }
 
   componentDidMount() {
-    for (let i = 0; i < selectBanners.length; i++) {
-      selectBanners[i].active = false;
-    }
-    selectBanners[4].active = true;
-    this.setState({
-      datas: selectBanners,
+    x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BANNERS + "?useful=1"
+    ).then((json) => {
+      this.banners = json;
+      for (let i = 0; i < this.banners.length; i++) {
+        this.banners[i].active = false;
+      }
+      this.banners[4].active = true;
+      this.setState({
+        datas: this.banners,
+      });
     });
+    
     this.timer = setInterval(() => {
-      if (this.isCouldPlayBanners) {
+      if (this.isCouldPlayBanners && this.banners.length > 0) {
         let index = this.state.datas.findIndex((item) => item.active);
         this.updateActive((index + 1) % this.state.datas.length);
       }

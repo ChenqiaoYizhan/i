@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 23:34:04
+ * @LastEditTime: 2021-02-02 19:00:37
  */
 import React from "react";
 import Main from "./Main";
@@ -19,6 +19,7 @@ import Article from "./Article";
 import CanvasPadDemo from "./Demo/CanvasPadDemo";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Test from "./Demo/Test";
+import Admin from "./Admin";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +43,7 @@ class App extends React.Component {
                   <Route path="/Timer" component={() => <Timer />} />
                   <Route path="/Webs" component={() => <Webs />} />
                   <Route path="/About" component={() => <Home />} />
+                  <Route path="/Admin" component={() => <Admin />} />
                   <Route path="/Article/:id" component={() => <Article />} />
                   <Route
                     // 以后测试页面统一添加前缀 /Demo/PageName

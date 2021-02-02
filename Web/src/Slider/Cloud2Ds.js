@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 19:49:27
+ * @LastEditTime: 2021-02-02 23:55:52
  */
 
 import React from "react";
@@ -20,70 +20,55 @@ class Cloud2Ds extends React.Component {
   constructor(props) {
     super(props);
     this.isCloud2dShowOnAppPage = true;
+    this.books = [];
     this.state = {
       datas: [],
     };
   }
 
   componentDidMount() {
-    let keys = [
-      "考研",
-      "数据结构",
-      "算法",
-      "设计模式",
-      "Android",
-      "小程序",
-      "C/C++",
-      "Java",
-      "HTML/CSS/JavaScript",
-      "软件工程",
-      "高等数学",
-      "线程代数",
-      "计算机网络",
-      "操作系统",
-      "面试",
-      "运维(MySQL/Linux)",
-      "React Native",
-      "杂七杂八",
-    ];
-    let that = this;
+    x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?useful=1"
+    ).then((json) => {
+      this.books = json;
+    });
     let index = 0;
-    setInterval(function () {
-      let datasCopy = JSON.parse(JSON.stringify(that.state.datas));
-      if (that.isCloud2dShowOnAppPage) {
+    setInterval(() => {
+      let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
+      if (this.isCloud2dShowOnAppPage && this.books.length > 0) {
         index++;
-        let key = keys[index % keys.length];
+        let item = this.books[index % this.books.length];
         datasCopy.push({
           id: index,
-          text: keys[index % keys.length],
+          text: this.books[index % this.books.length].title,
           color: x.UI.randomColor(),
           show: true,
           x:
             parseInt(
-              (x.UI.SLIDER_WIDTH - key.length * 12 - 16) * Math.random()
+              (x.UI.SLIDER_WIDTH - item.title.length * 12 - 16) * Math.random()
             ) + 4,
           y: x.UI.SLIDER_WIDTH - 32,
           time: Math.random() * 1588 + 6666,
         });
         // console.log(datasCopy);
-        that.setState({
+        this.setState({
           datas: datasCopy,
         });
       } else {
       }
     }, 1000);
-    document.addEventListener("mouseleave", function () {
-      that.state.datas = [];
-      that.setState({
-        datas: []
-      })
-      that.isCloud2dShowOnAppPage = false;
+    document.addEventListener("mouseleave", () => {
+      this.state.datas = [];
+      this.setState({
+        datas: [],
+      });
+      this.isCloud2dShowOnAppPage = false;
     });
-    document.addEventListener("mouseenter", function () {
-      that.isCloud2dShowOnAppPage = true;
+    document.addEventListener("mouseenter", () => {
+      this.isCloud2dShowOnAppPage = true;
     });
   }
-
+  
   componentWillUnmount() {
     document.removeEventListener("mouseleave", function () {});
     document.removeEventListener("mouseenter", function () {});
