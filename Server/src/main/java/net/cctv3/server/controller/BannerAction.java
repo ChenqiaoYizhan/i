@@ -1,15 +1,22 @@
-package net.cctv3.server.action;
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: Michael Sun @ www.cctv3.net
+ * @Date: 2021-02-01 01:18:39
+ * @LastEditors: Michael Sun
+ * @LastEditTime: 2021-02-03 21:25:25
+ */
+package net.cctv3.server.controller;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import net.cctv3.server.entity.Banner;
 import net.cctv3.server.mapper.BannerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class BannerAction {
@@ -17,21 +24,17 @@ public class BannerAction {
     private JdbcTemplate jdbc;
     @Autowired
     private BannerMapper bannerMapper;
-    // Mybatis plus could not autowire. No beans of 'BaseMapper' type found
 
     @CrossOrigin
     @RequestMapping("/selectBanners.action")
-    public List<Map<String, Object>> selectBanners(@RequestParam(value = "useful") String useful) {
-        String sql = String.format("select * from banner where useful = %s order by time desc limit 9", useful);
-        return jdbc.queryForList(sql);
+    public List<Banner> selectBanners(@RequestParam(value = "deleted") String deleted) {
+        return bannerMapper.findBannersByDeleted(deleted);
     }
 
     @CrossOrigin
     @PostMapping("/insertBanner.action")
     public HashMap<String, Object> insertBanner(@RequestBody Banner banner) {
         HashMap<String, Object> hashMap = new HashMap<>();
-        int rows = bannerMapper.insert(banner);
-        hashMap.put("status", rows);
         return hashMap;
     }
 }

@@ -4,10 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-22 19:13:43
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 00:01:13
+ * @LastEditTime: 2021-02-03 19:19:21
  */
 import md5 from "blueimp-md5";
-import moment from 'moment';
+import moment from "moment";
 
 var tinycolor = require("tinycolor2");
 
@@ -70,7 +70,9 @@ export const SERVICE = {
   // SERVER: "http://127.0.0.1:8080/Service/",
   API: {
     SELECT_BOOKS: "selectBooks.action",
-    SELECT_BANNERS: "selectBanners.action"
+    SELECT_BANNERS: "selectBanners.action",
+    INSERT_ARTICLE: "insertArticle.action",
+    INSERT_BOOOKS: "insertBooks.action",
   },
 };
 
@@ -124,7 +126,13 @@ export const HTTP = {
   },
   post: async function (url, body) {
     return new Promise(function (resolve, reject) {
-      fetch(url, { method: "POST", body: JSON.string(body) })
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
         .then((response) => response.json())
         .then((responseJson) => {
           CONSOLE.e(url);

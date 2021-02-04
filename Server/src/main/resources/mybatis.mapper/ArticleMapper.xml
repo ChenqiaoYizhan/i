@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.cctv3.server.mapper.ArticleMapper">
+    <insert id="insertArticleOnly" parameterType="net.cctv3.server.entity.Article" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into article
+            (name, title, message, image, html, look, love, time, deleted)
+        values (#{name}, #{title}, #{message}, #{image}, #{html}, #{look}, #{love}, #{time}, #{deleted})
+    </insert>
+</mapper>

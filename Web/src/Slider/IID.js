@@ -4,11 +4,10 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 00:05:55
+ * @LastEditTime: 2021-02-03 12:36:21
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import * as x from "../x";
 import moment from "moment";
 import Group from "./Group";

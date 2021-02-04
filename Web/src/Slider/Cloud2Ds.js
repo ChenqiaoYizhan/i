@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-02 23:55:52
+ * @LastEditTime: 2021-02-03 21:24:21
  */
 
 import React from "react";
@@ -28,7 +28,7 @@ class Cloud2Ds extends React.Component {
 
   componentDidMount() {
     x.HTTP.get(
-      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?useful=1"
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
     ).then((json) => {
       this.books = json;
     });

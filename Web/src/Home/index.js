@@ -31,9 +31,9 @@ class Home extends React.Component {
     //   item.time = moment().format("YYYY-MM-DD HH:mm:ss");
     //   fetch("http://localhost:8080/insertBanner.action", {
     //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
     //     mode: "cors",
     //     body: JSON.stringify(item),
     //   })

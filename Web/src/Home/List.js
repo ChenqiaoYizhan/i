@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 11:46:00
+ * @LastEditTime: 2021-02-04 11:54:13
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -60,7 +60,7 @@ class List extends React.Component {
         >
           <div style={{ display: "flex" }}>
             <img
-              src="http://www.cctv3.net/images/ChiJi0201.jpg"
+              src={require('../images/Article_default.jpg')}
               style={{
                 height: 135,
                 width: 240,

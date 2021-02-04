@@ -1,12 +1,9 @@
 package net.cctv3.server.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import javax.persistence.*;
 
 public class Article {
-    @TableId(value = "id", type = IdType.AUTO)
     public Integer id;
-    public String iid;
     public String name;
     public String title;
     public String message;
@@ -14,6 +11,22 @@ public class Article {
     public String html;
     public int look;
     public int love;
-    public int useful;
     public String time;
+    public int deleted;
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", image='" + image + '\'' +
+                ", html='" + html + '\'' +
+                ", look=" + look +
+                ", love=" + love +
+                ", time='" + time + '\'' +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

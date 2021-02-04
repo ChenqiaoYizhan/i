@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 00:01:22
+ * @LastEditTime: 2021-02-03 21:24:04
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -30,7 +30,7 @@ class Banner extends React.Component {
 
   componentDidMount() {
     x.HTTP.get(
-      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BANNERS + "?useful=1"
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BANNERS + "?deleted=0"
     ).then((json) => {
       this.banners = json;
       for (let i = 0; i < this.banners.length; i++) {

@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 00:25:00
+ * @LastEditTime: 2021-02-03 14:03:04
  */
 import React from "react";
 import E from "wangeditor";
@@ -17,8 +17,8 @@ const FACE_URL = "http://www.cctv3.net/facebook";
 class Editor extends React.Component {
   static propTypes = {
     // menus: PropTypes.array, // 不配置则默认显示所有
-    // height: PropTypes.number.isRequired,
-    // onConfirmPress: PropTypes.func.isRequired,
+    height: PropTypes.number.isRequired,
+    onConfirmPress: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -81,7 +81,7 @@ class Editor extends React.Component {
           style={{ flex: 1 }}
           type="primary"
           onClick={() => {
-            // this.props.onConfirmPress(this.html);
+            this.props.onConfirmPress(this.html);
             console.log(this.html);
           }}
         >

@@ -1,7 +1,11 @@
 package net.cctv3.server.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import net.cctv3.server.entity.Article;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
-public interface ArticleMapper extends BaseMapper<Article> {
+@Mapper
+public interface ArticleMapper {
+    int insertArticleOnly(Article article);
 }
