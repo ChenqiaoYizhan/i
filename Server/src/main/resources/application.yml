@@ -41,3 +41,6 @@ spring:
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 mybatis:
   mapper-locations: classpath:mybatis.mapper/*.xml
+logging:
+  level:
+    net.cctv3.server.mapper: trace

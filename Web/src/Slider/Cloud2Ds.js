@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 21:24:21
+ * @LastEditTime: 2021-02-04 19:14:30
  */
 
 import React from "react";
@@ -26,12 +26,11 @@ class Cloud2Ds extends React.Component {
     };
   }
 
-  componentDidMount() {
-    x.HTTP.get(
+  async initDatas() {
+    let books = await x.HTTP.get(
       x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
-    ).then((json) => {
-      this.books = json;
-    });
+    );
+    this.books = books;
     let index = 0;
     setInterval(() => {
       let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
@@ -57,6 +56,10 @@ class Cloud2Ds extends React.Component {
       } else {
       }
     }, 1000);
+  }
+
+  componentDidMount() {
+    this.initDatas();
     document.addEventListener("mouseleave", () => {
       this.state.datas = [];
       this.setState({
@@ -68,7 +71,7 @@ class Cloud2Ds extends React.Component {
       this.isCloud2dShowOnAppPage = true;
     });
   }
-  
+
   componentWillUnmount() {
     document.removeEventListener("mouseleave", function () {});
     document.removeEventListener("mouseenter", function () {});

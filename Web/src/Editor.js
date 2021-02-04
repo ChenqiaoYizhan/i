@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 14:03:04
+ * @LastEditTime: 2021-02-04 19:34:14
  */
 import React from "react";
 import E from "wangeditor";
@@ -19,6 +19,7 @@ class Editor extends React.Component {
     // menus: PropTypes.array, // 不配置则默认显示所有
     height: PropTypes.number.isRequired,
     onConfirmPress: PropTypes.func.isRequired,
+    defaultHTML: PropTypes.string,
   };
 
   constructor(props) {
@@ -64,7 +65,12 @@ class Editor extends React.Component {
     };
     /**一定要创建 */
     this.editor.create();
-    this.editor.txt.html(this.props.defaultHTML);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.defaultHTML !== undefined) {
+      this.editor.txt.html(nextProps.defaultHTML);
+    }
   }
 
   componentWillUnmount() {
@@ -76,7 +82,6 @@ class Editor extends React.Component {
       <div style={{ flexDirection: "column", display: "flex" }}>
         <div id="editDiv" />
         <div style={{ height: 4 }} />
-
         <Button
           style={{ flex: 1 }}
           type="primary"

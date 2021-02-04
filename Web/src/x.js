@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-22 19:13:43
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 19:19:21
+ * @LastEditTime: 2021-02-04 21:41:13
  */
 import md5 from "blueimp-md5";
 import moment from "moment";
@@ -73,6 +73,8 @@ export const SERVICE = {
     SELECT_BANNERS: "selectBanners.action",
     INSERT_ARTICLE: "insertArticle.action",
     INSERT_BOOOKS: "insertBooks.action",
+    SELECT_ARTICLE: "selectArticle.action",
+    UPDATE_ARTICLE: "updateArticle.action"
   },
 };
 
@@ -111,38 +113,24 @@ export const TIME = {
 // GET
 export const HTTP = {
   get: async function (url) {
-    return new Promise(function (resolve, reject) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          CONSOLE.e(url);
-          CONSOLE.i(responseJson);
-          resolve(responseJson);
-        })
-        .catch((error) => {
-          CONSOLE.e(error);
-        });
-    });
+    let web = await fetch(url);
+    let json = await web.json();
+    CONSOLE.d(url);
+    CONSOLE.i(json);
+    return json;
   },
   post: async function (url, body) {
-    return new Promise(function (resolve, reject) {
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      })
-        .then((response) => response.json())
-        .then((responseJson) => {
-          CONSOLE.e(url);
-          CONSOLE.w(body);
-          CONSOLE.i(responseJson);
-          resolve(responseJson);
-        })
-        .catch((error) => {
-          CONSOLE.e(error);
-        });
+    let web = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
+    let json = await web.json();
+    CONSOLE.i(json);
+    CONSOLE.d(url);
+    CONSOLE.w(body);
+    return json;
   },
 };

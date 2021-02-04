@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 12:50:01
+ * @LastEditTime: 2021-02-04 14:18:50
  */
 import React from "react";
 import Main from "./Main";
@@ -46,7 +46,7 @@ class App extends React.Component {
                   <Route path="/About" component={() => <Home />} />
                   <Route path="/Admin" component={() => <Admin />} />
                   <Route path="/Article/:id" component={() => <Article />} />
-                  <Route path="/Edit" component={() => <Edit />} />
+                  <Route path="/Edit/:id" component={() => <Edit />} />
                   <Route
                     // 以后测试页面统一添加前缀 /Demo/PageName
                     path="/Demo"

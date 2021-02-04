@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Options;
 @Mapper
 public interface ArticleMapper {
     int insertArticleOnly(Article article);
+    Article selectArticleByID(int id);
+    int updateArticle(Article article);
 }

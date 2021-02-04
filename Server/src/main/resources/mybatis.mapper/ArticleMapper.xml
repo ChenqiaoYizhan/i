@@ -9,4 +9,12 @@
             (name, title, message, image, html, look, love, time, deleted)
         values (#{name}, #{title}, #{message}, #{image}, #{html}, #{look}, #{love}, #{time}, #{deleted})
     </insert>
+    <select id="selectArticleByID" parameterType="int" resultType="net.cctv3.server.entity.Article">
+        select * from article where id = #{id}
+    </select>
+    <update id="updateArticle" parameterType="net.cctv3.server.entity.Article">
+        update article
+            set name = #{name}, title = #{title}, message = #{message}, image = #{image}, html = #{html}
+        where id = #{id}
+    </update>
 </mapper>

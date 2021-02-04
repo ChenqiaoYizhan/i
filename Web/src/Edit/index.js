@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-04 10:19:09
+ * @LastEditTime: 2021-02-04 22:14:39
  */
 import React from "react";
 import PropTypes, { array } from "prop-types";
@@ -13,9 +13,6 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import { Checkbox, Input, message } from "antd";
 import Editor from "../Editor";
-import { Base64 } from "js-base64";
-
-const { TextArea } = Input;
 
 class Edit extends React.Component {
   static propTypes = {};
@@ -26,47 +23,119 @@ class Edit extends React.Component {
     this.titleInput = null;
     this.messageInput = null;
     this.imageInput = null;
-    this.html = "";
-    this.keys = [];
+    this.initArticle = null; // 初始化网络请求后的article，如果为空则为新增，否则则为修改
     this.state = {
-      index: 0,
       books: [],
+      html: "",
     };
   }
 
   componentDidMount() {
-    x.HTTP.get(
-      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
-    ).then((json) => {
-      this.setState({
-        books: Array.from(json, (_, i) => ({
-          label: json[i].title,
-          value: json[i].id,
-        })),
-      });
-    });
+    this.initDatas();
   }
 
-  send() {
+  async initDatas() {
+    let allBooks = await x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
+    );
+    // console.log("Books", allBooks);
+    let selectArticle = await x.HTTP.get(
+      x.SERVICE.SERVER +
+        x.SERVICE.API.SELECT_ARTICLE +
+        `?id=${this.props.match.params.id}`
+    );
+    let article = selectArticle.article;
+    let articleBooks = selectArticle.books;
+    // console.log(Array.from(articleBooks, (_, i) => articleBooks[i].book));
+    let booksDatas = [];
+    for (let i = 0; i < allBooks.length; i++) {
+      let item = allBooks[i];
+      booksDatas[i] = {
+        select: articleBooks.findIndex((it) => it.book == item.id) >= 0,
+        data: item,
+      };
+    }
+    this.setState({
+      selecBooksKeys: Array.from(articleBooks, (_, i) => articleBooks[i].book),
+      books: booksDatas,
+    });
+    if (article == null) {
+    } else {
+      this.initArticle = article;
+      this.nameInput.setValue(article.name);
+      this.titleInput.setValue(article.title);
+      this.messageInput.setValue(article.message);
+      this.imageInput.setValue(article.image);
+      this.setState({
+        html: article.html,
+      });
+    }
+  }
+
+  async send() {
+    let keys = JSON.parse(JSON.stringify(this.state.books));
+    keys = keys.filter((item) => item.select).map((item) => item.data.id);
     let body = {
-      keys: this.keys,
+      keys: keys,
       article: {
-        id: null,
+        id: this.initArticle == null ? null : this.initArticle.id,
         name: this.nameInput.input.value,
         title: this.titleInput.input.value,
         message: this.messageInput.input.value,
         image: this.imageInput.input.value,
-        html: this.html,
+        html: this.state.html,
         look: 0,
         love: 0,
         time: x.TIME.format(moment()),
-        deleted: 1
+        deleted: 0,
       },
     };
-    x.HTTP.post(
-      x.SERVICE.SERVER + x.SERVICE.API.INSERT_ARTICLE,
+    let result = x.HTTP.post(
+      x.SERVICE.SERVER +
+        (this.initArticle == null
+          ? x.SERVICE.API.INSERT_ARTICLE
+          : x.SERVICE.API.UPDATE_ARTICLE),
       body
-    ).then((json) => {});
+    );
+    console.log(result);
+  }
+
+  loadBooks() {
+    let array = [];
+    for (let i = 0; i < this.state.books.length; i++) {
+      let item = this.state.books[i];
+      array.push(
+        <a
+          key={i}
+          onClick={() => {
+            this.state.books[i].select = !this.state.books[i].select;
+            this.setState({
+              books: this.state.books,
+            });
+          }}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            display: "flex",
+            margin: "4px 6px",
+          }}
+        >
+          <div style={{ color: item.select ? "black" : "grey", fontSize: 14 }}>
+            {item.data.title}
+          </div>
+          <div style={{ width: 2 }} />
+          <img
+            src={
+              item.select
+                ? require("../images/Book_select_yes.png")
+                : require("../images/Book_select_no.png")
+            }
+            style={{ height: 16, width: 16 }}
+          />
+        </a>
+      );
+    }
+    return array;
   }
 
   render() {
@@ -102,19 +171,22 @@ class Edit extends React.Component {
           addonBefore="预览"
         />
         <div style={{ height: 8 }} />
-        <Checkbox.Group
-          options={this.state.books}
-          defaultValue={[]}
-          onChange={(e) => {
-            x.CONSOLE.i(e);
-            this.keys = e;
+        <div
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            flexWrap: "wrap",
+            display: "flex",
           }}
-        />
+        >
+          {this.loadBooks()}
+        </div>
         <div style={{ height: 8 }} />
         <Editor
           height={320}
+          defaultHTML={this.state.html}
           onConfirmPress={(html) => {
-            this.html = html;
+            this.state.html = html;
             this.send();
           }}
         />
