@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-30 23:57:42
+ * @LastEditTime: 2021-02-04 22:50:41
  */
 import React from "react";
 import Slider from "./Slider";
@@ -26,10 +26,6 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(x.MD5.dealWithSunyupeng("year=2021&month=01&day=27"));
-    // let strings = ["id", "time", "i", "md5"];
-    // strings = strings.sort((a, b) => a.localeCompare(b));
-    // console.log(strings);
   }
 
   render() {
@@ -60,7 +56,7 @@ class Main extends React.Component {
               switch (item.id) {
                 case "About":
                   this.props.history.push({
-                    pathname: `/Article/i`,
+                    pathname: `/Article/5`,
                   });
                   break;
 

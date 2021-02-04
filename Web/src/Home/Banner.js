@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-21 23:59:01
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-03 21:24:04
+ * @LastEditTime: 2021-02-04 22:28:42
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -28,20 +28,21 @@ class Banner extends React.Component {
     };
   }
 
-  componentDidMount() {
-    x.HTTP.get(
+  async initDatas() {
+    this.banners = await x.HTTP.get(
       x.SERVICE.SERVER + x.SERVICE.API.SELECT_BANNERS + "?deleted=0"
-    ).then((json) => {
-      this.banners = json;
-      for (let i = 0; i < this.banners.length; i++) {
-        this.banners[i].active = false;
-      }
-      this.banners[4].active = true;
-      this.setState({
-        datas: this.banners,
-      });
+    );
+    for (let i = 0; i < this.banners.length; i++) {
+      this.banners[i].active = false;
+    }
+    this.banners[4].active = true;
+    this.setState({
+      datas: this.banners,
     });
-    
+  }
+
+  componentDidMount() {
+    this.initDatas();
     this.timer = setInterval(() => {
       if (this.isCouldPlayBanners && this.banners.length > 0) {
         let index = this.state.datas.findIndex((item) => item.active);

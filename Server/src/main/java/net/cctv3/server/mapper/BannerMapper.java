@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface BannerMapper {
     @Select("select * from banner where deleted = #{deleted}")
-    List<Banner> findBannersByDeleted(String deleted);
+    List<Banner> findBannersByDeleted(int deleted);
 }

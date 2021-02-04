@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-28 19:13:28
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-28 21:58:55
+ * @LastEditTime: 2021-02-04 23:05:18
  */
 /*
  * @Descripttion:
@@ -21,18 +21,7 @@ import * as x from "../x";
 import PropTypes from "prop-types";
 import { Button } from "antd";
 
-const COLORS = [
-  { title: "基佬紫", name: "purple", value: "#dc27b0" },
-  { title: "闷骚红", name: "red", value: "#ff5252" },
-  { title: "天空蓝", name: "blue", value: "#4481ff" },
-  { title: "荷花粉", name: "pink", value: "#ff4081" },
-  { title: "深邃蓝", name: "indigo", value: "#3f51b5" },
-  { title: "水墨绿", name: "teal", value: "#009688" },
-  { title: "香蕉黄", name: "amber", value: "#ffc107" },
-  { title: "苹果绿", name: "green", value: "#4caf50" },
-  { title: "活力橙", name: "orange", value: "#ff9800" },
-  { title: "咖啡棕", name: "brown", value: "#795548" },
-];
+const COLORS = x.UI.COLORS;
 
 const WIDTH = ["细", "中", "宽"];
 

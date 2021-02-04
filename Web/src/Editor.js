@@ -4,16 +4,16 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-04 19:34:14
+ * @LastEditTime: 2021-02-04 23:08:11
  */
 import React from "react";
 import E from "wangeditor";
 import hljs from "highlight.js";
 import { Button } from "antd";
 import PropTypes from "prop-types";
+import * as x from "./x";
 
 const FACE_URL = "http://www.cctv3.net/facebook";
-
 class Editor extends React.Component {
   static propTypes = {
     // menus: PropTypes.array, // 不配置则默认显示所有
@@ -55,6 +55,8 @@ class Editor extends React.Component {
         })),
       },
     ];
+    // 显示颜色
+    this.editor.config.colors = x.UI.COLORS.map((item) => item.value);
     // 设置显示的菜单项
     if (this.props.menus !== undefined) {
       this.editor.config.menus = this.props.menus;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.cctv3.server.mapper.ArticleMapper">
+    <insert id="insertDiscuss" parameterType="net.cctv3.server.entity.Discuss" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into discuss
+            (article, parent, qq, name, blog, ip, text, paint, time, deleted)
+        values (#{article}, #{parent}, #{qq}, #{name}, #{blog}, #{ip}, #{text}, #{paint}, #{time}, #{deleted})
+    </insert>
+</mapper>

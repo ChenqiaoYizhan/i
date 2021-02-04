@@ -8,12 +8,12 @@ import java.util.List;
 @Mapper
 public interface RelationshipMapper {
     @Options(useGeneratedKeys = true)
-    @Insert("insert into relationship (article, book, time, deleted) values (#{article}, #{book}, #{time}, #{deleted})")
+    @Insert("insert into relationship (article, book) values (#{article}, #{book})")
     int insertRelationship(Relationship relationship);
 
-    @Select("select * from relationship where article = #{id} and deleted = 0")
+    @Select("select * from relationship where article = #{id}")
     List<Relationship> findRelationshipsByArticle(int id);
 
-    @Delete("update relationship set deleted = 1 where article = #{id}")
+    @Delete("delete from relationship where article = #{id}")
     int deleteRelationShipsByArticle(int id);
 }

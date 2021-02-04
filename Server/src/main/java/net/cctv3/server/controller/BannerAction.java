@@ -28,7 +28,7 @@ public class BannerAction {
     @CrossOrigin
     @RequestMapping("/selectBanners.action")
     public List<Banner> selectBanners(@RequestParam(value = "deleted") String deleted) {
-        return bannerMapper.findBannersByDeleted(deleted);
+        return bannerMapper.findBannersByDeleted(Integer.parseInt(deleted));
     }
 
     @CrossOrigin

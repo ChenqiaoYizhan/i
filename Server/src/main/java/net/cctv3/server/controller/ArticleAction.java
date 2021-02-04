@@ -29,7 +29,7 @@ public class ArticleAction {
             int id = ia.article.id;
             hashMap.put("id", id);
             for (String s : ia.keys) {
-                Relationship relationship = new Relationship(null, id, Integer.parseInt(s), ia.article.time, ia.article.deleted);
+                Relationship relationship = new Relationship(id, Integer.parseInt(s));
                 relationshipMapper.insertRelationship(relationship);
             }
             hashMap.put("status", 1);
@@ -68,7 +68,7 @@ public class ArticleAction {
             articleMapper.updateArticle(ia.article);
             relationshipMapper.deleteRelationShipsByArticle(ia.article.id);
             for (String s : ia.keys) {
-                Relationship relationship = new Relationship(null, ia.article.id, Integer.parseInt(s), ia.article.time, ia.article.deleted);
+                Relationship relationship = new Relationship(ia.article.id, Integer.parseInt(s));
                 relationshipMapper.insertRelationship(relationship);
             }
             hashMap.put("status", 1);
