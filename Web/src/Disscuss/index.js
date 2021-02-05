@@ -4,7 +4,7 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-26 23:50:58
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-01-31 00:41:55
+ * @LastEditTime: 2021-02-05 23:43:12
  */
 import { color } from "echarts";
 import React from "react";
@@ -13,8 +13,9 @@ import * as x from "../x";
 import { Input } from "antd";
 import Editor from "../Editor";
 import CanvasPad from "./CanvasPad";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 const HEIGHT_WIDTH_RATE = 4;
 
@@ -34,9 +35,9 @@ const DATAS = [
 class Discuss extends React.Component {
   static propTypes = {
     onConfirmPress: PropTypes.func.isRequired,
-    width: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired
   };
-
+  
   constructor(props) {
     super(props);
     this.signCanvas = null;
@@ -95,6 +96,21 @@ class Discuss extends React.Component {
   }
 
   componentDidMount() {}
+
+  createInsertDiscussBody(content) {
+    return {
+      id: null,
+      article: null,
+      parent: 0,
+      qq: this.emailText.input.value,
+      name: this.nameText.input.value,
+      blog: this.blogText.input.value,
+      ip: null,
+      content: content,
+      time: moment().format("YYYY-MM-DD HH:mm:ss"),
+      deleted: 0,
+    };
+  }
 
   render() {
     return (
@@ -162,15 +178,13 @@ class Discuss extends React.Component {
             menus={["emoticon", "foreColor"]} // 不配置则默认显示所有
             height={this.props.width / HEIGHT_WIDTH_RATE}
             onConfirmPress={(html) => {
-              this.props.onConfirmPress({
-                name: this.nameText.input.value,
-                email: this.emailText.input.value,
-                blog: this.blogText.input.value,
-                data: {
-                  type: "text",
-                  data: html,
-                },
-              });
+              if (
+                x.RegExp.isQQ(this.emailText.input.value) &&
+                x.RegExp.isName(this.nameText.input.value) &&
+                x.RegExp.isDiscussContent(html)
+              ) {
+                this.props.onConfirmPress(this.createInsertDiscussBody(html));
+              }
             }}
             onCancelPress={(html) => {}}
           />
@@ -179,15 +193,13 @@ class Discuss extends React.Component {
             height={this.props.width / HEIGHT_WIDTH_RATE}
             width={this.props.width}
             onConfirmPress={(base64) => {
-              this.props.onConfirmPress({
-                name: this.nameText.input.value,
-                email: this.emailText.input.value,
-                blog: this.emailText.input.value,
-                data: {
-                  type: "paint",
-                  data: base64,
-                },
-              });
+              if (
+                x.RegExp.isQQ(this.emailText.input.value) &&
+                x.RegExp.isName(this.nameText.input.value) &&
+                x.RegExp.isDiscussContent(base64)
+              ) {
+                this.props.onConfirmPress(this.createInsertDiscussBody(base64));
+              }
             }}
           />
         ) : null}

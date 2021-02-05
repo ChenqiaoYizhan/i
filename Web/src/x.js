@@ -4,8 +4,9 @@
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2021-01-22 19:13:43
  * @LastEditors: Michael Sun
- * @LastEditTime: 2021-02-04 23:07:23
+ * @LastEditTime: 2021-02-05 23:32:48
  */
+import { notification } from "antd";
 import md5 from "blueimp-md5";
 import moment from "moment";
 
@@ -87,20 +88,8 @@ export const SERVICE = {
     INSERT_BOOOKS: "insertBooks.action",
     SELECT_ARTICLE: "selectArticle.action",
     UPDATE_ARTICLE: "updateArticle.action",
-  },
-};
-
-// 正则表达式以及字符串等
-export const RegExp = {
-  isNull: function (string) {
-    return (
-      string == undefined ||
-      string == "" ||
-      string == null ||
-      string == "{}" ||
-      string == "[]" ||
-      string == "Null"
-    );
+    INSERT_DISCUSS: "insertDiscuss.action",
+    SELECT_DISCUSSES: "selectDiscusses.action",
   },
 };
 
@@ -144,5 +133,171 @@ export const HTTP = {
     CONSOLE.d(url);
     CONSOLE.w(body);
     return json;
+  },
+};
+
+export const RegExp = {
+  isEmpty: function (string) {
+    return string == null || string == undefined || string.trim() == "";
+  },
+  isQQ: function (string) {
+    if (/\d{5,11}$/.test(string)) {
+      return true;
+    } else {
+      notification.open(NOTIFICATIONS.errorQQ);
+      return false;
+    }
+  },
+  isName: function (string) {
+    if (string.length >= 1 && string.length <= 16) {
+      return true;
+    } else {
+      notification.open(NOTIFICATIONS.errorName);
+      return false;
+    }
+  },
+  isWeb: function (string) {
+    if (
+      /^((https|http|ftp|rtsp|mms){0,1}(:\/\/){0,1})www\.(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/i.test(
+        string
+      )
+    ) {
+      return true;
+    } else {
+      notification.open(NOTIFICATIONS.errorWeb);
+      return false;
+    }
+  },
+  isDiscussContent: function (string) {
+    if (string.length >= 1) {
+      return true;
+    } else {
+      notification.open(NOTIFICATIONS.errorDiscussContent);
+      return false;
+    }
+  },
+  isBase64Image(string) {
+    return /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\/?%\s]*?)\s*$/i.test(
+      string
+    );
+  },
+};
+
+export const NOTIFICATIONS = {
+  errorQQ: {
+    style: {borderRadius: 4, borderWidth: 1, borderColor: 'red'},
+    message: "操作失败 -_-||",
+    description: "QQ号貌似不对吧，别逗我了 →_→",
+    onClick: () => {},
+  },
+  errorName: {
+    message: "操作失败 -_-||",
+    description: "昵称貌似不对吧，别逗我了 →_→",
+    onClick: () => {},
+  },
+  errorWeb: {
+    message: "操作失败 -_-||",
+    description: "网站地址貌似是不太正常，别逗我了 →_→",
+    onClick: () => {},
+  },
+  errorDiscussContent: {
+    message: "操作失败 -_-||",
+    description: "涂鸦模式和文字模式都没用，别逗我了 →_→",
+    onClick: () => {},
+  },
+};
+
+export const MOMENT_CONFIG = {
+  months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split(
+    "_"
+  ),
+  monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+  weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+  weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"),
+  weekdaysMin: "日_一_二_三_四_五_六".split("_"),
+  longDateFormat: {
+    LT: "HH:mm",
+    LTS: "HH:mm:ss",
+    L: "YYYY-MM-DD",
+    LL: "YYYY年MM月DD日",
+    LLL: "YYYY年MM月DD日Ah点mm分",
+    LLLL: "YYYY年MM月DD日ddddAh点mm分",
+    l: "YYYY-M-D",
+    ll: "YYYY年M月D日",
+    lll: "YYYY年M月D日 HH:mm",
+    llll: "YYYY年M月D日dddd HH:mm",
+  },
+  meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+  meridiemHour: function (hour, meridiem) {
+    if (hour === 12) {
+      hour = 0;
+    }
+    if (meridiem === "凌晨" || meridiem === "早上" || meridiem === "上午") {
+      return hour;
+    } else if (meridiem === "下午" || meridiem === "晚上") {
+      return hour + 12;
+    } else {
+      // '中午'
+      return hour >= 11 ? hour : hour + 12;
+    }
+  },
+  meridiem: function (hour, minute, isLower) {
+    const hm = hour * 100 + minute;
+    return hm < 600
+      ? "凌晨"
+      : hm < 900
+      ? "早上"
+      : hm < 1130
+      ? "上午"
+      : hm < 1230
+      ? "中午"
+      : hm < 1800
+      ? "下午"
+      : "晚上";
+  },
+  calendar: {
+    sameDay: "[今天]LT",
+    nextDay: "[明天]LT",
+    nextWeek: "[下]ddddLT",
+    lastDay: "[昨天]LT",
+    lastWeek: "[上]ddddLT",
+    sameElse: "L",
+  },
+  dayOfMonthOrdinalParse: /\d{1,2}(日|月|周)/,
+  ordinal: function (number, period) {
+    switch (period) {
+      case "d":
+      case "D":
+      case "DDD":
+        return number + "日";
+      case "M":
+        return number + "月";
+      case "w":
+      case "W":
+        return number + "周";
+      default:
+        return number;
+    }
+  },
+  relativeTime: {
+    future: "%s内",
+    past: "%s前",
+    s: "几秒",
+    ss: "%d秒",
+    m: "1分钟",
+    mm: "%d分钟",
+    h: "1小时",
+    hh: "%d小时",
+    d: "1天",
+    dd: "%d天",
+    M: "1个月",
+    MM: "%d个月",
+    y: "1年",
+    yy: "%d年",
+  },
+  week: {
+    // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
+    dow: 1, // Monday is the first day of the week.
+    doy: 4, // The week that contains Jan 4th is the first week of the year.
   },
 };

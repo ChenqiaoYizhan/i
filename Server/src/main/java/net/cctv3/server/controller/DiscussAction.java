@@ -5,6 +5,7 @@ import net.cctv3.server.entity.Discuss;
 import net.cctv3.server.entity.InsertArticle;
 import net.cctv3.server.entity.Relationship;
 import net.cctv3.server.mapper.ArticleMapper;
+import net.cctv3.server.mapper.DiscussMapper;
 import net.cctv3.server.mapper.RelationshipMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ public class DiscussAction {
     ArticleMapper articleMapper;
     @Autowired
     RelationshipMapper relationshipMapper;
+    @Autowired
+    DiscussMapper discussMapper;
 
     @CrossOrigin
     @PostMapping("/insertDiscuss.action")
@@ -25,12 +28,19 @@ public class DiscussAction {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
         try {
-            // int id = articleMapper.insertArticleOnly(ia.article);
-            hashMap.put("status", 1);
+            int rows = discussMapper.insertDiscuss(discuss);
+            hashMap.put("status", rows);
         } catch (RuntimeException e) {
             e.printStackTrace();
             hashMap.put("message", e.getMessage());
         }
         return hashMap;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/selectDiscusses.action")
+    public List<Discuss> selectDiscusses(@RequestParam("article") String article) {
+        List<Discuss> list = discussMapper.findDiscussesByArticle(Integer.parseInt(article));
+        return list;
     }
 }

@@ -8,8 +8,7 @@ public class Discuss {
     public String name;
     public String blog;
     public String ip;
-    public String text;
-    public String paint;
+    public String content;
     public String time;
     public int deleted;
 }

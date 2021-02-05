@@ -42,7 +42,7 @@ public class ArticleAction {
 
     @CrossOrigin
     @GetMapping("/selectArticle.action")
-    public HashMap<String, Object> selectArticle(@RequestParam String id) {
+    public HashMap<String, Object> selectArticle(@RequestParam("id") String id) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
         try {

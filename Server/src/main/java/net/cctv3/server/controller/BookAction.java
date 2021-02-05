@@ -25,7 +25,7 @@ public class BookAction {
 
     @CrossOrigin
     @RequestMapping("/selectBooks.action")
-    public List<Book> selectBanners(@RequestParam(value = "deleted") String deleted) {
+    public List<Book> selectBanners(@RequestParam("deleted") String deleted) {
         return bookMapper.findBooksByDeleted(deleted);
     }
 
