@@ -68,11 +68,13 @@ class Editor extends React.Component {
     /**一定要创建 */
     this.editor.create();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     x.CONSOLE.e(nextProps.defaultHTML);
     this.editor.txt.html(
-      x.RegExp.isEmpty(nextProps.defaultHTML) ? "" : nextProps.defaultHTML
+      x.RegExp.isEmpty(nextProps.defaultHTML)
+        ? "<div />"
+        : nextProps.defaultHTML
     );
   }
 

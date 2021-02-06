@@ -57,7 +57,7 @@ class DiscussList extends React.Component {
     for (let i = 0; i < parents.length; i++) {
       let parent = parents[i];
       let children = result.filter((item) => item.parent == parent.id);
-      console.log(i, children);
+      // console.log(i, children);
       array.push({ parent: parent, children: children });
     }
     // console.log("Parent and Children", array);
@@ -78,7 +78,7 @@ class DiscussList extends React.Component {
           paddingLeft: 4,
           paddingRight: 4,
           borderRadius: 2,
-          backgroundColor: x.UI.randomColor(),
+          backgroundColor: "#" + x.MD5.dealWithSunyupeng(text).substring(0, 6),
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
@@ -116,6 +116,7 @@ class DiscussList extends React.Component {
   loadItem(item, isParent) {
     let index = parseInt(Math.random() * OS.length);
     // console.log(item, `http://q1.qlogo.cn/g?b=qq&nk=${item.qq}&s=100`);
+    let os = x.RegExp.getOS(item.userAgent);
     return (
       <div style={{ flexDirection: "row", display: "flex" }}>
         <img
@@ -151,22 +152,21 @@ class DiscussList extends React.Component {
                 display: "flex",
               }}
             >
-              <div style={{ fontSize: 14, color: "black" }}>{item.name}</div>
+              <div style={{ fontSize: 16, color: "#1790fc" }}>{item.name}</div>
               <div style={{ width: 12 }} />
-
               <img
                 style={{
                   height: 14,
                   width: 14,
                 }}
-                src={OS[index].image}
+                src={os.image}
               />
               <div style={{ width: 4 }} />
-              {this.loadTags(OS[index].name)}
+              {this.loadTags(os.name)}
               <div style={{ width: 12 }} />
-              {this.loadTags("Google浏览器")}
+              {this.loadTags(x.RegExp.getBrowser(item.userAgent))}
               <div style={{ width: 12 }} />
-              {this.loadTags("192.168.0.1")}
+              {this.loadTags(item.ip)}
             </div>
             <div
               style={{
@@ -279,13 +279,16 @@ class DiscussList extends React.Component {
               isShowModal: false,
             });
           }}
-          centered
+          centered={true}
+          destroyOnClose={true}
+          zIndex={x.UI.ZINDEX.DIALOG}
           width={x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH + 32}
         >
           <DiscussForm
-            defaultHTML={""}
             isHideTiaodou={true}
-            width={x.UI.MAIN_WIDTH - 32 - x.UI.SLIDER_WIDTH}
+            width={
+              x.UI.MAIN_WIDTH - 16 - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL
+            }
             onConfirmPress={(body) => {
               this.props.onConfirmPress(body);
               this.setState({

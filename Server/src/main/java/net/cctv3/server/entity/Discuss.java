@@ -9,6 +9,7 @@ public class Discuss {
     public String blog;
     public String ip;
     public String content;
+    public String userAgent;
     public String time;
     public int deleted;
 }

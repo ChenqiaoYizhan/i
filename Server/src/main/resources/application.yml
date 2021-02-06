@@ -43,4 +43,4 @@ mybatis:
   mapper-locations: classpath:mybatis.mapper/*.xml
 logging:
   level:
-    net.cctv3.server.mapper: trace
+    net.cctv3.server.action: trace

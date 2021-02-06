@@ -50,7 +50,7 @@ class DiscussForm extends React.Component {
         width: 2,
         color: "#795548",
       },
-      tab: 0,
+      tab: 1,
     };
   }
 
@@ -179,7 +179,6 @@ class DiscussForm extends React.Component {
         </div>
         {this.state.tab == 0 ? (
           <Editor
-            defaultHMLT={""}
             menus={["emoticon", "foreColor"]} // 不配置则默认显示所有
             width={this.props.width}
             height={this.props.width / HEIGHT_WIDTH_RATE}

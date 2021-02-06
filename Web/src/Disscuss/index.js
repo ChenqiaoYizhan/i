@@ -24,14 +24,14 @@ class Discuss extends React.Component {
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   async send(body) {
     this.setState({
       isInsertingArticle: true,
     });
     body.article = parseInt(this.props.article);
+    await x.HTTP.post(x.SERVICE.SERVER + x.SERVICE.API.INSERT_DISCUSS, body);
     this.setState({
       isInsertingArticle: false,
     });

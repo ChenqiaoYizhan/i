@@ -22,6 +22,7 @@ export const UI = {
     // 浮层优先级
     MENU: 666666,
     DANMU: 666665,
+    DIALOG: 666664,
   },
   TIMER_COLUMNS: 3,
   randomColor: function () {
@@ -181,6 +182,74 @@ export const RegExp = {
     return /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\/?%\s]*?)\s*$/i.test(
       string
     );
+  },
+  getBrowser(userAgent) {
+    let userAgents = [
+      { regex: /.*rv\:.*/, name: "Microsoft Edge" },
+      { regex: /MSIE\s([^\s|;]+)/i, name: "Microsoft Internet Explorer" },
+      { regex: /FireFox\/([^\s]+)/i, name: "Firefox" },
+      { regex: /Maxthon([\d]*)\/([^\s]+)/i, name: "Aoyou" },
+      { regex: /#SE 2([a-zA-Z0-9.]+)#i/, name: "Sougou" },
+      { regex: /#360([a-zA-Z0-9.]+)#i/, name: "360" },
+      { regex: /Edge([\d]*)\/([^\s]+)/i, name: "Microsoft Edge" },
+      { regex: /UC/i, name: "UC web" },
+      { regex: /OPR/i, name: "Opera" },
+      { regex: /MicroMesseng/i, name: "Wechat" },
+      { regex: /WeiBo/i, name: "Weibo" },
+      { regex: /QQ/i, name: "QQ" },
+      { regex: /QQBrowser\/([^\s]+)/i, name: "QQ" },
+      { regex: /BAIDU/i, name: "Baidu" },
+      { regex: /LBBROWSER/i, name: "Liebao" },
+      { regex: /TheWorld/i, name: "The window of world" },
+      { regex: /UBrowser/i, name: "UC web" },
+      { regex: /2345Explorer/i, name: "2345" },
+      { regex: /Opera[\s|\/]([^\s]+)/i, name: "Opera" },
+      { regex: /Chrome([\d]*)\/([^\s]+)/i, name: "Google Chrome" },
+      { regex: /safari\/([^\s]+)/i, name: "Apple safar" },
+    ];
+    let index = userAgents.findIndex((item) => item.regex.test(userAgent));
+    return index < 0 ? "菜" : `${userAgents[index].name} 浏览器`;
+  },
+  getOS(userAgent) {
+    let userAgents = [
+      {
+        regex: /win/i,
+        name: "Windows",
+        image: require("./images/Device_windows.png"),
+      },
+      {
+        regex: /android/i,
+        name: "Android",
+        image: require("./images/Device_android.png"),
+      },
+      {
+        regex: /ubuntu/i,
+        name: "Ubuntu",
+        image: require("./images/Device_linux.png"),
+      },
+      {
+        regex: /linux/i,
+        name: "Linux",
+        image: require("./images/Device_linux.png"),
+      },
+      {
+        regex: /iPhone/i,
+        name: "iPhone",
+        image: require("./images/Device_iOS.png"),
+      },
+      {
+        regex: /iPad/i,
+        name: "iPad",
+        image: require("./images/Device_iOS.png"),
+      },
+      {
+        regex: /mac/i,
+        name: "Mac OS",
+        image: require("./images/Device_iOS.png"),
+      },
+    ];
+    let index = userAgents.findIndex((item) => item.regex.test(userAgent));
+    return index < 0 ? null : userAgents[index];
   },
 };
 
