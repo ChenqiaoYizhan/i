@@ -16,27 +16,44 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      datas: [],
+    };
   }
 
-  loadCount(n, name) {
-    return (
-      <div
-        style={{
-          flexDirection: "column",
-          alignItems: "center",
-          display: "flex",
-          flex: 1,
-          alignItems: "center",
-        }}
-      >
-        <div style={{ fontSize: 18, color: "black" }}>{n}</div>
-        <div style={{ fontSize: 12, color: "grey" }}>{name}</div>
-      </div>
-    );
+  loadCounts() {
+    let array = [];
+    for (let i = 0; i < this.state.datas.length; i++) {
+      let item = this.state.datas[i];
+      array.push(
+        <div
+          key={i}
+          style={{
+            flexDirection: "column",
+            alignItems: "center",
+            display: "flex",
+            flex: 1,
+            alignItems: "center",
+          }}
+        >
+          <div style={{ fontSize: 16, color: "black" }}>{item.name}</div>
+          <div style={{ fontSize: 12, color: "grey" }}>{item.value}</div>
+        </div>
+      );
+    }
+    return array;
   }
 
-  componentDidMount() {}
+  async initDatas() {
+    let result = await x.HTTP.get(x.SERVICE.SERVER + x.SERVICE.API.SELECT_COUNT);
+    this.setState({
+      datas: result,
+    });
+  }
+
+  componentDidMount() {
+    this.initDatas();
+  }
 
   render() {
     return (
@@ -97,11 +114,7 @@ class Header extends React.Component {
             alignItems: "center",
           }}
         >
-          {this.loadCount("99", "文章")}
-          <div style={{ height: 16, width: 1, backgroundColor: "#f0f0f0" }} />
-          {this.loadCount("99", "日记")}
-          <div style={{ height: 16, width: 1, backgroundColor: "#f0f0f0" }} />
-          {this.loadCount("99", "评论")}
+          {this.loadCounts()}
         </div>
       </div>
     );

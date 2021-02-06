@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.cctv3.server.mapper.CountMapper">
+    <select id="selectCount" resultType="net.cctv3.server.entity.SelectCount">
+        select 'article' as id, '文章' as name, count(*) as value from article
+            where deleted = 0
+        union all
+        select 'timer' as id, '说说' as name, count(*) as value from timer
+            where deleted = 0
+        union all
+        select 'discuss' as id, '评论' as name, count(*) as value from discuss
+            where deleted = 0
+        union all
+            select 'web' as id, '工具' as name, count(*) as value
+        from web where deleted = 0
+    </select>
+</mapper>

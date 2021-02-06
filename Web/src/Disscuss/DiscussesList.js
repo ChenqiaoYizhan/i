@@ -20,8 +20,8 @@ import CanvasDraw from "react-canvas-draw";
 import * as x from "../x";
 import PropTypes from "prop-types";
 import { Button, Modal } from "antd";
-import Discuss from "../Disscuss";
 import moment from "moment";
+import DiscussForm from "./DiscussForm";
 
 const OS = [
   { name: "Windows 8.1", image: require("../images/Device_windows.png") },
@@ -31,12 +31,12 @@ const OS = [
   { name: "Android 7.1.1", image: require("../images/Device_android.png") },
 ];
 
-class Discusses extends React.Component {
+class DiscussList extends React.Component {
   static propTypes = {
     onReplyPress: PropTypes.func,
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
   };
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,7 @@ class Discusses extends React.Component {
         `?article=${this.props.article}`
     );
     let parents = result.filter((item) => item.parent == 0);
-    console.log("Parent", parents);
+    // console.log("Parent", parents);
     let array = [];
     for (let i = 0; i < parents.length; i++) {
       let parent = parents[i];
@@ -60,7 +60,7 @@ class Discusses extends React.Component {
       console.log(i, children);
       array.push({ parent: parent, children: children });
     }
-    console.log("Parent and Children", array);
+    // console.log("Parent and Children", array);
     this.setState({
       datas: array,
     });
@@ -115,7 +115,7 @@ class Discusses extends React.Component {
 
   loadItem(item, isParent) {
     let index = parseInt(Math.random() * OS.length);
-    console.log(item, `http://q1.qlogo.cn/g?b=qq&nk=${item.qq}&s=100`);
+    // console.log(item, `http://q1.qlogo.cn/g?b=qq&nk=${item.qq}&s=100`);
     return (
       <div style={{ flexDirection: "row", display: "flex" }}>
         <img
@@ -282,8 +282,10 @@ class Discusses extends React.Component {
           centered
           width={x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH + 32}
         >
-          <Discuss
-            width={x.UI.MAIN_WIDTH - 16 - x.UI.SLIDER_WIDTH}
+          <DiscussForm
+            defaultHTML={""}
+            isHideTiaodou={true}
+            width={x.UI.MAIN_WIDTH - 32 - x.UI.SLIDER_WIDTH}
             onConfirmPress={(body) => {
               this.props.onConfirmPress(body);
               this.setState({
@@ -297,4 +299,4 @@ class Discusses extends React.Component {
   }
 }
 
-export default Discusses;
+export default DiscussList;

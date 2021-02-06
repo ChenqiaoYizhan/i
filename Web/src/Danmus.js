@@ -31,7 +31,6 @@ let DATAS = [
   "V_{X}=\\pi\\int_a^b{f^2(x)}dx",
   "V_{Y}=2\\pi\\int_a^b{xf(x)}dx",
 ];
-
 class Danmus extends React.Component {
   constructor(props) {
     super(props);

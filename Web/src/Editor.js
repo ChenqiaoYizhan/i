@@ -68,11 +68,12 @@ class Editor extends React.Component {
     /**一定要创建 */
     this.editor.create();
   }
-
+  
   componentWillReceiveProps(nextProps) {
-    if (nextProps.defaultHTML !== undefined) {
-      this.editor.txt.html(nextProps.defaultHTML);
-    }
+    x.CONSOLE.e(nextProps.defaultHTML);
+    this.editor.txt.html(
+      x.RegExp.isEmpty(nextProps.defaultHTML) ? "" : nextProps.defaultHTML
+    );
   }
 
   componentWillUnmount() {

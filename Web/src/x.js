@@ -90,6 +90,7 @@ export const SERVICE = {
     UPDATE_ARTICLE: "updateArticle.action",
     INSERT_DISCUSS: "insertDiscuss.action",
     SELECT_DISCUSSES: "selectDiscusses.action",
+    SELECT_COUNT: "selectCount.action",
   },
 };
 
@@ -185,7 +186,7 @@ export const RegExp = {
 
 export const NOTIFICATIONS = {
   errorQQ: {
-    style: {borderRadius: 4, borderWidth: 1, borderColor: 'red'},
+    style: { borderRadius: 4, borderWidth: 1, borderColor: "red" },
     message: "操作失败 -_-||",
     description: "QQ号貌似不对吧，别逗我了 →_→",
     onClick: () => {},

@@ -19,8 +19,7 @@ import React from "react";
 import CanvasDraw from "react-canvas-draw";
 import * as x from "../x";
 import PropTypes from "prop-types";
-import TweenOne from "rc-tween-one";
-import Discusses from "../Disscuss/Discusses";
+
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +38,6 @@ export default class extends React.Component {
           padding: 12,
         }}
       >
-        <Discusses />
       </div>
     );
   }

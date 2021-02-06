@@ -97,7 +97,6 @@ class Edit extends React.Component {
           : x.SERVICE.API.UPDATE_ARTICLE),
       body
     );
-    console.log(result);
   }
 
   loadBooks() {

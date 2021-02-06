@@ -11,8 +11,6 @@ import PropTypes from "prop-types";
 import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import Discuss from "../Disscuss";
-import Discusses from "../Disscuss/Discusses";
-import { Spin } from "antd";
 class Article extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -70,31 +68,7 @@ class Article extends React.Component {
           style={{ padding: 8 }}
           dangerouslySetInnerHTML={{ __html: this.state.text }}
         />
-        <Spin spinning={this.state.isInsertingArticle}>
-          <Discuss
-            width={
-              x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 16
-            }
-            onConfirmPress={(body) => {
-              body.parent = this.discussParent;
-              this.send(body);
-            }}
-          />
-        </Spin>
-        <div style={{ height: 12 }} />
-        <Discusses
-          article={this.props.match.params.id}
-          onReplyPress={(parent) => {
-            this.discussParent = parent;
-          }}
-          onConfirmPress={(body) => {
-            body.parent = this.discussParent;
-            this.send(body);
-          }}
-          onCancel={() => {
-            this.discussParent = 0;
-          }}
-        />
+        <Discuss article={this.props.match.params.id} />
       </div>
     );
   }
