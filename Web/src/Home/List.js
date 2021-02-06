@@ -11,9 +11,7 @@ import PropTypes from "prop-types";
 import * as x from "../x";
 import { Button } from "antd";
 import moment from "moment";
-
-var selectPasters = require("../datas/selectPasters.json");
-
+import Tags from "../Tags";
 class List extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -23,10 +21,17 @@ class List extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async initDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_HOME_ARTICLES + "?deleted=0"
+    );
     this.setState({
-      datas: selectPasters.slice(0, 10),
+      datas: result,
     });
+  }
+
+  componentDidMount() {
+    this.initDatas();
   }
 
   loadIconText(image, text) {
@@ -46,8 +51,11 @@ class List extends React.Component {
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
       array.push(
-        <div
+        <a
           key={i}
+          onClick={() => {
+            window.open(`../Article/${item.id}`, "_blank");
+          }}
           style={{
             flexDirection: "column",
             display: "flex",
@@ -60,7 +68,11 @@ class List extends React.Component {
         >
           <div style={{ display: "flex", position: "relative" }}>
             <img
-              src={require("../images/Article_default.jpg")}
+              src={
+                x.RegExp.isEmpty(item.image)
+                  ? require("../images/Article_default.jpg")
+                  : item.image
+              }
               style={{
                 height: 135,
                 width: 240,
@@ -91,7 +103,7 @@ class List extends React.Component {
               />
               <div style={{ width: 4 }} />
               <div style={{ color: "white", fontSize: 12 }}>
-                {moment().format("YYYY-MM-DD")}
+                {moment(item.time).format("YYYY-MM-DD")}
               </div>
             </div>
             <div style={{ width: 8 }} />
@@ -106,9 +118,7 @@ class List extends React.Component {
               <div
                 style={{ flexDirection: "column", display: "flex", flex: 1 }}
               >
-                <div style={{ fontSize: 18, color: "black" }}>
-                  React + Spring Boot 重构博客后的第一篇文章 ( Hello World )
-                </div>
+                <div style={{ fontSize: 18, color: "black" }}>{item.title}</div>
                 <div style={{ height: 1, background: "#f0f0f0", margin: 4 }} />
                 <div style={{ fontSize: 14, color: "grey", flexWrap: "wrap" }}>
                   {item.message}
@@ -130,37 +140,25 @@ class List extends React.Component {
                   }}
                 >
                   {this.loadIconText(
-                    require("../images/List_date.png"),
-                    moment().format("YYYY-MM-DD HH:mm:ss")
+                    require("../images/List_look.png"),
+                    `${item.look} 阅读`
                   )}
                   <div style={{ width: 16 }} />
                   {this.loadIconText(
-                    require("../images/List_see.png"),
-                    parseInt(Math.random() * 100)
-                  )}
-                  <div style={{ width: 16 }} />
-                  {this.loadIconText(
-                    require("../images/List_discuss.png"),
-                    parseInt(Math.random() * 100)
+                    require("../images/List_love.png"),
+                    `${item.love} 点赞`
                   )}
                 </div>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    // window.open(`../Reader/${Math.random()}`, "_blank");
-                  }}
-                >
-                  阅读全文
-                </Button>
+                <Tags string={item.books} />
               </div>
             </div>
           </div>
-        </div>
+        </a>
       );
     }
     return array;
   }
-
+  
   render() {
     return (
       <div

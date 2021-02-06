@@ -11,7 +11,7 @@ import PropTypes, { array } from "prop-types";
 import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import { Checkbox, Input, message } from "antd";
+import { Checkbox, Input, message, Spin } from "antd";
 import Editor from "../Editor";
 
 class Edit extends React.Component {
@@ -25,6 +25,7 @@ class Edit extends React.Component {
     this.imageInput = null;
     this.initArticle = null; // 初始化网络请求后的article，如果为空则为新增，否则则为修改
     this.state = {
+      isSendingArticle: false,
       books: [],
       html: "",
     };
@@ -73,6 +74,9 @@ class Edit extends React.Component {
   }
 
   async send() {
+    this.setState({
+      isSendingArticle: true,
+    });
     let keys = JSON.parse(JSON.stringify(this.state.books));
     keys = keys.filter((item) => item.select).map((item) => item.data.id);
     let body = {
@@ -90,13 +94,16 @@ class Edit extends React.Component {
         deleted: 0,
       },
     };
-    let result = x.HTTP.post(
+    let result = await x.HTTP.post(
       x.SERVICE.SERVER +
         (this.initArticle == null
           ? x.SERVICE.API.INSERT_ARTICLE
           : x.SERVICE.API.UPDATE_ARTICLE),
       body
     );
+    this.setState({
+      isSendingArticle: false,
+    });
   }
 
   loadBooks() {
@@ -181,14 +188,16 @@ class Edit extends React.Component {
           {this.loadBooks()}
         </div>
         <div style={{ height: 8 }} />
-        <Editor
-          height={320}
-          defaultHTML={this.state.html}
-          onConfirmPress={(html) => {
-            this.state.html = html;
-            this.send();
-          }}
-        />
+        <Spin spinning={this.state.isSendingArticle}>
+          <Editor
+            height={320}
+            defaultHTML={this.state.html}
+            onConfirmPress={(html) => {
+              this.state.html = html;
+              this.send();
+            }}
+          />
+        </Spin>
       </div>
     );
   }

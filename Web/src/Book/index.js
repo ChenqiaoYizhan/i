@@ -8,12 +8,11 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import { Input, Button } from "antd";
+import { Input, Button, Tag } from "antd";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as x from "../x";
-import monent from "moment";
 import moment from "moment";
-
+import Tags from "../Tags";
 class Book extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -110,14 +109,15 @@ class Book extends React.Component {
               }}
             />
             <div style={{ width: 4 }} />
-            <div style={{ fontSize: 14, color: "grey" }}>
+            <div style={{ fontSize: 16, color: "grey" }}>
               {moment(item.time).format("MM-DD")}
             </div>
             <div style={{ width: 12 }} />
-            <div style={{ fontSize: 16, color: "rgba(0, 0, 0, 0.618)" }}>
+            <div style={{ fontSize: 16, color: "rgba(0, 0, 0, 0.88)" }}>
               {item.title}
             </div>
           </div>
+          <Tags string={item.books} />
         </div>
       );
     }

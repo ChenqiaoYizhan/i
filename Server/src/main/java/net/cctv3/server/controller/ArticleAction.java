@@ -1,9 +1,6 @@
 package net.cctv3.server.controller;
 
-import net.cctv3.server.entity.Article;
-import net.cctv3.server.entity.InsertArticle;
-import net.cctv3.server.entity.Relationship;
-import net.cctv3.server.entity.SelectArticleGroupByMonth;
+import net.cctv3.server.entity.*;
 import net.cctv3.server.mapper.ArticleMapper;
 import net.cctv3.server.mapper.RelationshipMapper;
 import org.slf4j.Logger;
@@ -70,6 +67,13 @@ public class ArticleAction {
         hashMap.put("articles", articles);
         hashMap.put("months", months);
         return hashMap;
+    }
+
+    @CrossOrigin
+    @GetMapping("/selectHomeArticles.action")
+    public List<SelectHomeArticle> selectHomeArticles(@RequestParam("deleted") String deleted) {
+        List<SelectHomeArticle> list = articleMapper.selectHomeArticles(Integer.parseInt(deleted));
+        return list;
     }
 
     @CrossOrigin

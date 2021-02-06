@@ -18,17 +18,30 @@
         where id = #{id}
     </update>
     <select id="selectArticlesGroupByMonth" parameterType="int" resultType="net.cctv3.server.entity.SelectArticleGroupByMonth" >
-        select id, name, title, message, date_format(time,'%Y-%m') as month, time
-            from article
-            where deleted = #{deleted}
-        order by time desc;
+        select a.id, a.name, a.title, a.message, date_format(a.time,'%Y-%m') as month,
+            group_concat(b.title separator '::') as books, a.time
+            from article a
+                left join relationship r on r.article = a.id
+                left join book b on b.id = r.book
+            where a.deleted = #{deleted} and a.id > 10
+            group by a.id
+        order by a.time desc;
     </select>
-
     <select id="selectArticleMonths" parameterType="int" resultType="String">
         select date_format(time,'%Y-%m') time
             from article
-            where deleted = #{deleted}
+            where deleted = #{deleted} and id > 10
             group by date_format(time, '%Y-%m')
         order by time desc;
+    </select>
+    <select id="selectHomeArticles" parameterType="int" resultType="net.cctv3.server.entity.SelectHomeArticle">
+        select a.id, a.name, a.image, a.title, a.message, a.html, a.look, a.love, a.time,
+                group_concat(b.title separator '::') as books
+            from article a
+                left join relationship r on r.article = a.id
+                left join book b on b.id = r.book
+            where a.deleted = #{deleted} and a.id > 10
+            group by a.id
+        order by a.time desc
     </select>
 </mapper>

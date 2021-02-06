@@ -17,40 +17,47 @@ class Books extends React.Component {
   static propTypes = {
     onMenuPress: PropTypes.func,
   };
-  
+
   constructor(props) {
     super(props);
     this.state = {
-      datas: []
+      datas: [],
     };
   }
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   loadBooks() {
     let array = [];
-    for(let i=0;i<this.state.datas.length;i++) {
+    for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
-      array.push(<div style={{alignItems: 'center', display: 'flex', justifyContent: 'center', padding: '1px 4px', background:'#f0f0f0'}}>
-        <div style={{fontSize: 14, color: 'black'}}>{item.name}</div>
-      </div>) 
+      array.push(
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            padding: "1px 4px",
+            background: "#f0f0f0",
+          }}
+        >
+          <div style={{ fontSize: 14, color: "black" }}>{item.name}</div>
+        </div>
+      );
     }
-    return array;  
+    return array;
   }
 
   render() {
     return (
       <div
         style={{
-          flexDirection: 'column',
-          display: 'flex',
+          flexDirection: "column",
+          display: "flex",
           height: 120,
-          backgroundColor: 'green'
+          backgroundColor: "green",
         }}
-      >
-      </div>
+      ></div>
     );
   }
 }
