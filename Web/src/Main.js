@@ -53,18 +53,9 @@ class Main extends React.Component {
         >
           <Menu
             onMenuPress={(item) => {
-              switch (item.id) {
-                case "About":
-                  this.props.history.push({
-                    pathname: `/Article/5`,
-                  });
-                  break;
-
-                default:
-                  this.props.history.push({
-                    pathname: `/${item.id}`,
-                  });
-              }
+              this.props.history.push({
+                pathname: `/${item.id}`,
+              });
             }}
           />
         </div>

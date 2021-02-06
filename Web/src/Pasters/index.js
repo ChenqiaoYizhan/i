@@ -124,6 +124,7 @@ class Pasters extends React.Component {
         <div style={{ height: 8 }} />
         <div style={{ padding: 8 }}>
           <Disscuss
+            article={x.ARTICLES.PASTERS}
             height={(x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - 16) / 4}
             width={
               x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 16

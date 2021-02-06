@@ -28,11 +28,4 @@ public class BookAction {
     public List<Book> selectBanners(@RequestParam("deleted") String deleted) {
         return bookMapper.findBooksByDeleted(deleted);
     }
-
-    @CrossOrigin
-    @PostMapping("/insertBooks.action")
-    public HashMap<String, Object> insertBanner(@RequestBody Book book) {
-        HashMap<String, Object> hashMap = new HashMap<>();
-        return hashMap;
-    }
 }

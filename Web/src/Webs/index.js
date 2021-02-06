@@ -12,108 +12,51 @@ import { Input, Button } from "antd";
 
 import * as x from "../x";
 
-const DATAS = [
-  {
-    id: 1,
-    title: "数据结构与算法",
-    message: "",
-    children: [
-      { id: "", title: "LibreOJ", message: "NOIP刷题", web: "https://loj.ac/" },
-    ],
-  },
-  {
-    id: 2,
-    title: "白嫖 ( 部分资源也花钱的哦 )",
-    message: "不是我给你吹，白嫖这方面我从来就没输给过谁。",
-    children: [
-      {
-        id: "",
-        title: "看影客",
-        message: "Chrome F12抓包找.m3u8",
-        web: "http://www.kanyingke.com/",
-      },
-      {
-        id: "",
-        title: "黑盒",
-        message: "MP3免费下载",
-        web: "http://www.heibox.cn/",
-      },
-      {
-        id: "",
-        title: "MyFreeMP3",
-        message: "MP3免费下载",
-        web: "http://tool.liumingye.cn/music/?page=searchPage",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "开发与辅助设计",
-    message: "",
-    children: [
-      {
-        id: "",
-        title: "爱莫助手",
-        message: "手机投屏到电脑 ( Mac版 )",
-        web: "http://web.airmore.cn/",
-      },
-      {
-        id: "",
-        title: "Maven",
-        message: "Maven自助下载",
-        web: "https://mvnrepository.com/",
-      },
-      {
-        id: "",
-        title: "高德地图",
-        message: "高德地图WEB版开发文档",
-        web: "https://lbs.amap.com/api/jsapi-v2/example/3d/map3d",
-      },
-      {
-        id: "",
-        title: "365编辑器",
-        message: "微信公众号文章编辑工具",
-        web: "https://www.365editor.com/",
-      },
-      {
-        id: "",
-        title: "爱莫助手",
-        message: "手机投屏到电脑 ( Mac版 )",
-        web: "http://web.airmore.cn/",
-      },
-      {
-        id: "",
-        title: "Maven",
-        message: "Maven自助下载",
-        web: "https://mvnrepository.com/",
-      },
-    ],
-  },
-  { id: 4, title: "微信公众号文章摘选", message: "", children: [] },
-];
-
 class Webs extends React.Component {
   static propTypes = {
     onItemPress: PropTypes.func,
   };
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      datas: [],
+    };
+  }
+
+  async initDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_WEBS + "?deleted=0"
+    );
+    let array = [];
+    let parents = result.filter((item) => item.parent == 0);
+    for (let i = 0; i < parents.length; i++) {
+      let parent = parents[i];
+      let children = result.filter((item) => item.parent == parent.id);
+      array.push({ parent: parent, children: children });
+    }
+    this.setState({
+      datas: array,
+    });
+  }
+
+  componentDidMount() {
+    this.initDatas();
   }
 
   loadItems() {
     let array = [];
-    for (let i = 0; i < DATAS.length; i++) {
-      let item = DATAS[i];
+    for (let i = 0; i < this.state.datas.length; i++) {
+      let item = this.state.datas[i];
+      let parent = item.parent;
       array.push(
         <div key={i} style={{ flexDirection: "column", display: "flex" }}>
-          {this.loadParent(item.title, item.message)}
+          {this.loadParent(parent.title, parent.message)}
           <div
             style={{ flexDirection: "row", flexWrap: "wrap", display: "flex" }}
           >
             {this.loadChildren(item.children)}
           </div>
-          <div style={{ height: i == DATAS.length - 1 ? 0 : 16 }} />
+          <div style={{ height: i == this.state.datas.length - 1 ? 0 : 16 }} />
         </div>
       );
     }
@@ -157,9 +100,7 @@ class Webs extends React.Component {
       let item = children[i];
       array.push(
         <a
-          onClick={() => {
-            
-          }}
+          onClick={() => {}}
           key={i}
           style={{
             flexDirection: "row",

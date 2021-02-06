@@ -21,6 +21,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Test from "./Demo/Test";
 import Admin from "./Admin";
 import Edit from "./Edit";
+import About from "./About";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,7 @@ class App extends React.Component {
                   <Route path="/Pasters" component={() => <Pasters />} />
                   <Route path="/Timer" component={() => <Timer />} />
                   <Route path="/Webs" component={() => <Webs />} />
-                  <Route path="/About" component={() => <Home />} />
+                  <Route path="/About" component={() => <About />} />
                   <Route path="/Admin" component={() => <Admin />} />
                   <Route path="/Article/:id" component={() => <Article />} />
                   <Route path="/Edit/:id" component={() => <Edit />} />

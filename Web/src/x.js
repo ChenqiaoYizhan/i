@@ -53,6 +53,16 @@ export const UI = {
   ],
 };
 
+export const ARTICLES = {
+  //  article 表里面的ID，默认1-10为服务保留的ID，写的文章从11开始
+  HOME: 1,
+  BOOKS: 2,
+  PASTERS: 3,
+  TIMER: 4,
+  WEBS: 5,
+  ABOUT: 6,
+};
+
 export const MD5 = {
   dealWithSunyupeng: function (s) {
     // s: year=2021&month=01&day=27
@@ -92,6 +102,7 @@ export const SERVICE = {
     INSERT_DISCUSS: "insertDiscuss.action",
     SELECT_DISCUSSES: "selectDiscusses.action",
     SELECT_COUNT: "selectCount.action",
+    SELECT_WEBS: "selectWebs.action",
   },
 };
 

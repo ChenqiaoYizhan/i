@@ -7,7 +7,6 @@
  * @LastEditTime: 2021-02-06 00:34:20
  */
 import React from "react";
-import PropTypes from "prop-types";
 import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import DiscussForm from "./DiscussForm";

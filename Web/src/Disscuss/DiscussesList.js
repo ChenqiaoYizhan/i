@@ -22,15 +22,6 @@ import PropTypes from "prop-types";
 import { Button, Modal } from "antd";
 import moment from "moment";
 import DiscussForm from "./DiscussForm";
-
-const OS = [
-  { name: "Windows 8.1", image: require("../images/Device_windows.png") },
-  { name: "macOS 10.15.7", image: require("../images/Device_mac.png") },
-  { name: "Linux ", image: require("../images/Device_linux.png") },
-  { name: "iOS 14.3", image: require("../images/Device_iOS.png") },
-  { name: "Android 7.1.1", image: require("../images/Device_android.png") },
-];
-
 class DiscussList extends React.Component {
   static propTypes = {
     onReplyPress: PropTypes.func,
@@ -78,7 +69,7 @@ class DiscussList extends React.Component {
           paddingLeft: 4,
           paddingRight: 4,
           borderRadius: 2,
-          backgroundColor: "#" + x.MD5.dealWithSunyupeng(text).substring(0, 6),
+          backgroundColor: x.UI.randomColor(),
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
@@ -114,7 +105,6 @@ class DiscussList extends React.Component {
   }
 
   loadItem(item, isParent) {
-    let index = parseInt(Math.random() * OS.length);
     // console.log(item, `http://q1.qlogo.cn/g?b=qq&nk=${item.qq}&s=100`);
     let os = x.RegExp.getOS(item.userAgent);
     return (

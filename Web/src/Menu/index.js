@@ -40,7 +40,7 @@ const DATAS = [
   },
   {
     image: require("../images/Menu_web.png"),
-    text: "工具",
+    text: "链接",
     page: "",
     id: "Webs",
   },

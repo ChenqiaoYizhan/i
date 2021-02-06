@@ -5,6 +5,8 @@ import net.cctv3.server.entity.InsertArticle;
 import net.cctv3.server.entity.Relationship;
 import net.cctv3.server.mapper.ArticleMapper;
 import net.cctv3.server.mapper.RelationshipMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.*;
 
 @RestController
 public class ArticleAction {
+    private  final  static Logger logger = LoggerFactory.getLogger(ArticleAction.class);
     @Autowired
     ArticleMapper articleMapper;
     @Autowired

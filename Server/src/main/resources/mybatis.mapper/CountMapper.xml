@@ -13,7 +13,7 @@
         select 'discuss' as id, '评论' as name, count(*) as value from discuss
             where deleted = 0
         union all
-            select 'web' as id, '工具' as name, count(*) as value
+            select 'web' as id, '链接' as name, count(*) as value
         from web where deleted = 0
     </select>
 </mapper>
