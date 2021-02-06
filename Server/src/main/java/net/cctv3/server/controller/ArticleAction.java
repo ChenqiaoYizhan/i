@@ -3,6 +3,7 @@ package net.cctv3.server.controller;
 import net.cctv3.server.entity.Article;
 import net.cctv3.server.entity.InsertArticle;
 import net.cctv3.server.entity.Relationship;
+import net.cctv3.server.entity.SelectArticleGroupByMonth;
 import net.cctv3.server.mapper.ArticleMapper;
 import net.cctv3.server.mapper.RelationshipMapper;
 import org.slf4j.Logger;
@@ -57,6 +58,17 @@ public class ArticleAction {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
+        return hashMap;
+    }
+
+    @CrossOrigin
+    @GetMapping("/selectArticlesGroupByMonth.action")
+    public HashMap<String, Object> selectArticlesGroupByMonth(@RequestParam("deleted") String deleted) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        List<SelectArticleGroupByMonth> articles = articleMapper.selectArticlesGroupByMonth(Integer.parseInt(deleted));
+        List<String> months = articleMapper.selectArticleMonths(Integer.parseInt(deleted));
+        hashMap.put("articles", articles);
+        hashMap.put("months", months);
         return hashMap;
     }
 

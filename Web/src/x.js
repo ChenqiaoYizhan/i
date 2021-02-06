@@ -103,6 +103,7 @@ export const SERVICE = {
     SELECT_DISCUSSES: "selectDiscusses.action",
     SELECT_COUNT: "selectCount.action",
     SELECT_WEBS: "selectWebs.action",
+    SELECT_ARTICLES_GROUP_BY_MONTH: "selectArticlesGroupByMonth.action"
   },
 };
 

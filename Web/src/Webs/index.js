@@ -73,7 +73,13 @@ class Webs extends React.Component {
             alignItems: "center",
           }}
         >
-          <div style={{ width: 4, backgroundColor: "grey", height: 18 }} />
+          <div
+            style={{
+              width: 4,
+              backgroundColor: x.UI.randomColor(),
+              height: 18,
+            }}
+          />
           <div style={{ width: 4 }} />
           <div style={{ fontSize: 18, color: "black" }}>{title}</div>
         </div>

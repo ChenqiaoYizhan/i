@@ -47,9 +47,7 @@ class Timer extends React.Component {
             backgroundColor: "white",
             borderRadius: 8,
             padding: 4,
-            marginLeft: 4,
-            marginRight: 4,
-            marginBottom: 16,
+            margin: "6px 4px",
             boxShadow: x.UI.BOX_SHADOW,
           }}
         >
@@ -95,9 +93,7 @@ class Timer extends React.Component {
         }}
       >
         <Masonry
-          onImagesLoaded={() => {
-            
-          }}
+          onImagesLoaded={() => {}}
           onLayoutComplete={(laidOutItems) => {}}
           onRemoveComplete={(removedItems) => {}}
         >

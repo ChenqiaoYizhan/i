@@ -61,7 +61,7 @@ class Menu extends React.Component {
       index: 0,
     };
   }
-
+  
   loadItems() {
     let array = [];
     for (let i = 0; i < DATAS.length; i++) {

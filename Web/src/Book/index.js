@@ -12,8 +12,7 @@ import { Input, Button } from "antd";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as x from "../x";
 import monent from "moment";
-
-var selectPasters = require("../datas/selectPasters.json");
+import moment from "moment";
 
 class Book extends React.Component {
   static propTypes = {};
@@ -25,72 +24,99 @@ class Book extends React.Component {
   }
 
   componentDidMount() {
+    this.initDatas();
+  }
+
+  async initDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER +
+        x.SERVICE.API.SELECT_ARTICLES_GROUP_BY_MONTH +
+        "?deleted=0"
+    );
+    let months = result.months;
+    let articles = result.articles;
+    let array = [];
+    for (let i = 0; i < months.length; i++) {
+      let children = articles.filter((item) => item.month == months[i]);
+      array.push({ month: months[i], articles: children });
+    }
     this.setState({
-      datas: selectPasters.sort((a, b) =>
-        monent(a.time).isAfter(monent(b.time)) ? -1 : 1
-      ),
+      datas: array,
     });
   }
 
-  loadYears() {
+  loadItems() {
     let array = [];
-    // console.log(years);
-    for (let i = 2019; i <= 2022; i++) {
-      // console.log(months);
+    for (let i = 0; i < this.state.datas.length; i++) {
+      let item = this.state.datas[i];
       array.push(
-        <div
-          key={i}
-          style={{
-            flexDirection: "column",
-            display: "flex",
-          }}
-        >
-          <div style={{ fontSize: 18, color: "black" }}>{i}</div>
-          {this.laodMonths(i)}
+        <div key={i} style={{ flexDirection: "column", display: "flex" }}>
+          <div
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                backgroundColor: x.UI.randomColor(),
+              }}
+            />
+            <div style={{ width: 4 }} />
+            <div style={{ fontSize: 18, color: "#1790fc" }}>{item.month}</div>
+          </div>
+          <div
+            style={{ flexDirection: "column", marginLeft: 36, display: "flex" }}
+          >
+            {this.loadArticles(item.articles)}
+          </div>
         </div>
       );
     }
     return array;
   }
 
-  fixZero(n) {
-    return n < 10 ? "0" + n : n;
-  }
-
-  laodMonths(year) {
+  loadArticles(articles) {
     let array = [];
-    let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
-    // console.log(days);
-    for (let i = 1; i <= 12; i++) {
-      var days = [];
-      if (days.length > 0) {
-        array.push(
-          <div key={i} style={{ flexDirection: "column", display: "flex" }}>
-            <div style={{ fontSize: 16, color: "black" }}>{i}</div>
-            {this.loadDays(days)}
-          </div>
-        );
-      }
-    }
-    return array;
-  }
-
-  loadDays(days) {
-    let array = [];
-    for (let i = 0; i < days.length; i++) {
+    for (let i = 0; i < articles.length; i++) {
+      let item = articles[i];
       array.push(
         <div
           key={i}
           style={{
             flexDirection: "row",
             alignItems: "center",
-            display: "flex",
             justifyContent: "space-between",
+            display: "flex",
           }}
         >
-          <div style={{ fontSize: 14, color: "grey" }}>{days[i].message}</div>
-          <div style={{ fontSize: 14, color: "grey" }}>
-            {monent(days[i].time).format("YYYY-MM-DD")}
+          <div
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                width: 4,
+                height: 4,
+                borderRadius: 2,
+                backgroundColor: x.UI.randomColor(),
+              }}
+            />
+            <div style={{ width: 4 }} />
+            <div style={{ fontSize: 14, color: "grey" }}>
+              {moment(item.time).format("MM-DD")}
+            </div>
+            <div style={{ width: 12 }} />
+            <div style={{ fontSize: 16, color: "rgba(0, 0, 0, 0.618)" }}>
+              {item.title}
+            </div>
           </div>
         </div>
       );
@@ -100,8 +126,17 @@ class Book extends React.Component {
 
   render() {
     return (
-      <div style={{ flexDirection: "column", display: "flex" }}>
-        {this.loadYears()}
+      <div
+        style={{
+          flexDirection: "column",
+          display: "flex",
+          backgroundColor: "white",
+          borderRadius: 8,
+          boxShadow: x.UI.BOX_SHADOW,
+          padding: 8,
+        }}
+      >
+        {this.loadItems()}
       </div>
     );
   }
