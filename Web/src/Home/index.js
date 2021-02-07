@@ -23,49 +23,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    // for (let i = 0; i < datas.length; i++) {
-    //   let item = datas[i];
-    //   item.id = null;
-    //   item.iid = x.MD5.dealWithSunyupeng(Math.random());
-    //   item.useful = 1;
-    //   item.time = moment().format("YYYY-MM-DD HH:mm:ss");
-    //   fetch("http://localhost:8080/insertBanner.action", {
-    //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-    //     mode: "cors",
-    //     body: JSON.stringify(item),
-    //   })
-    //     .then((response) => {
-    //       let json = response.json();
-    //       console.log(json);
-    //       return json;
-    //     })
-    //     .then((json) => {
-    //       console.log(json);
-    //     });
-    // }
-  }
-
-  loadBanners() {
-    let array = [];
-    const host = "http://www.cctv3.net/images/";
-    let images = ["ChiJi0201.jpg", "ChiJi0202.jpg"];
-    for (let i = 0; i < images.length; i++) {
-      array.push(
-        <div key={i}>
-          <img
-            src={host + images[i]}
-            style={{
-              height: "100%",
-              width: "100%",
-            }}
-          />
-        </div>
-      );
-    }
-    return array;
   }
 
   render() {
@@ -95,7 +52,7 @@ class Home extends React.Component {
           >
             <img
               src={require("../images/Home_camera.png")}
-              style={{ height: 36, width: 36 }}
+              style={{ height: 18, width: 18 }}
             />
             <div style={{ width: 4 }} />
             <div style={{ fontSize: 18, color: "black" }}>正能量</div>

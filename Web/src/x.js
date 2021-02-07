@@ -90,8 +90,9 @@ export const CONSOLE = {
 
 // Server API
 export const SERVICE = {
+  // SERVER: "http://192.168.1.67:8080/",
+  // SERVER: "http://127.0.0.1:8080/",
   SERVER: "http://localhost:8080/",
-  // SERVER: "http://127.0.0.1:8080/Service/",
   API: {
     SELECT_BOOKS: "selectBooks.action",
     SELECT_BANNERS: "selectBanners.action",

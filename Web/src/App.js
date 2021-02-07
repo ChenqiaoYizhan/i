@@ -39,7 +39,11 @@ class App extends React.Component {
               path="/"
               component={() => (
                 <Main>
-                  <Route path="/Home" exact component={() => <Home />} />
+                  <Route
+                    path={["/Home", "/"]}
+                    exact
+                    component={() => <Home />}
+                  />
                   <Route path="/Book" component={() => <Book />} />
                   <Route path="/Pasters" component={() => <Pasters />} />
                   <Route path="/Timer" component={() => <Timer />} />

@@ -149,7 +149,7 @@ class List extends React.Component {
                     `${item.love} 点赞`
                   )}
                 </div>
-                <Tags string={item.books} />
+                <Tags string={item.books} borderStyle='fill'/>
               </div>
             </div>
           </div>

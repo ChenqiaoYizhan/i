@@ -11,10 +11,12 @@ import PropTypes from "prop-types";
 import * as x from "../x";
 import { Button } from "antd";
 import moment from "moment";
+import tinycolor from "tinycolor2";
 
 class List extends React.Component {
   static propTypes = {
     string: PropTypes.string.isRequired, // :: 为分隔符
+    borderStyle: PropTypes.string.isRequired, // line为线条样式 fill为实心样式
   };
 
   constructor(props) {
@@ -29,20 +31,39 @@ class List extends React.Component {
       let array = [];
       let books = booksString.split(/::/);
       for (let i = 0; i < books.length; i++) {
+        let style;
         let color = x.UI.randomColor();
-        array.push(
-          <div
-            key={i}
-            style={{
+        let fontColor;
+        switch (this.props.borderStyle) {
+          case "fill":
+            fontColor = 'white';
+            style = {
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
-              borderRadius: 2,
-              marginRight: i == books.length - 1 ? 0 : 4,
+              borderRadius: '4px',
+              padding: '1px 4px',
+              margin: '4px',
               backgroundColor: color,
-            }}
-          >
-            <div style={{ fontSize: 12, color: "white", margin: "1px 4px" }}>
+            };
+            break;
+          case "line":
+            fontColor = color;
+            style = {
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+              borderRadius: '4px',
+              padding: '1px 4px',
+              margin: '4px',
+              border: `1px solid ${tinycolor(color).toRgbString()}`,
+            };
+          default:
+            break;
+        }
+        array.push(
+          <div key={i} style={style}>
+            <div style={{ fontSize: 12, color: fontColor }}>
               {books[i]}
             </div>
           </div>

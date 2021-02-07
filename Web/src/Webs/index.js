@@ -99,14 +99,16 @@ class Webs extends React.Component {
       </div>
     );
   }
-
+  
   loadChildren(children) {
     let array = [];
     for (let i = 0; i < children.length; i++) {
       let item = children[i];
       array.push(
         <a
-          onClick={() => {}}
+          onClick={() => {
+            window.open(item.url, "_blank");
+          }}
           key={i}
           style={{
             flexDirection: "row",

@@ -6,10 +6,13 @@
     <insert id="insertDiscuss" parameterType="net.cctv3.server.entity.Discuss" useGeneratedKeys="true"
             keyProperty="id">
         insert into discuss
-            (article, parent, qq, name, blog, ip, content, userAgent, time, deleted)
+        (article, parent, qq, name, blog, ip, content, userAgent, time, deleted)
         values (#{article}, #{parent}, #{qq}, #{name}, #{blog}, #{ip}, #{content}, #{userAgent}, #{time}, #{deleted})
     </insert>
     <select id="findDiscussesByArticle" parameterType="int" resultType="net.cctv3.server.entity.Discuss">
-        select * from discuss where article = #{article} order by time desc
+        select *
+        from discuss
+        where article = #{article}
+        order by time desc
     </select>
 </mapper>

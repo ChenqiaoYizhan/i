@@ -117,7 +117,7 @@ class Book extends React.Component {
               {item.title}
             </div>
           </div>
-          <Tags string={item.books} />
+          <Tags string={item.books} borderStyle='line' />
         </div>
       );
     }
