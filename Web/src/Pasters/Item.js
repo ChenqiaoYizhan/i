@@ -109,7 +109,13 @@ class Item extends React.Component {
             paddingBottom: 4,
           }}
         >
-          <div style={{ fontSize: 12, color: color }}>{item.message}</div>
+          {x.RegExp.isBase64Image(item.content) ? (
+            <div>
+              <img src={item.content} style={{ height: "auto", width: 235 }} />
+            </div>
+          ) : (
+            <div style={{ fontSize: 12, color: color }}>{item.content}</div>
+          )}
         </div>
         <div
           style={{

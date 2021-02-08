@@ -29,7 +29,7 @@ export const i = {
     {
       key: "Android",
       value: [
-        "QQ WeChat ( 登录、分享 )",
+        "SDK ( QQ/微信 高德地图 )",
         "高德地图 ( 逆地理编码、地理围栏、曲线拟合 )",
         "Socket / WebSocket",
         "嵌入式 ( 打印、八达通支付 )",

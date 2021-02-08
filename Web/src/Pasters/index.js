@@ -13,8 +13,6 @@ import * as x from "../x";
 import Disscuss from "../Disscuss";
 import PropTypes from "prop-types";
 
-var selectPasters = require("../datas/selectPasters.json");
-
 class Pasters extends React.Component {
   constructor(props) {
     super(props);
@@ -23,33 +21,41 @@ class Pasters extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async intidDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER +
+        x.SERVICE.API.SELECT_DISCUSSES +
+        `?article=${x.ARTICLES.PASTERS}`
+    );
+    console.log(result);
     let array = [];
     // 保证八种贴纸都显示出来
     // 从第八张往后的贴纸随机显示
-    let DATAS = selectPasters.slice(0, 16);
-    let all8Pasters = Array.from({ length: 8 }, (_, i) => i)
-      .sort((a, b) => Math.random() - 0.5)
-      .concat(
-        Array.from({ length: DATAS.length - 8 }, (_, i) =>
-          parseInt(Math.random() * 8)
-        )
-      );
-
-    for (let i = 0; i < DATAS.length; i++) {
-      let item = DATAS[i];
+    // let all8Pasters = Array.from({ length: 8 }, (_, i) => i)
+    //   .sort((a, b) => Math.random() - 0.5)
+    //   .concat(
+    //     Array.from({ length: DATAS.length - 8 }, (_, i) =>
+    //       parseInt(Math.random() * 8)
+    //     )
+    //   );
+    for (let i = 0; i < result.length; i++) {
+      let item = result[i];
       array.push({
         id: i,
         title: item.title,
         time: item.time,
-        message: item.message,
-        index: all8Pasters[i], // 八种卡片选哪张
+        content: item.content,
+        index: parseInt(Math.random() * 8), // 八种卡片选哪张
         lastEditTime: new Date().getTime(),
       });
     }
     this.setState({
       datas: this.sortZindexByLastEditTime(array),
     });
+  }
+
+  componentDidMount() {
+    this.intidDatas();
   }
 
   // 优化zIndex逻辑

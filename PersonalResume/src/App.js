@@ -30,7 +30,6 @@ class App extends Component {
           flexDirection: "column",
           display: "flex",
           flex: 1,
-          backgroundColor: "#f0f0f0",
           padding: 16,
         }}
       >

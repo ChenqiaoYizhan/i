@@ -9,6 +9,8 @@
 import React from "react";
 
 import * as datas from "./data";
+import * as x from "./x";
+
 var basic = datas.i.basic;
 
 class Basic extends React.Component {
@@ -53,6 +55,7 @@ class Basic extends React.Component {
           backgroundColor: "white",
           padding: 8,
           borderRadius: 8,
+          boxShadow: x.UI.BOX_SHADOW,
         }}
       >
         <div
