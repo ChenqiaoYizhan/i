@@ -11,7 +11,6 @@ import Item from "./Item";
 import Wall from "../images/Paster_wall.gif";
 import * as x from "../x";
 import Disscuss from "../Disscuss";
-import PropTypes from "prop-types";
 
 class Pasters extends React.Component {
   constructor(props) {
@@ -27,27 +26,12 @@ class Pasters extends React.Component {
         x.SERVICE.API.SELECT_DISCUSSES +
         `?article=${x.ARTICLES.PASTERS}`
     );
-    console.log(result);
-    let array = [];
-    // 保证八种贴纸都显示出来
-    // 从第八张往后的贴纸随机显示
-    // let all8Pasters = Array.from({ length: 8 }, (_, i) => i)
-    //   .sort((a, b) => Math.random() - 0.5)
-    //   .concat(
-    //     Array.from({ length: DATAS.length - 8 }, (_, i) =>
-    //       parseInt(Math.random() * 8)
-    //     )
-    //   );
-    for (let i = 0; i < result.length; i++) {
+    // console.log(result);
+    let array = JSON.parse(JSON.stringify(result));
+    for (let i = 0; i < array.length; i++) {
       let item = result[i];
-      array.push({
-        id: i,
-        title: item.title,
-        time: item.time,
-        content: item.content,
-        index: parseInt(Math.random() * 8), // 八种卡片选哪张
-        lastEditTime: new Date().getTime(),
-      });
+      array[i].lastEditTime = new Date().getTime();
+      array[i].index = parseInt(Math.random() * 8);
     }
     this.setState({
       datas: this.sortZindexByLastEditTime(array),
@@ -130,6 +114,7 @@ class Pasters extends React.Component {
         <div style={{ height: 8 }} />
         <div style={{ padding: 8 }}>
           <Disscuss
+            isHideDiscussList={true}
             article={x.ARTICLES.PASTERS}
             height={(x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - 16) / 4}
             width={

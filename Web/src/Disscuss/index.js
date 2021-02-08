@@ -12,8 +12,11 @@ import { withRouter } from "react-router-dom";
 import DiscussForm from "./DiscussForm";
 import DiscussList from "./DiscussesList";
 import { Spin } from "antd";
+import PropTypes from "prop-types";
 class Discuss extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    isHideDiscussList: PropTypes.bool, // 是否隐藏DiscussList
+  };
   constructor(props) {
     super(props);
     this.discussParent = 0;
@@ -60,20 +63,25 @@ class Discuss extends React.Component {
             }}
           />
         </Spin>
-        <div style={{ height: 12 }} />
-        <DiscussList
-          article={this.props.article}
-          onReplyPress={(parent) => {
-            this.discussParent = parent;
-          }}
-          onConfirmPress={(body) => {
-            body.parent = this.discussParent;
-            this.send(body);
-          }}
-          onCancel={() => {
-            this.discussParent = 0;
-          }}
-        />
+        {this.props.hasOwnProperty("isHideDiscussList") &&
+        this.props.isHideDiscussList ? null : (
+          <div style={{ flexDirection: "column", display: "flex" }}>
+            <div style={{ height: 12 }} />
+            <DiscussList
+              article={this.props.article}
+              onReplyPress={(parent) => {
+                this.discussParent = parent;
+              }}
+              onConfirmPress={(body) => {
+                body.parent = this.discussParent;
+                this.send(body);
+              }}
+              onCancel={() => {
+                this.discussParent = 0;
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }

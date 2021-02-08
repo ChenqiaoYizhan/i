@@ -114,7 +114,13 @@ class Item extends React.Component {
               <img src={item.content} style={{ height: "auto", width: 235 }} />
             </div>
           ) : (
-            <div style={{ fontSize: 12, color: color }}>{item.content}</div>
+            // <div
+            //   style={{ padding: 8 }}
+            //   dangerouslySetInnerHTML={{ __html: item.content }}
+            // />
+            <div style={{ fontSize: 12, color: color }}>
+              {x.RegExp.filterHTMLTag(item.content)}
+            </div>
           )}
         </div>
         <div

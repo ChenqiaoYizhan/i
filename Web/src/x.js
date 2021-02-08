@@ -93,6 +93,7 @@ export const SERVICE = {
   // SERVER: "http://192.168.1.67:8080/",
   // SERVER: "http://127.0.0.1:8080/",
   SERVER: "http://localhost:8080/",
+
   API: {
     SELECT_BOOKS: "selectBooks.action",
     SELECT_BANNERS: "selectBanners.action",
@@ -196,6 +197,12 @@ export const RegExp = {
     return /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\/?%\s]*?)\s*$/i.test(
       string
     );
+  },
+  filterHTMLTag(msg) {
+    var msg = msg.replace(/<\/?[^>]*>/g, ""); //去除HTML Tag
+    msg = msg.replace(/[|]*\n/, ""); //去除行尾空格
+    msg = msg.replace(/&nbsp;/gi, ""); //去掉npsp
+    return msg;
   },
   getBrowser(userAgent) {
     let userAgents = [
