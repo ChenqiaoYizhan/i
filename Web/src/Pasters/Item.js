@@ -137,7 +137,7 @@ class Item extends React.Component {
             justifyContent: "flex-end",
           }}
         >
-          <div style={{ fontSize: 12, color: color }}>{item.title}</div>
+          <div style={{ fontSize: 12, color: color }}>{item.name}</div>
         </div>
       </a>
     );

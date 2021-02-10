@@ -32,6 +32,10 @@ class Edit extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
     this.initDatas();
   }
 

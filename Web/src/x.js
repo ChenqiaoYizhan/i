@@ -13,18 +13,18 @@ import moment from "moment";
 var tinycolor = require("tinycolor2");
 
 export const UI = {
-  SLIDER_WIDTH: 256, // Slider宽度
+  SLIDER_WIDTH: 258, // Slider宽度
   MAIN_WIDTH: 1158, // 整体宽度，左右两边留白
   MAIN_INTERVAL: 16, // 左右两栏的宽度
   DANMU_HEIGHT: 24, // 弹幕高度
   MENU_HEIGHT: 64, // 导航栏高度
   ZINDEX: {
     // 浮层优先级
-    MENU: 666666,
-    DANMU: 666665,
-    DIALOG: 666664,
+    MENU: 10086,
+    DANMU: 10085,
+    DIALOG: 10084,
   },
-  TIMER_COLUMNS: 3,
+  TIMER_COLUMNS: 4,
   randomColor: function () {
     let s = "";
     let array = Array.from({ length: 10 }, (_, i) => i + "").concat(
@@ -95,18 +95,24 @@ export const SERVICE = {
   SERVER: "http://localhost:8080/",
 
   API: {
-    SELECT_BOOKS: "selectBooks.action",
-    SELECT_BANNERS: "selectBanners.action",
+    // CRUD
+    // C
     INSERT_ARTICLE: "insertArticle.action",
     INSERT_BOOOKS: "insertBooks.action",
-    SELECT_ARTICLE: "selectArticle.action",
-    UPDATE_ARTICLE: "updateArticle.action",
     INSERT_DISCUSS: "insertDiscuss.action",
+    // R
+    SELECT_BOOKS: "selectBooks.action",
+    SELECT_BANNERS: "selectBanners.action",
+    SELECT_ARTICLE: "selectArticle.action",
     SELECT_DISCUSSES: "selectDiscusses.action",
     SELECT_COUNT: "selectCount.action",
     SELECT_WEBS: "selectWebs.action",
     SELECT_ARTICLES_GROUP_BY_MONTH: "selectArticlesGroupByMonth.action",
     SELECT_HOME_ARTICLES: "selectHomeArticles.action",
+    SELECT_TIMERS: "selectTimers.action",
+    // U
+    UPDATE_ARTICLE: "updateArticle.action",
+    // D
   },
 };
 

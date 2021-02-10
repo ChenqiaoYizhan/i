@@ -23,6 +23,10 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
   }
 
   render() {
@@ -51,11 +55,11 @@ class Home extends React.Component {
             }}
           >
             <img
-              src={require("../images/Home_camera.png")}
-              style={{ height: 18, width: 18 }}
+              src={require("../images/Anli_want.gif")}
+              style={{ height: 88, width: 88 }}
             />
             <div style={{ width: 4 }} />
-            <div style={{ fontSize: 18, color: "black" }}>正能量</div>
+            <div style={{ fontSize: 18, color: "black" }}>墙裂推荐</div>
           </div>
           <div
             style={{

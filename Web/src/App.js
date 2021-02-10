@@ -28,7 +28,9 @@ class App extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // console.log("123456".split(/::/).length)
+  }
 
   render() {
     return (

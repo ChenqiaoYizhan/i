@@ -17,7 +17,7 @@ export const UI = {
     .toRgbString()}`,
   COLORS: [
     { title: "基佬紫", name: "purple", value: "#dc27b0" },
-    { title: "闷骚红", name: "red", value: "#ff5252" },
+    { title: "闷骚红", name: "red", value: "#ff5b35" },
     { title: "天空蓝", name: "blue", value: "#4481ff" },
     { title: "荷花粉", name: "pink", value: "#ff4081" },
     { title: "深邃蓝", name: "indigo", value: "#3f51b5" },

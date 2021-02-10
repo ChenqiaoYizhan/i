@@ -29,7 +29,7 @@ class Pasters extends React.Component {
     // console.log(result);
     let array = JSON.parse(JSON.stringify(result));
     for (let i = 0; i < array.length; i++) {
-      let item = result[i];
+      array[i].id = `${i + 1}`;
       array[i].lastEditTime = new Date().getTime();
       array[i].index = parseInt(Math.random() * 8);
     }
@@ -39,6 +39,10 @@ class Pasters extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
     this.intidDatas();
   }
 

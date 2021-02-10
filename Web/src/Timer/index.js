@@ -9,11 +9,16 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Timeline } from "antd";
+import { Timeline, Carousel } from "antd";
 import Masonry from "react-masonry-component";
 import * as x from "../x";
+import tinycolor from "tinycolor2";
 
-var selectPasters = require("../datas/selectPasters.json");
+const CDN = "http://www.cctv3.net/timer/";
+const ITEM_WIDTH =
+  (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 12) /
+    x.UI.TIMER_COLUMNS -
+  8;
 class Timer extends React.Component {
   static propTypes = {};
 
@@ -25,8 +30,19 @@ class Timer extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+    this.initDatas();
+  }
+
+  async initDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_TIMERS + "?deleted=0"
+    );
     this.setState({
-      datas: selectPasters,
+      datas: result,
     });
   }
 
@@ -34,47 +50,94 @@ class Timer extends React.Component {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
+      let images = item.images.split(/::/);
       array.push(
         <div
           key={i}
           style={{
             flexDirection: "column",
             display: "flex",
-            width:
-              (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL + 8) /
-                x.UI.TIMER_COLUMNS -
-              8,
+            width: ITEM_WIDTH,
             backgroundColor: "white",
             borderRadius: 8,
-            padding: 4,
             margin: "6px 4px",
             boxShadow: x.UI.BOX_SHADOW,
+            position: "relative",
           }}
         >
           <div
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: "column",
               display: "flex",
+              padding: 4,
             }}
           >
-            <img
-              src={require("../images/i.jpg")}
-              style={{ height: 36, width: 36, borderRadius: 18 }}
-            />
-            <div style={{ width: 4 }} />
             <div
               style={{
-                justifyContent: "space-around",
-                display: "flex",
-                flexDirection: "column",
+                fontSize: 14,
+                color: tinycolor(0, 0, 0, 0.88).toRgbString(),
               }}
             >
-              <div style={{ color: "black", fontSize: 14 }}>陈桥驿站</div>
-              <div style={{ fontSize: 12, color: "grey" }}>{item.time}</div>
+              {item.title}
             </div>
+            <div style={{ fontSize: 12, color: "grey" }}>{item.message}</div>
           </div>
-          <div style={{ fontSize: 12, color: "grey" }}>{item.message}</div>
+          {this.loadBannes(
+            // Didiao的照片都隐藏，自己知道就行了 →_→
+            // 如果以后上传别的截图或者旅游照片，就不D加idiao了
+            item.images.split(/::/).filter((it) => it.indexOf("Didiao") < 0)
+          )}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              borderBottomRightRadius: 8,
+              borderTopLeftRadius: 8,
+              backgroundColor:
+                x.UI.COLORS[parseInt(Math.random() * x.UI.COLORS.length)].value,
+              padding: "1px 2px",
+            }}
+          >
+            <div style={{ fontSize: 12, color: "white" }}>{item.time}</div>
+          </div>
+        </div>
+      );
+    }
+    return array;
+  }
+
+  loadBannes(images) {
+    let CDN = "http://www.cctv3.net/timer/";
+    return images.length == 1 ? (
+      <img
+        src={CDN + images[0]}
+        style={{
+          ITEM_WIDTH,
+          height: "auto",
+        }}
+      />
+    ) : (
+      <Carousel easing="" autoplay>
+        {this.loadImages(images)}
+      </Carousel>
+    );
+  }
+
+  loadImages(images) {
+    let array = [];
+    for (let i = 0; i < images.length; i++) {
+      array.push(
+        <div key={i} style={{ position: "relative" }}>
+          <img
+            src={CDN + images[i]}
+            style={{
+              width: ITEM_WIDTH,
+              height: "auto",
+              borderBottomRightRadius: 8,
+              borderBottomLeftRadius: 8,
+            }}
+          />
         </div>
       );
     }
@@ -88,8 +151,10 @@ class Timer extends React.Component {
           flex: 1,
           flexDirection: "column",
           display: "flex",
-          marginLeft: -4,
-          marginRight: -4,
+          backgroundColor: "white",
+          boxShadow: x.UI.BOX_SHADOW,
+          borderRadius: 8,
+          padding: 8,
         }}
       >
         <Masonry
