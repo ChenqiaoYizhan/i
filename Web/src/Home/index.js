@@ -13,6 +13,7 @@ import Banner from "./Banner";
 import List from "./List";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
+import Niu from "./Niu";
 class Home extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -25,7 +26,7 @@ class Home extends React.Component {
   componentDidMount() {
     window.scrollTo({
       top: 0,
-      behavior: 'auto',
+      behavior: "auto",
     });
   }
 
@@ -43,32 +44,51 @@ class Home extends React.Component {
             display: "flex",
             backgroundColor: "white",
             boxShadow: x.UI.BOX_SHADOW,
-            borderRadius: 8,
+            borderTopLeftRadius: 18,
+            borderTopRightRadius: 18,
             padding: 8,
           }}
         >
           <div
             style={{
               flexDirection: "row",
-              alignItems: "flex-end",
+              alignItems: "center",
               display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            <img
-              src={require("../images/Anli_want.gif")}
-              style={{ height: 88, width: 88 }}
-            />
-            <div style={{ width: 4 }} />
-            <div style={{ fontSize: 18, color: "black" }}>墙裂推荐</div>
-          </div>
-          <div
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              display: "flex",
-            }}
-          >
-            <Banner />
+            <Niu />
+            <div
+              style={{
+                flexDirection: "column",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                style={{
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                  display: "flex",
+                }}
+              >
+                <img
+                  src={require("../images/Anli_want.gif")}
+                  style={{ height: 88, width: 88 }}
+                />
+                <div style={{ width: 4 }} />
+                <div style={{ fontSize: 18, color: "black" }}>墙裂推荐</div>
+              </div>
+              <div
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <Banner />
+              </div>
+            </div>
           </div>
         </div>
         <div style={{ height: 12 }} />

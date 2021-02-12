@@ -14,7 +14,13 @@ import moment from "moment";
 import TweenOne from "rc-tween-one";
 
 const WIDTH =
-  (x.UI.MAIN_WIDTH - x.UI.MAIN_INTERVAL - x.UI.SLIDER_WIDTH - 16) / 13;
+  (x.UI.MAIN_WIDTH -
+    x.UI.MAIN_INTERVAL -
+    x.UI.SLIDER_WIDTH -
+    16 -
+    x.UI.NIU_WIDTH -
+    8) /
+  10;
 class Banner extends React.Component {
   static propTypes = {};
 
@@ -32,6 +38,7 @@ class Banner extends React.Component {
     this.banners = await x.HTTP.get(
       x.SERVICE.SERVER + x.SERVICE.API.SELECT_BANNERS + "?deleted=0"
     );
+
     for (let i = 0; i < this.banners.length; i++) {
       this.banners[i].active = false;
     }
@@ -159,7 +166,7 @@ class Banner extends React.Component {
           display: "flex",
           flexDirection: "row",
           height: WIDTH * 3,
-          width: WIDTH * 13,
+          width: WIDTH * 10,
         }}
       >
         {this.loadItems()}

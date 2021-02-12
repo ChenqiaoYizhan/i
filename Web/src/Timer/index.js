@@ -82,7 +82,7 @@ class Timer extends React.Component {
             </div>
             <div style={{ fontSize: 12, color: "grey" }}>{item.message}</div>
           </div>
-          {this.loadBannes(
+          {this.loadBanners(
             // Didiao的照片都隐藏，自己知道就行了 →_→
             // 如果以后上传别的截图或者旅游照片，就不D加idiao了
             item.images.split(/::/).filter((it) => it.indexOf("Didiao") < 0)
@@ -107,18 +107,20 @@ class Timer extends React.Component {
     return array;
   }
 
-  loadBannes(images) {
+  loadBanners(images) {
     let CDN = "http://www.cctv3.net/timer/";
     return images.length == 1 ? (
       <img
         src={CDN + images[0]}
         style={{
-          ITEM_WIDTH,
+          width: ITEM_WIDTH,
           height: "auto",
+          borderBottomRightRadius: 8,
+          borderBottomLeftRadius: 8,
         }}
       />
     ) : (
-      <Carousel easing="" autoplay>
+      <Carousel autoplay>
         {this.loadImages(images)}
       </Carousel>
     );

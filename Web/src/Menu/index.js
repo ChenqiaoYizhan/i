@@ -61,7 +61,7 @@ class Menu extends React.Component {
       index: 0,
     };
   }
-  
+
   loadItems() {
     let array = [];
     for (let i = 0; i < DATAS.length; i++) {
@@ -150,24 +150,6 @@ class Menu extends React.Component {
           >
             搜索
           </Button>
-          <div style={{ width: 24 }} />
-          <a
-            onClick={() => {
-              this.props.history.push({
-                pathname: `/Admin`,
-              });
-            }}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              display: "flex",
-            }}
-          >
-            <img
-              style={{ height: 24, width: 108 }}
-              src={require("../images/Menu_admin.png")}
-            />
-          </a>
         </div>
       </div>
     );

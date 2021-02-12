@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import Discuss from "../Disscuss";
-
+import "./about.css";
 class About extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -29,15 +29,16 @@ class About extends React.Component {
         x.SERVICE.API.SELECT_ARTICLE +
         `?id=${x.ARTICLES.ABOUT}`
     );
+
     this.setState({
-      text: result.article.html,
+      text: x.RegExp.filterClassEleImg(result.article.html),
     });
   }
 
   componentDidMount() {
     window.scrollTo({
       top: 0,
-      behavior: 'auto',
+      behavior: "auto",
     });
     this.initDatas();
   }
@@ -71,7 +72,9 @@ class About extends React.Component {
       >
         <div
           style={{ padding: 8 }}
-          dangerouslySetInnerHTML={{ __html: this.state.text }}
+          dangerouslySetInnerHTML={{
+            __html: this.state.text,
+          }}
         />
         <Discuss article={x.ARTICLES.ABOUT} />
       </div>

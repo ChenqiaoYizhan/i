@@ -18,11 +18,13 @@ export const UI = {
   MAIN_INTERVAL: 16, // 左右两栏的宽度
   DANMU_HEIGHT: 24, // 弹幕高度
   MENU_HEIGHT: 64, // 导航栏高度
+  NIU_WIDTH: 188, // Banner 左边牛的宽度
   ZINDEX: {
     // 浮层优先级
-    MENU: 10086,
-    DANMU: 10085,
-    DIALOG: 10084,
+    MENU: 99,
+    DANMU: 98,
+    DIALOG: 97,
+    EDITOR: 96,
   },
   TIMER_COLUMNS: 4,
   randomColor: function () {
@@ -207,8 +209,11 @@ export const RegExp = {
   filterHTMLTag(msg) {
     var msg = msg.replace(/<\/?[^>]*>/g, ""); //去除HTML Tag
     msg = msg.replace(/[|]*\n/, ""); //去除行尾空格
-    msg = msg.replace(/&nbsp;/gi, ""); //去掉npsp
+    msg = msg.replace(/&nbsp;/g, ""); //去掉npsp
     return msg;
+  },
+  filterClassEleImg(string) {
+    return string.replace(/eleImg/g, "biaoqing");
   },
   getBrowser(userAgent) {
     let userAgents = [

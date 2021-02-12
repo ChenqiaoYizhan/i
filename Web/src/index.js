@@ -13,6 +13,7 @@ import * as serviceWorker from "./serviceWorker";
 import moment from "moment";
 import "antd/dist/antd.css"; // 默认的HTML是没有样式的，比如 pre code等标签，官网给的示例配置文件
 import * as x from "./x";
+import "./app.css";
 class Web extends React.Component {
   constructor(props) {
     super(props);

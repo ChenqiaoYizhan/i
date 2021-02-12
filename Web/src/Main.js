@@ -19,14 +19,14 @@ import { Link, withRouter } from "react-router-dom";
 class Main extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       page: <Home />,
       menu: { text: "首页" },
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -83,9 +83,9 @@ class Main extends React.Component {
             <Slider />
           </div>
         </div>
-        <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>
+        {/* <div style={{ zIndex: x.UI.ZINDEX.DANMU }}>
           <Danmus />
-        </div>
+        </div> */}
         <div style={{ height: 8 }} />
         <Footer />
       </div>
