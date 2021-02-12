@@ -6,8 +6,9 @@
     <insert id="insertArticleOnly" parameterType="net.cctv3.server.entity.Article" useGeneratedKeys="true"
             keyProperty="id">
         insert into article
-            (name, title, message, image, html, look, love, time, deleted)
-        values (#{name}, #{title}, #{message}, #{image}, #{html}, #{look}, #{love}, #{time}, #{deleted})
+        (name, title, message, image, html, nLook, nLove, timeCreate, timeUpdate, deleted)
+        values (#{name}, #{title}, #{message}, #{image}, #{html}, #{nLook}, #{nLove}, #{timeCreate}, #{timeUpdate},
+                #{deleted})
     </insert>
     <select id="selectArticleByID" parameterType="int" resultType="net.cctv3.server.entity.Article">
         select *
@@ -16,36 +17,41 @@
     </select>
     <update id="updateArticle" parameterType="net.cctv3.server.entity.Article">
         update article
-        set name    = #{name},
-            title   = #{title},
-            message = #{message},
-            image   = #{image},
-            html    = #{html}
+        set name       = #{name},
+            title      = #{title},
+            message    = #{message},
+            image      = #{image},
+            html       = #{html},
+            timeUpdate = #{timeUpdate}
         where id = #{id}
     </update>
+
+    <!-- 归档的时候，按照添加时间倒序排列 -->
     <select id="selectArticlesGroupByMonth" parameterType="int"
             resultType="net.cctv3.server.entity.SelectArticleGroupByMonth">
         select a.id,
                a.name,
                a.title,
                a.message,
-               date_format(a.time, '%Y-%m') as month,
-            group_concat(b.title separator '::') as books, a.time
+               date_format(a.timeCreate, '%Y-%m') as month,
+            group_concat(b.title separator '::') as books, a.timeCreate as time
         from article a
             left join relationship r
         on r.article = a.id
             left join book b on b.id = r.book
         where a.deleted = #{deleted} and a.id > 10
         group by a.id
-        order by a.time desc;
+        order by a.timeCreate desc;
     </select>
     <select id="selectArticleMonths" parameterType="int" resultType="String">
-        select date_format(time, '%Y-%m') time
+        select date_format(timeCreate, '%Y-%m') time
         from article
         where deleted = #{deleted} and id > 10
-        group by date_format(time, '%Y-%m')
+        group by date_format(timeCreate, '%Y-%m')
         order by time desc;
     </select>
+
+    <!-- 首页展示列表的时候，按照修改时间倒序排列 -->
     <select id="selectHomeArticles" parameterType="int" resultType="net.cctv3.server.entity.SelectHomeArticle">
         select a.id,
                a.name,
@@ -53,9 +59,10 @@
                a.title,
                a.message,
                a.html,
-               a.look,
-               a.love,
-               a.time,
+               a.nLook,
+               a.nLove,
+               a.timeCreate,
+               a.timeUpdate,
                group_concat(b.title separator '::') as books
         from article a
                  left join relationship r on r.article = a.id
@@ -63,6 +70,6 @@
         where a.deleted = #{deleted}
           and a.id > 10
         group by a.id
-        order by a.time desc
+        order by a.timeUpdate desc
     </select>
 </mapper>

@@ -92,9 +92,10 @@ class Edit extends React.Component {
         message: this.messageInput.input.value,
         image: this.imageInput.input.value,
         html: this.state.html,
-        look: 0,
-        love: 0,
-        time: x.TIME.format(moment()),
+        nLook: 0,
+        nLove: 0,
+        timeCreate: x.TIME.format(moment()),
+        timeUpdate: x.TIME.format(moment()),
         deleted: 0,
       },
     };

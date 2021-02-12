@@ -9,24 +9,9 @@ public class Article {
     public String message;
     public String image;
     public String html;
-    public int look;
-    public int love;
-    public String time;
+    public int nLook;
+    public int nLove;
+    public String timeCreate;
+    public String timeUpdate;
     public int deleted;
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", title='" + title + '\'' +
-                ", message='" + message + '\'' +
-                ", image='" + image + '\'' +
-                ", html='" + html + '\'' +
-                ", look=" + look +
-                ", love=" + love +
-                ", time='" + time + '\'' +
-                ", deleted=" + deleted +
-                '}';
-    }
 }

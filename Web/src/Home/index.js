@@ -77,7 +77,7 @@ class Home extends React.Component {
                   style={{ height: 88, width: 88 }}
                 />
                 <div style={{ width: 4 }} />
-                <div style={{ fontSize: 18, color: "black" }}>墙裂推荐</div>
+                <div style={{ fontSize: 18, color: "black" }}>注意 · 我要开始安利了</div>
               </div>
               <div
                 style={{

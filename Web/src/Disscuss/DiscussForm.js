@@ -134,10 +134,10 @@ class DiscussForm extends React.Component {
           >
             <img
               src={require("../images/Discuss_tiaodou.gif")}
-              style={{ height: 128, width: 128 }}
+              style={{ height: 98, width: 98 }}
             />
             <div style={{ width: 12 }} />
-            <div style={{ fontSize: 30, color: "black" }}>评论</div>
+            <div style={{ fontSize: 24, color: "black" }}>评论</div>
           </div>
         )}
         <div

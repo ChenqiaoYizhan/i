@@ -7,8 +7,9 @@ public class SelectHomeArticle {
     public String title;
     public String message;
     public String html;
-    public int look;
-    public int love;
-    public String time;
+    public int nLook;
+    public int nLove;
+    public String timeCreate;
+    public String timeUpdate;
     public String books;
 }

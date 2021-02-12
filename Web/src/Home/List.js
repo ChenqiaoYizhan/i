@@ -12,6 +12,11 @@ import * as x from "../x";
 import { Button } from "antd";
 import moment from "moment";
 import Tags from "../Tags";
+
+const images4mao8mao = Array.from(
+  { length: 20 },
+  (_, i) => `http://www.cctv3.net/shupo/${i + 1}.jpg`
+).sort((a, b) => Math.random() - 0.5);
 class List extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -70,7 +75,7 @@ class List extends React.Component {
             <img
               src={
                 x.RegExp.isEmpty(item.image)
-                  ? require("../images/Article_default.jpg")
+                  ? images4mao8mao[i % 20]
                   : item.image
               }
               style={{
@@ -103,7 +108,9 @@ class List extends React.Component {
               />
               <div style={{ width: 4 }} />
               <div style={{ color: "white", fontSize: 12 }}>
-                {moment(item.time).format("YYYY-MM-DD")}
+                {(item.timeUpdate == item.timeCreate
+                  ? "创建于: "
+                  : "修改于: ") + moment(item.timeUpdate).format("YYYY-MM-DD")}
               </div>
             </div>
             <div style={{ width: 8 }} />
@@ -141,15 +148,15 @@ class List extends React.Component {
                 >
                   {this.loadIconText(
                     require("../images/List_look.png"),
-                    `${item.look} 阅读`
+                    `${item.nLook} 阅读`
                   )}
                   <div style={{ width: 16 }} />
                   {this.loadIconText(
                     require("../images/List_love.png"),
-                    `${item.love} 点赞`
+                    `${item.nLove} 点赞`
                   )}
                 </div>
-                <Tags string={item.books} borderStyle='fill'/>
+                <Tags string={item.books} borderStyle="fill" />
               </div>
             </div>
           </div>
@@ -158,7 +165,7 @@ class List extends React.Component {
     }
     return array;
   }
-  
+
   render() {
     return (
       <div

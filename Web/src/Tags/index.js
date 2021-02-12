@@ -13,7 +13,7 @@ import { Button } from "antd";
 import moment from "moment";
 import tinycolor from "tinycolor2";
 
-class List extends React.Component {
+class Tags extends React.Component {
   static propTypes = {
     string: PropTypes.string.isRequired, // :: 为分隔符
     borderStyle: PropTypes.string.isRequired, // line为线条样式 fill为实心样式
@@ -36,14 +36,14 @@ class List extends React.Component {
         let fontColor;
         switch (this.props.borderStyle) {
           case "fill":
-            fontColor = 'white';
+            fontColor = "white";
             style = {
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
-              borderRadius: '4px',
-              padding: '1px 4px',
-              margin: '4px',
+              borderRadius: "4px",
+              padding: "1px 4px",
+              margin: "4px",
               backgroundColor: color,
             };
             break;
@@ -53,9 +53,9 @@ class List extends React.Component {
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
-              borderRadius: '4px',
-              padding: '1px 4px',
-              margin: '4px',
+              borderRadius: "4px",
+              padding: "1px 4px",
+              margin: "4px",
               border: `1px solid ${tinycolor(color).toRgbString()}`,
             };
           default:
@@ -63,9 +63,7 @@ class List extends React.Component {
         }
         array.push(
           <div key={i} style={style}>
-            <div style={{ fontSize: 12, color: fontColor }}>
-              {books[i]}
-            </div>
+            <div style={{ fontSize: 12, color: fontColor }}>{books[i]}</div>
           </div>
         );
       }
@@ -88,4 +86,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default Tags;
