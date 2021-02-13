@@ -26,6 +26,13 @@
         where id = #{id}
     </update>
 
+    <update id="updateArticleN" parameterType="net.cctv3.server.entity.UpdateArticleN">
+        update article
+        set nLook = nLook + #{nLook},
+            nLove = nLove + #{nLove}
+        where id = #{article}
+    </update>
+
     <!-- 归档的时候，按照添加时间倒序排列 -->
     <select id="selectArticlesGroupByMonth" parameterType="int"
             resultType="net.cctv3.server.entity.SelectArticleGroupByMonth">

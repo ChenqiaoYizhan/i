@@ -13,9 +13,7 @@ import { withRouter } from "react-router-dom";
 import Discuss from "../Disscuss";
 import moment from "moment";
 import Tags from "../Tags";
-
 import "./article.css";
-import Item from "antd/lib/list/Item";
 class Article extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -46,9 +44,20 @@ class Article extends React.Component {
         x.SERVICE.API.SELECT_ARTICLE +
         `?id=${this.props.match.params.id}`
     );
+    result.article.html = x.RegExp.formatEditorCode2PrismCode(
+      x.RegExp.filterClassEleImg(result.article.html)
+    );
     this.setState({
       article: result.article,
       books: result.books,
+    });
+  }
+
+  async updateArticleN(look, love) {
+    await x.HTTP.post(x.SERVICE.SERVER + x.SERVICE.API.UPDATE_ARTICLE_N, {
+      article: this.props.match.params.id,
+      nLook: look,
+      nLove: love,
     });
   }
 
@@ -58,6 +67,7 @@ class Article extends React.Component {
       behavior: "auto",
     });
     this.initDatas();
+    this.updateArticleN(1, 0);
   }
 
   loadTimeTags(text, time, color) {
@@ -126,7 +136,7 @@ class Article extends React.Component {
           >
             <div
               style={{ fontSize: 14, color: "grey" }}
-            >{`Nginx url: http://www.cctv3.net/${this.state.article.name}.html`}</div>
+            >{`Pseudo static: http://www.cctv3.net/${this.state.article.name}.html`}</div>
             <div
               style={{
                 flexDirection: "row",
@@ -153,7 +163,7 @@ class Article extends React.Component {
         <div
           style={{ padding: 8 }}
           dangerouslySetInnerHTML={{
-            __html: x.RegExp.filterClassEleImg(this.state.article.html),
+            __html: this.state.article.html,
           }}
         />
         <Discuss article={this.props.match.params.id} />

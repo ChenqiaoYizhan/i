@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 public class ArticleAction {
-    private  final  static Logger logger = LoggerFactory.getLogger(ArticleAction.class);
+    private final static Logger logger = LoggerFactory.getLogger(ArticleAction.class);
     @Autowired
     ArticleMapper articleMapper;
     @Autowired
@@ -90,6 +90,22 @@ public class ArticleAction {
                 Relationship relationship = new Relationship(ia.article.id, Integer.parseInt(s));
                 relationshipMapper.insertRelationship(relationship);
             }
+            hashMap.put("status", 1);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            hashMap.put("message", e.getMessage());
+        }
+        return hashMap;
+    }
+
+    @CrossOrigin
+    @PostMapping("/updateArticleN.action")
+    public HashMap<String, Object> updateArticleN(@RequestBody UpdateArticleN updateArticleN) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", 0);
+        try {
+            // int id = articleMapper.insertArticleOnly(ia.article);
+            articleMapper.updateArticleN(updateArticleN);
             hashMap.put("status", 1);
         } catch (RuntimeException e) {
             e.printStackTrace();

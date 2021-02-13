@@ -15,7 +15,7 @@ import Tags from "../Tags";
 
 const images4mao8mao = Array.from(
   { length: 20 },
-  (_, i) => `http://www.cctv3.net/shupo/${i + 1}.jpg`
+  (_, i) => `http://www.cctv3.net/shupofan/${i + 1}.jpg`
 ).sort((a, b) => Math.random() - 0.5);
 class List extends React.Component {
   static propTypes = {};

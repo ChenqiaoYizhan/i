@@ -8,7 +8,6 @@
  */
 import React from "react";
 import E from "wangeditor";
-import hljs from "highlight.js";
 import { Button } from "antd";
 import PropTypes from "prop-types";
 import * as x from "./x";
@@ -35,7 +34,7 @@ class Editor extends React.Component {
     this.editor.config.height =
       this.props.height == undefined ? 256 : this.props.height;
     // 配置代码高亮
-    this.editor.highlight = hljs;
+    // this.editor.highlight = hljs;
     // 配置表情
     this.editor.config.emotions = [
       {
@@ -73,12 +72,21 @@ class Editor extends React.Component {
     this.editor.config.onchange = function (newHTML) {
       that.html = newHTML;
     };
+    // 粘贴内容过滤
+    // this.editor.config.pasteFilterStyle = false
     /**一定要创建 */
     this.editor.config.zIndex = x.UI.ZINDEX.EDITOR;
     this.editor.create();
   }
 
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps(nextProps) {
+    if (
+      x.RegExp.isEmpty(this.html) &&
+      !x.RegExp.isEmpty(nextProps.defaultHTML)
+    ) {
+      this.editor.txt.html(nextProps.defaultHTML);
+    }
+  }
 
   componentWillUnmount() {
     this.editor.destroy();

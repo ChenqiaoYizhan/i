@@ -10,6 +10,7 @@ import { notification } from "antd";
 import md5 from "blueimp-md5";
 import moment from "moment";
 
+const Prism = require("prismjs");
 var tinycolor = require("tinycolor2");
 
 export const UI = {
@@ -114,6 +115,7 @@ export const SERVICE = {
     SELECT_TIMERS: "selectTimers.action",
     // U
     UPDATE_ARTICLE: "updateArticle.action",
+    UPDATE_ARTICLE_N: "updateArticleN.action",
     // D
   },
 };
@@ -215,14 +217,70 @@ export const RegExp = {
   filterClassEleImg(string) {
     return string.replace(/eleImg/g, "biaoqing");
   },
+  formatEditorCode2PrismCode(string) {
+    let text = string;
+    let formatCodeDiv = document.createElement("formatCodeStart");
+    formatCodeDiv.innerHTML = text;
+    let codes = formatCodeDiv.getElementsByTagName("pre");
+    for (let i = 0; i < codes.length; i++) {
+      let language = codes[i].getAttribute("type").toLowerCase();
+      let languages = [
+        { key: "c", name: Prism.languages.c, value: "C" },
+        { key: "cpp", name: Prism.languages.cpp, value: "C++" },
+        { key: "git", name: Prism.languages.git, value: "Git" },
+        { key: "php", name: Prism.languages.php, value: "PHP" },
+        { key: "json", name: Prism.languages.json, value: "JSON" },
+        { key: "java", name: Prism.languages.java, value: "Java" },
+        {
+          key: "javascript",
+          name: Prism.languages.javascript,
+          value: "JavaScript",
+        },
+        {
+          key: "js",
+          name: Prism.languages.javascript,
+          value: "JavaScript",
+        },
+        { key: "regex", name: Prism.languages.regexp, value: "RegExp" },
+        { key: "sql", name: Prism.languages.sql, value: "SQL" },
+        { key: "swift", name: Prism.languages.swift, value: "Swift" },
+        { key: "ts", name: Prism.languages.ts, value: "TypeScript" },
+        { key: "html", name: Prism.languages.html, value: "CSS" },
+        { key: "jsx", name: Prism.languages.jsx, value: "React JSX" },
+        { key: "tsx", name: Prism.languages.tsx, value: "React TSX" },
+      ];
+      let languageIndex = languages.findIndex((item) => item.key == language);
+      if (languageIndex == -1) {
+        languageIndex = languages.findIndex(
+          (item) => item.key == "javascript" || item.key == "js"
+        );
+      }
+      let languageItem = languages[languageIndex];
+      let codeDiv = document.createElement("formatCodeEnd");
+      let codeChildDiv = document.createElement("code");
+      codeChildDiv.style.backgroundColor = "#f6f6f6";
+      codeChildDiv.style.borderRadius = "8px";
+      // codeChildDiv.style.backgroundColor = tinycolor("#4caf50")
+      //   .setAlpha(0.18)
+      //   .toRgbString();
+      codeChildDiv.innerHTML = Prism.highlight(
+        codes[i].innerText,
+        languageItem.name,
+        language
+      );
+      codeDiv.appendChild(codeChildDiv);
+      text = text.replace(codes[i].innerHTML, codeDiv.innerHTML);
+    }
+    return text;
+  },
   getBrowser(userAgent) {
     let userAgents = [
       { regex: /.*rv\:.*/, name: "Microsoft Edge" },
       { regex: /MSIE\s([^\s|;]+)/i, name: "Microsoft Internet Explorer" },
       { regex: /FireFox\/([^\s]+)/i, name: "Firefox" },
       { regex: /Maxthon([\d]*)\/([^\s]+)/i, name: "Aoyou" },
-      { regex: /#SE 2([a-zA-Z0-9.]+)#i/, name: "Sougou" },
-      { regex: /#360([a-zA-Z0-9.]+)#i/, name: "360" },
+      { regex: /SE 2([a-zA-Z0-9.]+)#i/, name: "Sougou" },
+      { regex: /360([a-zA-Z0-9.]+)#i/, name: "360" },
       { regex: /Edge([\d]*)\/([^\s]+)/i, name: "Microsoft Edge" },
       { regex: /UC/i, name: "UC web" },
       { regex: /OPR/i, name: "Opera" },

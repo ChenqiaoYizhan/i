@@ -53,7 +53,7 @@ class App extends React.Component {
                   <Route path="/About" component={() => <About />} />
                   <Route path="/Admin" component={() => <Admin />} />
                   <Route path="/Article/:id" component={() => <Article />} />
-                  <Route path="/Edit/:id" component={() => <Edit />} />
+                  <Route path="/DidiaoEdit/:id" component={() => <Edit />} />
                   <Route
                     // 以后测试页面统一添加前缀 /Demo/PageName
                     path="/Demo"
