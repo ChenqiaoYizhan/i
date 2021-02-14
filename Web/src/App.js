@@ -22,6 +22,7 @@ import Test from "./Demo/Test";
 import Admin from "./Admin";
 import Edit from "./Edit";
 import About from "./About";
+import NotFound from "./NotFound";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +72,6 @@ class App extends React.Component {
                       </div>
                     )}
                   />
-                  <Route path="/Editor" component={() => <Editor />} />
                 </Main>
               )}
             />

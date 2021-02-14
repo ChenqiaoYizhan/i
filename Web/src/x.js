@@ -96,7 +96,7 @@ export const SERVICE = {
   // SERVER: "http://192.168.1.67:8080/",
   // SERVER: "http://127.0.0.1:8080/",
   SERVER: "http://localhost:8080/",
-
+  CDN: "http://www.cctv3.net/i/",
   API: {
     // CRUD
     // C
@@ -165,7 +165,7 @@ export const HTTP = {
 
 export const RegExp = {
   isEmpty: function (string) {
-    return string == null || string == undefined || string.trim() == "";
+    return string == null || string == undefined || string == '';
   },
   isQQ: function (string) {
     if (/\d{5,11}$/.test(string)) {
@@ -260,9 +260,6 @@ export const RegExp = {
       let codeChildDiv = document.createElement("code");
       codeChildDiv.style.backgroundColor = "#f6f6f6";
       codeChildDiv.style.borderRadius = "8px";
-      // codeChildDiv.style.backgroundColor = tinycolor("#4caf50")
-      //   .setAlpha(0.18)
-      //   .toRgbString();
       codeChildDiv.innerHTML = Prism.highlight(
         codes[i].innerText,
         languageItem.name,

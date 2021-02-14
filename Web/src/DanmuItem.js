@@ -26,7 +26,7 @@ class DanmuItem extends React.Component {
 
   render() {
     let latextHost = `http://sciencesoft.at/image/latexurl/image.png?dpi=${x.UI.SLIDER_WIDTH}&src=`;
-    let qq = "http://www.cctv3.net/facebook/" + this.props.item.qq + "@QQ.gif";
+    let qq = x.SERVICE.CDN + "QQ/" + this.props.item.qq + "@QQ.gif";
     let item = this.props.item;
     return item.show ? (
       <TweenOne

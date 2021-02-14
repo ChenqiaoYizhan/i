@@ -28,7 +28,7 @@ class Niu extends React.Component {
       array.push(
         <div key={i}>
           <img
-            src={`http://www.cctv3.net/niu/${i + 1}.jpg`}
+            src={x.SERVICE.CDN + `Niu/${i + 1}.jpg`}
             style={{
               height: "auto",
               width: x.UI.NIU_WIDTH,

@@ -6,7 +6,7 @@
     <select id="selectCount" resultType="net.cctv3.server.entity.SelectCount">
         select 'article' as id, '文章' as name, count(*) as value
         from article
-        where deleted = 0
+        where deleted = 0 and id > 10
         union all
         select 'timer' as id, '说说' as name, count(*) as value
         from timer

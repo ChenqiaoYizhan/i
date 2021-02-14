@@ -75,7 +75,7 @@ class Banner extends React.Component {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
-      let image = "http://www.cctv3.net/cctv/" + item.image;
+      let image = x.SERVICE.CDN + "CCTV/" + item.image;
       array.push(
         item.active ? (
           <a

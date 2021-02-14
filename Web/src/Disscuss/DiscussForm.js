@@ -23,12 +23,12 @@ const DATAS = [
   {
     key: "text",
     name: "低调的文字模式",
-    image: "http://www.cctv3.net/facebook/7@Huya.png",
+    image: require('../images/Huya_smile.png'),
   },
   {
     key: "paint",
     name: "奢华的涂鸦模式",
-    image: "http://www.cctv3.net/facebook/16@Huya.png",
+    image: require('../images/Huya_you_know.png'),
   },
 ];
 

@@ -12,8 +12,8 @@ import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import Discuss from "../Disscuss";
 import moment from "moment";
-import Tags from "../Tags";
 import "./article.css";
+import NotFound from "../NotFound";
 class Article extends React.Component {
   static propTypes = {};
   constructor(props) {
@@ -22,7 +22,7 @@ class Article extends React.Component {
     this.state = {
       article: {
         id: "",
-        name: "",
+        name: "别扯犊子了 →_→",
         title: "",
         message: "",
         image: "",
@@ -44,13 +44,17 @@ class Article extends React.Component {
         x.SERVICE.API.SELECT_ARTICLE +
         `?id=${this.props.match.params.id}`
     );
-    result.article.html = x.RegExp.formatEditorCode2PrismCode(
-      x.RegExp.filterClassEleImg(result.article.html)
-    );
-    this.setState({
-      article: result.article,
-      books: result.books,
-    });
+    if (result.status == 1) {
+      result.article.html = x.RegExp.formatEditorCode2PrismCode(
+        x.RegExp.filterClassEleImg(result.article.html)
+      );
+      this.setState({
+        article: result.article,
+        books: result.books,
+      });
+    } else {
+      // id不是数字或者权限不足或者文章不存在
+    }
   }
 
   async updateArticleN(look, love) {
@@ -66,8 +70,11 @@ class Article extends React.Component {
       top: 0,
       behavior: "auto",
     });
-    this.initDatas();
-    this.updateArticleN(1, 0);
+    if (/\d+/.test(this.props.match.params.id)) {
+      this.initDatas();
+      this.updateArticleN(1, 0);
+    } else {
+    }
   }
 
   loadTimeTags(text, time, color) {
@@ -166,7 +173,11 @@ class Article extends React.Component {
             __html: this.state.article.html,
           }}
         />
-        <Discuss article={this.props.match.params.id} />
+        {this.state.article.id == "" ? (
+          <NotFound />
+        ) : (
+          <Discuss article={this.props.match.params.id} />
+        )}
       </div>
     );
   }

@@ -21,7 +21,7 @@ public class ArticleAction {
     @CrossOrigin
     @PostMapping("/insertArticle.action")
     public HashMap<String, Object> insertArticle(@RequestBody InsertArticle ia) {
-        System.out.println(ia.article.toString());
+        // System.out.println(ia.article.toString());
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
         try {
@@ -46,14 +46,22 @@ public class ArticleAction {
     public HashMap<String, Object> selectArticle(@RequestParam("id") String id) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
-        try {
-            Article article = articleMapper.selectArticleByID(Integer.parseInt(id));
-            List<Relationship> books = relationshipMapper.findRelationshipsByArticle(Integer.parseInt(id));
-            hashMap.put("status", 1);
-            hashMap.put("article", article);
-            hashMap.put("books", books);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
+        if (id.matches("\\d+")) {
+            try {
+                Article article = articleMapper.selectArticleByID(Integer.parseInt(id));
+                if (Integer.parseInt(id) <= 10 || article == null) {
+                    // 权限不足或者不存在
+                } else {
+                    List<Relationship> books = relationshipMapper.findRelationshipsByArticle(Integer.parseInt(id));
+                    hashMap.put("status", 1);
+                    hashMap.put("article", article);
+                    hashMap.put("books", books);
+                }
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // 不是数字
         }
         return hashMap;
     }
@@ -79,7 +87,7 @@ public class ArticleAction {
     @CrossOrigin
     @PostMapping("/updateArticle.action")
     public HashMap<String, Object> updateArticle(@RequestBody InsertArticle ia) {
-        System.out.println(ia.article.toString());
+        // System.out.println(ia.article.toString());
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
         try {

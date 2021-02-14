@@ -6,6 +6,7 @@ public class Web {
     public String title;
     public String message;
     public String url;
+    public String image;
     public String time;
     public int deleted;
 }

@@ -42,7 +42,7 @@ class Webs extends React.Component {
   componentDidMount() {
     window.scrollTo({
       top: 0,
-      behavior: 'auto',
+      behavior: "auto",
     });
     this.initDatas();
   }
@@ -103,7 +103,7 @@ class Webs extends React.Component {
       </div>
     );
   }
-  
+
   loadChildren(children) {
     let array = [];
     for (let i = 0; i < children.length; i++) {
@@ -128,7 +128,11 @@ class Webs extends React.Component {
           }}
         >
           <img
-            src={require("../images/i.jpg")}
+            src={
+              x.RegExp.isEmpty(item.image)
+                ? require("../images/i.jpg")
+                : item.image
+            }
             style={{ height: 48, width: 48, borderRadius: 4 }}
           />
           <div style={{ width: 8 }} />

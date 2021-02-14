@@ -1,5 +1,13 @@
 /*
  * @Descripttion:
+  1.图片处理:
+    截图: QQ发送小号，一般不作处理
+    照片: QQ发送小号，然后用PS处理为 888*666大小的图片，另存为图片质量选8
+  2.命名规则:
+    如果只有一张图片，就不要编号了，直接 Name-MM-dd.jpg/png
+    如果多张图片，编号 Name-MM-dd-n.jpg/png
+    原图:
+    Name-MM-dd-n-Didiao.jpg/png
  * @version:
  * @Author: Michael Sun @ www.cctv3.net
  * @Date: 2020-09-22 15:36:38
@@ -8,13 +16,13 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 import { Timeline, Carousel } from "antd";
 import Masonry from "react-masonry-component";
 import * as x from "../x";
 import tinycolor from "tinycolor2";
 
-const CDN = "http://www.cctv3.net/timer/";
+const CDN = x.SERVICE.CDN + "Timer/";
 const ITEM_WIDTH =
   (x.UI.MAIN_WIDTH - x.UI.SLIDER_WIDTH - x.UI.MAIN_INTERVAL - 12) /
     x.UI.TIMER_COLUMNS -
@@ -50,7 +58,8 @@ class Timer extends React.Component {
     let array = [];
     for (let i = 0; i < this.state.datas.length; i++) {
       let item = this.state.datas[i];
-      let images = item.images.split(/::/);
+      // 2::jpg::Zhifubao-0211 两张 图片格式 图片名
+      let strings = item.images.split(/::/);
       array.push(
         <div
           key={i}
@@ -82,11 +91,7 @@ class Timer extends React.Component {
             </div>
             <div style={{ fontSize: 12, color: "grey" }}>{item.message}</div>
           </div>
-          {this.loadBanners(
-            // Didiao的照片都隐藏，自己知道就行了 →_→
-            // 如果以后上传别的截图或者旅游照片，就不D加idiao了
-            item.images.split(/::/).filter((it) => it.indexOf("Didiao") < 0)
-          )}
+          {this.loadBanners(strings)}
           <div
             style={{
               position: "absolute",
@@ -107,11 +112,13 @@ class Timer extends React.Component {
     return array;
   }
 
-  loadBanners(images) {
-    let CDN = "http://www.cctv3.net/timer/";
-    return images.length == 1 ? (
+  loadBanners(strings) {
+    let n = parseInt(strings[0]);
+    let after = strings[1];
+    let name = strings[2];
+    return n == 1 ? (
       <img
-        src={CDN + images[0]}
+        src={CDN + name + "." + after}
         style={{
           width: ITEM_WIDTH,
           height: "auto",
@@ -120,19 +127,17 @@ class Timer extends React.Component {
         }}
       />
     ) : (
-      <Carousel autoplay>
-        {this.loadImages(images)}
-      </Carousel>
+      <Carousel autoplay>{this.loadImages(n, after, name)}</Carousel>
     );
   }
 
-  loadImages(images) {
+  loadImages(n, after, name) {
     let array = [];
-    for (let i = 0; i < images.length; i++) {
+    for (let i = 0; i < n; i++) {
       array.push(
         <div key={i} style={{ position: "relative" }}>
           <img
-            src={CDN + images[i]}
+            src={CDN + `${name}-${i + 1}.${after}`}
             style={{
               width: ITEM_WIDTH,
               height: "auto",

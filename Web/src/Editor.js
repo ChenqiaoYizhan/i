@@ -12,7 +12,7 @@ import { Button } from "antd";
 import PropTypes from "prop-types";
 import * as x from "./x";
 
-const FACE_URL = "http://www.cctv3.net/faces";
+const FACE_URL = x.SERVICE.CDN + 'Facebook';
 class Editor extends React.Component {
   static propTypes = {
     // menus: PropTypes.array, // 不配置则默认显示所有
