@@ -49,3 +49,5 @@ mybatis:
 logging:
   level:
     net.cctv3.server.action: trace
+server:
+  port: 5188

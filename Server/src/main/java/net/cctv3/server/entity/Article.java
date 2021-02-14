@@ -1,7 +1,5 @@
 package net.cctv3.server.entity;
 
-import javax.persistence.*;
-
 public class Article {
     public Integer id;
     public String name;

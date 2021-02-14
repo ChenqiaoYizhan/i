@@ -25,7 +25,7 @@ public class DiscussAction {
     @Autowired
     DiscussMapper discussMapper;
     @Autowired
-    private HttpServletRequest request;
+    HttpServletRequest request;
 
     @CrossOrigin
     @PostMapping("/insertDiscuss.action")

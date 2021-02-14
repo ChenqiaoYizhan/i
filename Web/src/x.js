@@ -93,9 +93,10 @@ export const CONSOLE = {
 
 // Server API
 export const SERVICE = {
-  // SERVER: "http://192.168.1.67:8080/",
-  // SERVER: "http://127.0.0.1:8080/",
-  SERVER: "http://localhost:8080/",
+  // SERVER: "http://192.168.1.67:5188/",
+  // SERVER: "http://127.0.0.1:5188/",
+  // SERVER: "http://localhost:5188/",
+  SERVER: "http://106.12.56.100:5188/",
   CDN: "http://www.cctv3.net/i/",
   API: {
     // CRUD

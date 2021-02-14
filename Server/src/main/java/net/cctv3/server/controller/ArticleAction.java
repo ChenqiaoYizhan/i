@@ -47,18 +47,14 @@ public class ArticleAction {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", 0);
         if (id.matches("\\d+")) {
-            try {
-                Article article = articleMapper.selectArticleByID(Integer.parseInt(id));
-                if (Integer.parseInt(id) <= 10 || article == null) {
-                    // 权限不足或者不存在
-                } else {
-                    List<Relationship> books = relationshipMapper.findRelationshipsByArticle(Integer.parseInt(id));
-                    hashMap.put("status", 1);
-                    hashMap.put("article", article);
-                    hashMap.put("books", books);
-                }
-            } catch (RuntimeException e) {
-                e.printStackTrace();
+            Article article = articleMapper.selectArticleByID(Integer.parseInt(id));
+            if (article == null) {
+                // 权限不足或者不存在
+            } else {
+                List<Relationship> books = relationshipMapper.findRelationshipsByArticle(Integer.parseInt(id));
+                hashMap.put("status", 1);
+                hashMap.put("article", article);
+                hashMap.put("books", books);
             }
         } else {
             // 不是数字

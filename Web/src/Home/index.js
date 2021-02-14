@@ -20,6 +20,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       index: 0,
+      html: "",
     };
   }
 
@@ -27,6 +28,16 @@ class Home extends React.Component {
     window.scrollTo({
       top: 0,
       behavior: "auto",
+    });
+    this.initDatas();
+  }
+
+  async initDatas() {
+    let result = await x.HTTP.get(
+      x.SERVICE.SERVER + x.SERVICE.API.SELECT_ARTICLE + `?id=${x.ARTICLES.HOME}`
+    );
+    this.setState({
+      html: x.RegExp.filterClassEleImg(result.article.html),
     });
   }
 
@@ -60,24 +71,39 @@ class Home extends React.Component {
             <Niu />
             <div
               style={{
+                flex: 1,
                 flexDirection: "column",
                 display: "flex",
                 justifyContent: "space-between",
+                alignItems: "flex-end",
               }}
             >
               <div
                 style={{
                   flexDirection: "row",
-                  alignItems: "flex-end",
                   display: "flex",
+                  alignItems: "center",
                 }}
               >
+                <div
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <div
+                    style={{ paddingTop: 8, paddingLeft: 12 }}
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.html,
+                    }}
+                  />
+                </div>
                 <img
                   src={require("../images/Anli_want.gif")}
                   style={{ height: 88, width: 88 }}
                 />
-                <div style={{ width: 4 }} />
-                <div style={{ fontSize: 18, color: "black" }}>注意 · 我要开始安利了</div>
               </div>
               <div
                 style={{
