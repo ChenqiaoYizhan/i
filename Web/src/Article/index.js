@@ -42,7 +42,10 @@ class Article extends React.Component {
     let result = await x.HTTP.get(
       x.SERVICE.SERVER +
         x.SERVICE.API.SELECT_ARTICLE +
-        `?id=${this.props.match.params.id}`
+        `?id=${x.RegExp.getParamByParesingQueryString(
+          window.location.search,
+          "id"
+        )}`
     );
     if (result.status == 1) {
       result.article.html = x.RegExp.formatEditorCode2PrismCode(
@@ -59,7 +62,10 @@ class Article extends React.Component {
 
   async updateArticleN(look, love) {
     await x.HTTP.post(x.SERVICE.SERVER + x.SERVICE.API.UPDATE_ARTICLE_N, {
-      article: this.props.match.params.id,
+      article: x.RegExp.getParamByParesingQueryString(
+        window.location.search,
+        "id"
+      ),
       nLook: look,
       nLove: love,
     });
@@ -70,7 +76,11 @@ class Article extends React.Component {
       top: 0,
       behavior: "auto",
     });
-    if (/\d+/.test(this.props.match.params.id)) {
+    if (
+      /\d+/.test(
+        x.RegExp.getParamByParesingQueryString(window.location.search, "id")
+      )
+    ) {
       this.initDatas();
       this.updateArticleN(1, 0);
     } else {

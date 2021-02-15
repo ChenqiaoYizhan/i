@@ -1,12 +1,4 @@
 .DS_Store
 node_modules/
 dist/
-MyUtils/1.jpg
-MyUtils/2.jpg
-MyUtils/3.jpg
-MyUtils/4.jpg
-MyUtils/5.jpg
-MyUtils/6.jpg
-MyUtils/7.jpg
-MyUtils/8.jpg
-MyUtils/9.jpg
+build/

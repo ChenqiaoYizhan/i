@@ -59,7 +59,10 @@ class List extends React.Component {
         <a
           key={i}
           onClick={() => {
-            window.open(`../Article/${item.id}`, "_blank");
+            window.open(`../Article?id=${item.id}`, "_blank");
+            // this.props.history.push({
+            //   pathname: `/${item.id}`,
+            // });
           }}
           style={{
             flexDirection: "column",

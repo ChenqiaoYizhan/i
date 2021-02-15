@@ -12,6 +12,7 @@ import moment from "moment";
 
 const Prism = require("prismjs");
 var tinycolor = require("tinycolor2");
+var queryString = require("query-string");
 
 export const UI = {
   SLIDER_WIDTH: 258, // Slider宽度
@@ -144,8 +145,8 @@ export const HTTP = {
   get: async function (url) {
     let web = await fetch(url);
     let json = await web.json();
-    CONSOLE.d(url);
-    CONSOLE.i(json);
+    // CONSOLE.d(url);
+    // CONSOLE.i(json);
     return json;
   },
   post: async function (url, body) {
@@ -157,16 +158,16 @@ export const HTTP = {
       body: JSON.stringify(body),
     });
     let json = await web.json();
-    CONSOLE.i(json);
-    CONSOLE.d(url);
-    CONSOLE.w(body);
+    // CONSOLE.i(json);
+    // CONSOLE.d(url);
+    // CONSOLE.w(body);
     return json;
   },
 };
 
 export const RegExp = {
   isEmpty: function (string) {
-    return string == null || string == undefined || string == '';
+    return string == null || string == undefined || string == "";
   },
   isQQ: function (string) {
     if (/\d{5,11}$/.test(string)) {
@@ -338,6 +339,10 @@ export const RegExp = {
     ];
     let index = userAgents.findIndex((item) => item.regex.test(userAgent));
     return index < 0 ? null : userAgents[index];
+  },
+  getParamByParesingQueryString(url, key) {
+    let params = queryString.parse(url);
+    return params[key];
   },
 };
 

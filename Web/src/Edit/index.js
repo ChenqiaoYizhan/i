@@ -47,7 +47,10 @@ class Edit extends React.Component {
     let selectArticle = await x.HTTP.get(
       x.SERVICE.SERVER +
         x.SERVICE.API.SELECT_ARTICLE +
-        `?id=${this.props.match.params.id}`
+        `?id=${x.RegExp.getParamByParesingQueryString(
+          window.location.search,
+          "id"
+        )}`
     );
     let article = selectArticle.article;
     let articleBooks = selectArticle.books;
