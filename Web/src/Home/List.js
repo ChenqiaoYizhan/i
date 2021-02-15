@@ -10,6 +10,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as x from "../x";
 import { Button } from "antd";
+import { withRouter } from "react-router";
 import moment from "moment";
 import Tags from "../Tags";
 
@@ -61,7 +62,7 @@ class List extends React.Component {
           onClick={() => {
             window.open(`../Article?id=${item.id}`, "_blank");
             // this.props.history.push({
-            //   pathname: `/${item.id}`,
+            //   pathname: `Article?id=${item.id}`,
             // });
           }}
           style={{
@@ -183,4 +184,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default withRouter(List);
