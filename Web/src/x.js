@@ -225,46 +225,14 @@ export const RegExp = {
     formatCodeDiv.innerHTML = text;
     let codes = formatCodeDiv.getElementsByTagName("pre");
     for (let i = 0; i < codes.length; i++) {
-      let language = codes[i].getAttribute("type").toLowerCase();
-      let languages = [
-        { key: "c", name: Prism.languages.c, value: "C" },
-        { key: "cpp", name: Prism.languages.cpp, value: "C++" },
-        { key: "git", name: Prism.languages.git, value: "Git" },
-        { key: "php", name: Prism.languages.php, value: "PHP" },
-        { key: "json", name: Prism.languages.json, value: "JSON" },
-        { key: "java", name: Prism.languages.java, value: "Java" },
-        {
-          key: "javascript",
-          name: Prism.languages.javascript,
-          value: "JavaScript",
-        },
-        {
-          key: "js",
-          name: Prism.languages.javascript,
-          value: "JavaScript",
-        },
-        { key: "regex", name: Prism.languages.regexp, value: "RegExp" },
-        { key: "sql", name: Prism.languages.sql, value: "SQL" },
-        { key: "swift", name: Prism.languages.swift, value: "Swift" },
-        { key: "ts", name: Prism.languages.ts, value: "TypeScript" },
-        { key: "html", name: Prism.languages.html, value: "CSS" },
-        { key: "jsx", name: Prism.languages.jsx, value: "React JSX" },
-        { key: "tsx", name: Prism.languages.tsx, value: "React TSX" },
-      ];
-      let languageIndex = languages.findIndex((item) => item.key == language);
-      if (languageIndex == -1) {
-        languageIndex = languages.findIndex(
-          (item) => item.key == "javascript" || item.key == "js"
-        );
-      }
-      let languageItem = languages[languageIndex];
+      let language = codes[i].getAttribute("type");
       let codeDiv = document.createElement("formatCodeEnd");
       let codeChildDiv = document.createElement("code");
       codeChildDiv.style.backgroundColor = "#f6f6f6";
       codeChildDiv.style.borderRadius = "8px";
       codeChildDiv.innerHTML = Prism.highlight(
         codes[i].innerText,
-        languageItem.name,
+        Prism.languages.javascript,
         language
       );
       codeDiv.appendChild(codeChildDiv);

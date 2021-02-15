@@ -31,12 +31,11 @@ blockquote {
 
 /* code 样式 */
 code {
-  display: inline;
-  zoom: 1;
+  width: 848px;
   background-color: #fcfcfc;
-  border-radius: 3px;
-  padding: 3px 5px;
-  margin: 0 3px;
+  border-radius: 8px;
+  padding: 4px 4px;
+  overflow-x: hidden;
 }
 pre code {
   display: block;
