@@ -112,10 +112,9 @@ class Menu extends React.Component {
         style={{
           width: x.UI.MAIN_WIDTH,
           display: "flex",
-          height: 64,
-          alignItems: "center",
-          display: "flex",
-          backgroundColor: "white",
+          height: 66,
+          alignItems: "flex-end",
+          backgroundColor: "white"
         }}
       >
         <img
@@ -125,7 +124,7 @@ class Menu extends React.Component {
         <div
           style={{
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: "flex-end",
             display: "flex",
           }}
         >
