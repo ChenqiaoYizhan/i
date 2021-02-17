@@ -28,6 +28,7 @@ class Edit extends React.Component {
       isSendingArticle: false,
       books: [],
       html: "",
+      isLogin: false
     };
   }
 
@@ -36,6 +37,7 @@ class Edit extends React.Component {
       top: 0,
       behavior: "auto",
     });
+    
     this.initDatas();
   }
 

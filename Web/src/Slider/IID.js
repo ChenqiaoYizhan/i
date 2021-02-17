@@ -11,13 +11,15 @@ import React from "react";
 import * as x from "../x";
 import moment from "moment";
 import Group from "./Group";
-
+import { Input, Button } from "antd";
 class IID extends React.Component {
   static propTypes = {};
 
   constructor(props) {
     super(props);
     this.timer = null;
+    this.idInput = null;
+    this.passwordInput = null;
     this.state = {
       time: moment().format("YYYY-MM-DD HH:mm:ss"),
       iid: Array.from({ length: 32 }, (_, i) => 8).join(""),
@@ -47,11 +49,46 @@ class IID extends React.Component {
           borderRadius: 8,
           boxShadow: x.UI.BOX_SHADOW,
           alignItems: "center",
+          padding: 8,
         }}
       >
         <Group text="便捷测试" image={require("../images/Slider_tools.png")} />
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.time}</div>
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.iid}</div>
+        <Input addonBefore="账号" ref={(idInput) => (this.idInput = idInput)} />
+        <div style={{ height: 4 }} />
+        <Input
+          addonBefore="密码"
+          ref={(passwordInput) => (this.passwordInput = passwordInput)}
+        />
+        <div style={{ height: 4 }} />
+        <Button
+          type="primary"
+          style={{ width: x.UI.SLIDER_WIDTH - 16, borderRadius: 4 }}
+          onClick={() => {
+            let id = this.idInput.input.value;
+            let password = this.passwordInput.input.value;
+            if (x.RegExp.isEmpty(id) || x.RegExp.isEmpty(password)) {
+            } else {
+              let result = x.HTTP.get(
+                x.SERVICE.SERVER +
+                  x.SERVICE.API.SELECT_CUSTOMER +
+                  `?id=${id}&password=${password}`
+              );
+              if (result.status == 1) {
+                localStorage.setItem(
+                  "Customer",
+                  JSON.stringify({
+                    id: id,
+                    password: password,
+                  })
+                );
+              }
+            }
+          }}
+        >
+          授权
+        </Button>
       </div>
     );
   }
