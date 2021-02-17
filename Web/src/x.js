@@ -96,8 +96,8 @@ export const CONSOLE = {
 export const SERVICE = {
   // SERVER: "http://192.168.1.67:5188/",
   // SERVER: "http://127.0.0.1:5188/",
-  SERVER: "http://localhost:5188/",
-  // SERVER: "http://106.12.56.100:5188/",
+  // SERVER: "http://localhost:5188/",
+  SERVER: "http://106.12.56.100:5188/",
   CDN: "http://www.cctv3.net/i/",
   API: {
     // CRUD
@@ -146,8 +146,8 @@ export const HTTP = {
   get: async function (url) {
     let web = await fetch(url);
     let json = await web.json();
-    CONSOLE.d(url);
-    CONSOLE.i(json);
+    // CONSOLE.d(url);
+    // CONSOLE.i(json);
     return json;
   },
   post: async function (url, body) {
@@ -159,9 +159,9 @@ export const HTTP = {
       body: JSON.stringify(body),
     });
     let json = await web.json();
-    CONSOLE.i(json);
-    CONSOLE.d(url);
-    CONSOLE.w(body);
+    // CONSOLE.i(json);
+    // CONSOLE.d(url);
+    // CONSOLE.w(body);
     return json;
   },
 };
