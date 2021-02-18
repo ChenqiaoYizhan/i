@@ -10,6 +10,7 @@
 import React from "react";
 import * as x from "../x";
 import moment from "moment";
+import PaintPad from "./PaintPad";
 import Group from "./Group";
 import { Input, Button } from "antd";
 class IID extends React.Component {
@@ -89,6 +90,9 @@ class IID extends React.Component {
         >
           授权
         </Button>
+        <div style={{ height: 16 }} />
+        <div style={{ fontSize: 16, color: "black" }}>颜色渐进工具</div>
+        <PaintPad onChange={() => {}} />
       </div>
     );
   }

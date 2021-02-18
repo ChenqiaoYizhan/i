@@ -86,7 +86,7 @@ class Menu extends React.Component {
           {this.state.index == i ? (
             <img
               src={require("../images/Menu_you_know.png")}
-              style={{ height: 21, width: 25 }}
+              style={{ height: 28, width: 28 }}
             />
           ) : (
             <img src={item.image} style={{ height: 24, width: 24 }} />
@@ -114,7 +114,7 @@ class Menu extends React.Component {
           display: "flex",
           height: 66,
           alignItems: "flex-end",
-          backgroundColor: "white"
+          backgroundColor: "white",
         }}
       >
         <img
@@ -139,7 +139,10 @@ class Menu extends React.Component {
           }}
         >
           <Input
-            style={{ borderTopLeftRadius: 16, borderBottomLeftRadius: 16 }}
+            style={{
+              borderTopLeftRadius: 16,
+              borderBottomLeftRadius: 16,
+            }}
             placeholder="请输入关键字"
           />
           <div style={{ width: 2 }} />

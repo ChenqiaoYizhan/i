@@ -34,7 +34,11 @@ class Cloud2Ds extends React.Component {
     let index = 0;
     setInterval(() => {
       let datasCopy = JSON.parse(JSON.stringify(this.state.datas));
-      if (this.isCloud2dShowOnAppPage && this.books.length > 0) {
+      if (
+        this.isCloud2dShowOnAppPage &&
+        this.books.length > 0 &&
+        this.state.datas.length <= 18
+      ) {
         index++;
         let item = this.books[index % this.books.length];
         datasCopy.push({
