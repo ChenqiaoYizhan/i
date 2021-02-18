@@ -53,9 +53,12 @@ class IID extends React.Component {
           padding: 8,
         }}
       >
-        <Group text="便捷测试" image={require("../images/Slider_tools.png")} />
+        <Group text="小小工具箱" image={require("../images/Slider_tools.png")} />
+        <div style={{ fontSize: 14, color: "black" }}>UUID 生成器</div>
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.time}</div>
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.iid}</div>
+        <div style={{ height: 16 }} />
+        <div style={{ fontSize: 14, color: "black" }}>账号授权</div>
         <Input addonBefore="账号" ref={(idInput) => (this.idInput = idInput)} />
         <div style={{ height: 4 }} />
         <Input
@@ -91,7 +94,7 @@ class IID extends React.Component {
           授权
         </Button>
         <div style={{ height: 16 }} />
-        <div style={{ fontSize: 16, color: "black" }}>颜色渐进工具</div>
+        <div style={{ fontSize: 14, color: "black" }}>颜色渐进工具</div>
         <PaintPad onChange={() => {}} />
       </div>
     );

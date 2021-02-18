@@ -12,11 +12,13 @@ import * as x from "../x";
 import { withRouter } from "react-router-dom";
 import Discuss from "../Disscuss";
 import "./about.css";
+import Zhifubao from "./Zhifubao";
 class About extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
     this.discussParent = 0;
+    this.isShowZhifubao = false;
     this.state = {
       text: "",
       isInsertingArticle: false,
@@ -76,6 +78,21 @@ class About extends React.Component {
             __html: this.state.text,
           }}
         />
+        {this.isShowZhifubao ? (
+          <div
+            style={{
+              flexDirection: "column",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <div style={{ fontSize: 18, color: "black" }}>
+              测试 eCharts 折线统计图
+            </div>
+            <div style={{ height: 8 }} />
+            <Zhifubao />
+          </div>
+        ) : null}
         <Discuss article={x.ARTICLES.ABOUT} />
       </div>
     );

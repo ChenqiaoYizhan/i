@@ -229,7 +229,7 @@ export const RegExp = {
       let language = codes[i].getAttribute("type");
       let codeDiv = document.createElement("formatCodeEnd");
       let codeChildDiv = document.createElement("code");
-      codeChildDiv.style.backgroundColor = 'rgba(152, 113, 35, 0.28)';
+      codeChildDiv.style.backgroundColor = 'rgba(152, 113, 0, 0.28)';
       codeChildDiv.style.borderRadius = "8px";
       codeChildDiv.innerHTML = Prism.highlight(
         codes[i].innerText,
