@@ -16,7 +16,6 @@ import tinycolor from "tinycolor2";
 
 class PaintPad extends React.Component {
   static propTypes = {
-    onChange: PropTypes.func.toString(),
   };
 
   constructor(props) {

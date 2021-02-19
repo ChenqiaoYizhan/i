@@ -11,6 +11,21 @@ public class Shiti {
     public String time;
     public int deleted;
 
+    public Shiti() {
+    }
+
+    public Shiti(int id, String parent, String name, String question, String answer, int nLook, int nLove, String time, int deleted) {
+        this.id = id;
+        this.parent = parent;
+        this.name = name;
+        this.question = question;
+        this.answer = answer;
+        this.nLook = nLook;
+        this.nLove = nLove;
+        this.time = time;
+        this.deleted = deleted;
+    }
+
     public Shiti(String parent, String name, String question, String answer, int nLook, int nLove, String time, int deleted) {
         this.parent = parent;
         this.name = name;

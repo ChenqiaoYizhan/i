@@ -146,8 +146,8 @@ export const HTTP = {
   get: async function (url) {
     let web = await fetch(url);
     let json = await web.json();
-    // CONSOLE.d(url);
-    // CONSOLE.i(json);
+    CONSOLE.d(url);
+    CONSOLE.i(json);
     return json;
   },
   post: async function (url, body) {
@@ -159,9 +159,9 @@ export const HTTP = {
       body: JSON.stringify(body),
     });
     let json = await web.json();
-    // CONSOLE.i(json);
-    // CONSOLE.d(url);
-    // CONSOLE.w(body);
+    CONSOLE.i(json);
+    CONSOLE.d(url);
+    CONSOLE.w(body);
     return json;
   },
 };

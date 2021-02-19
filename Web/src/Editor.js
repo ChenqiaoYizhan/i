@@ -12,7 +12,7 @@ import { Button } from "antd";
 import PropTypes from "prop-types";
 import * as x from "./x";
 
-const FACE_URL = x.SERVICE.CDN + 'Facebook';
+const FACE_URL = x.SERVICE.CDN + "Facebook";
 class Editor extends React.Component {
   static propTypes = {
     // menus: PropTypes.array, // 不配置则默认显示所有
@@ -36,32 +36,22 @@ class Editor extends React.Component {
     // 配置代码高亮
     // this.editor.highlight = hljs;
     // 配置表情
-    this.editor.config.emotions = [
-      {
-        title: "QQ",
-        type: "image", // emoji / image
-        content: Array.from({ length: 120 }, (_, i) => ({
-          alt: i,
-          src: `${FACE_URL}/QQ/${i + 1}@QQ.gif`,
-        })),
-      },
-      {
-        title: "贴吧",
-        type: "image", // emoji / image
-        content: Array.from({ length: 50 }, (_, i) => ({
-          alt: i,
-          src: `${FACE_URL}/Baidu/${i + 1}@Baidu.png`,
-        })),
-      },
-      {
-        title: "微信",
-        type: "image", // emoji / image
-        content: Array.from({ length: 140 }, (_, i) => ({
-          alt: i,
-          src: `${FACE_URL}/WeChat/${i + 1}@WeChat.png`,
-        })),
-      },
+    let images = [
+      { name: "QQ", n: 120, value: "QQ", after: "gif" },
+      { name: "Baidu", n: 50, value: "百度", after: "png" },
+      { name: "Alibaba", n: 107, value: "钉钉", after: "png" },
     ];
+    this.editor.config.emotions = Array.from(images, (_, i) => {
+      let item = images[i];
+      return {
+        title: item.value,
+        type: "image", // emoji / image
+        content: Array.from({ length: item.n }, (_, j) => ({
+          alt: j,
+          src: `${FACE_URL}/${item.name}/${j + 1}@${item.name}.${item.after}`,
+        })),
+      };
+    });
     // 显示颜色
     this.editor.config.colors = x.UI.COLORS.map((item) => item.value);
     // 设置显示的菜单项

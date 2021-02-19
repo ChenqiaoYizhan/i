@@ -34,6 +34,13 @@ class IID extends React.Component {
         iid: x.MD5.dealWithSunyupeng(Math.random()),
       });
     }, 6666);
+    let saveID = localStorage.getItem("id");
+    let savePassword = localStorage.getItem("password");
+    if (x.RegExp.isEmpty(saveID) || x.RegExp.isEmpty(savePassword)) {
+    } else {
+      this.idInput.setValue(saveID);
+      this.passwordInput.setValue(savePassword);
+    }
   }
 
   componentWillUnmount() {
@@ -53,7 +60,10 @@ class IID extends React.Component {
           padding: 8,
         }}
       >
-        <Group text="小小工具箱" image={require("../images/Slider_tools.png")} />
+        <Group
+          text="小小工具箱"
+          image={require("../images/Slider_tools.png")}
+        />
         <div style={{ fontSize: 14, color: "black" }}>UUID 生成器</div>
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.time}</div>
         <div style={{ color: "grey", fontSize: 12 }}>{this.state.iid}</div>
@@ -74,20 +84,8 @@ class IID extends React.Component {
             let password = this.passwordInput.input.value;
             if (x.RegExp.isEmpty(id) || x.RegExp.isEmpty(password)) {
             } else {
-              let result = x.HTTP.get(
-                x.SERVICE.SERVER +
-                  x.SERVICE.API.SELECT_CUSTOMER +
-                  `?id=${id}&password=${password}`
-              );
-              if (result.status == 1) {
-                localStorage.setItem(
-                  "Customer",
-                  JSON.stringify({
-                    id: id,
-                    password: password,
-                  })
-                );
-              }
+              localStorage.setItem("id", id);
+              localStorage.setItem("password", password);
             }
           }}
         >

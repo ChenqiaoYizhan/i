@@ -28,7 +28,7 @@ class Edit extends React.Component {
       isSendingArticle: false,
       books: [],
       html: "",
-      isLogin: false
+      isLogin: false,
     };
   }
 
@@ -37,47 +37,76 @@ class Edit extends React.Component {
       top: 0,
       behavior: "auto",
     });
-    
     this.initDatas();
   }
 
-  async initDatas() {
-    let allBooks = await x.HTTP.get(
-      x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
-    );
-    // console.log("Books", allBooks);
-    let selectArticle = await x.HTTP.get(
-      x.SERVICE.SERVER +
-        x.SERVICE.API.SELECT_ARTICLE +
-        `?id=${x.RegExp.getParamByParesingQueryString(
-          window.location.search,
-          "id"
-        )}`
-    );
-    let article = selectArticle.article;
-    let articleBooks = selectArticle.books;
-    // console.log(Array.from(articleBooks, (_, i) => articleBooks[i].book));
-    let booksDatas = [];
-    for (let i = 0; i < allBooks.length; i++) {
-      let item = allBooks[i];
-      booksDatas[i] = {
-        select: articleBooks.findIndex((it) => it.book == item.id) >= 0,
-        data: item,
-      };
-    }
-    this.setState({
-      selecBooksKeys: Array.from(articleBooks, (_, i) => articleBooks[i].book),
-      books: booksDatas,
-    });
-    if (article == null) {
+  async checkCustomer() {
+    let id = localStorage.getItem("id");
+    let password = localStorage.getItem("password");
+    if (x.RegExp.isEmpty(id) || x.RegExp.isEmpty(password)) {
+      return false;
     } else {
-      this.initArticle = article;
-      this.nameInput.setValue(article.name);
-      this.titleInput.setValue(article.title);
-      this.messageInput.setValue(article.message);
-      this.imageInput.setValue(article.image);
-      this.setState({
-        html: article.html,
+      let result = await x.HTTP.get(
+        x.SERVICE.SERVER +
+          x.SERVICE.API.SELECT_CUSTOMER +
+          `?id=${id}&password=${password}`
+      );
+      return result.status == 1;
+    }
+  }
+
+  async initDatas() {
+    let isMe = await this.checkCustomer();
+    if (isMe) {
+      let allBooks = await x.HTTP.get(
+        x.SERVICE.SERVER + x.SERVICE.API.SELECT_BOOKS + "?deleted=0"
+      );
+      // console.log("Books", allBooks);
+      let selectArticle = await x.HTTP.get(
+        x.SERVICE.SERVER +
+          x.SERVICE.API.SELECT_ARTICLE +
+          `?id=${x.RegExp.getParamByParesingQueryString(
+            window.location.search,
+            "id"
+          )}`
+      );
+      if (selectArticle.status == 1) {
+        let article = selectArticle.article;
+        let articleBooks = selectArticle.books;
+        // console.log(Array.from(articleBooks, (_, i) => articleBooks[i].book));
+        let booksDatas = [];
+        for (let i = 0; i < allBooks.length; i++) {
+          let item = allBooks[i];
+          booksDatas[i] = {
+            select: articleBooks.findIndex((it) => it.book == item.id) >= 0,
+            data: item,
+          };
+        }
+        this.setState({
+          selecBooksKeys: Array.from(
+            articleBooks,
+            (_, i) => articleBooks[i].book
+          ),
+          books: booksDatas,
+        });
+        if (article == null) {
+        } else {
+          this.initArticle = article;
+          this.nameInput.setValue(article.name);
+          this.titleInput.setValue(article.title);
+          this.messageInput.setValue(article.message);
+          this.imageInput.setValue(article.image);
+          this.setState({
+            html: article.html,
+          });
+        }
+      } else {
+        // 请求地址不合法 或者 文章不存在的时候 这个接口返回 status = 0 是为了照顾文章详情页
+      }
+    } else {
+      // 权限不足
+      this.props.history.push({
+        pathname: "/Home",
       });
     }
   }
